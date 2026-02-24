@@ -915,3 +915,51 @@ html {
     display: none;
   }
 }
+
+/* ========================================
+   HERO AMBIENT ANIMATIONS
+   ======================================== */
+
+.hero-breathing-gradient {
+  background: radial-gradient(circle at top left, rgba(30, 58, 110, 0.4) 0%, rgba(10, 22, 40, 0) 60%);
+  background-size: 200% 200%;
+  animation: breathe-gradient 12s ease-in-out infinite;
+}
+
+@keyframes breathe-gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 8% 8%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.noise-bg-element {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.heartbeat-dot {
+  display: inline-block;
+  animation: heartbeat-pulse 3s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes heartbeat-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+}
