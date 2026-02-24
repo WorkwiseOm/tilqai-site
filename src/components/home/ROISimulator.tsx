@@ -284,10 +284,10 @@ const ResultCard = ({ label, value, supporting, isRtl }: { label: string; value:
     <div className={`text-[11px] font-bold text-primary tracking-[2px] mb-2 relative z-10 ${isRtl ? "md:text-right font-['Tajawal',sans-serif]" : "font-mono uppercase"}`}>
       {label}
     </div>
-    <div className={`text-[22px] font-bold font-mono leading-[1.1] mb-2 relative z-10 text-white ${isRtl ? "md:text-right" : ""}`}>
+    <div className={`text-[19px] lg:text-[20px] font-bold font-mono leading-[1.1] mb-2 relative z-10 text-white ${isRtl ? "md:text-right" : ""}`}>
       {value}
     </div>
-    <div className={`text-[13px] text-muted-foreground leading-snug mt-auto relative z-10 ${isRtl ? "md:text-right font-['Tajawal',sans-serif]" : ""}`}>
+    <div className={`text-[12px] lg:text-[13px] text-muted-foreground leading-snug mt-auto relative z-10 ${isRtl ? "md:text-right font-['Tajawal',sans-serif]" : ""}`}>
       {supporting}
     </div>
   </div>
