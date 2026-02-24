@@ -51,12 +51,13 @@ const Navbar = () => {
     >
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
         <div className="flex h-14 items-center justify-between">
-          <Link to="/" onClick={(e) => handleNavClick(e, "/")} className="flex items-center logo-hover relative group">
+          <Link to="/" onClick={(e) => handleNavClick(e, "/")} className="flex items-center logo-hover relative group" style={{ background: 'transparent', border: 'none', boxShadow: 'none', outline: 'none' }}>
             <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             <img
               src={tilqaiLogo}
               alt="tilqai"
               className={`h-[57px] max-md:h-[46px] transition-none logo-entrance mix-blend-screen opacity-90${logoLoaded ? " logo-visible" : ""}`}
+              style={{ background: 'transparent', border: 'none', boxShadow: 'none', outline: 'none', padding: 0 }}
             />
           </Link>
 

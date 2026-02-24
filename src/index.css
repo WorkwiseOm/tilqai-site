@@ -231,18 +231,6 @@
     line-height: 1.85 !important;
   }
 
-  h1 {
-    font-size: 48px !important;
-  }
-
-  h2 {
-    font-size: 36px !important;
-  }
-
-  h3 {
-    font-size: 22px !important;
-  }
-
   /* Section labels */
   .section-label {
     font-size: 13px;
