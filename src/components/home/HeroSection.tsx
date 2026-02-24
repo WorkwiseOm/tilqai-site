@@ -3,7 +3,6 @@ import { openCalendly } from "@/lib/calendly";
 import { openROIModal } from "@/components/home/ROISimulator";
 import { HeroKeywords } from "@/components/home/HeroKeywords";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { useTypewriter } from "@/hooks/use-typewriter";
 import { useHeroIntro } from "@/hooks/use-hero-intro";
 
 /**
@@ -17,29 +16,49 @@ import { useHeroIntro } from "@/hooks/use-hero-intro";
 const HeroSection = () => {
   const { t, isRtl } = useLanguage();
   const { completeIntro } = useHeroIntro();
-  const { displayedText, showCursor, done: typingDone } = useTypewriter(
-    t("hero.headline"),
-    90,
-    300,
-  );
 
-  // 0 = hidden, 1 = sub visible, 2 = trust visible, 3 = everything visible
+  // 0 = hidden, 1 = "What if...", 2 = "...runs by itself", 3 = dot, 4 = sub, 5 = trust, 6 = CTA/Keywords
   const [stage, setStage] = useState(0);
 
+  // Fallback for prefers-reduced-motion
   useEffect(() => {
-    if (!typingDone) return;
-    const t1 = setTimeout(() => setStage(1), 500);
-    const t2 = setTimeout(() => setStage(2), 500 + 700);
-    const t3 = setTimeout(() => {
-      setStage(3);
-      completeIntro(); // tells Navbar to reveal
-    }, 300 + 400 + 500);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
-  }, [typingDone, completeIntro]);
+    const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isReduced) {
+      setStage(6);
+      completeIntro();
+      return;
+    }
 
-  const fade = (min: number, duration = 600) =>
-    `transition-all ease-out ${stage >= min ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
-    }` + ` duration-[${duration}ms]`;
+    // Sequence timings
+    // 1. "What if..." starts instantly string load (stage 1)
+    setStage(1);
+
+    // 2. "...runs by itself" starts 0.3s after step 1
+    const t2 = setTimeout(() => setStage(2), 300);
+
+    // 3. Dot bounce starts 0.15s after word 2 finishes (word 2 takes 0.6s) = 300 + 600 + 150 = 1050ms
+    const t3 = setTimeout(() => setStage(3), 1050);
+
+    // 4. Subheadline fades in 0.5s after step 2 finishes (300 + 600 + 500 = 1400)
+    const t4 = setTimeout(() => setStage(4), 1400);
+
+    // 5. Pill badge fades + slides 0.3s after subheadline finishes (1400 + 500 + 300 = 2200)
+    const t5 = setTimeout(() => setStage(5), 2200);
+
+    // 6. CTAs and Right-side Keywords start 0.2s after pill finishes (2200 + 400 + 200 = 2800)
+    const t6 = setTimeout(() => {
+      setStage(6);
+      completeIntro(); // Tells Navbar it can reveal
+    }, 2800);
+
+    return () => {
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+      clearTimeout(t5);
+      clearTimeout(t6);
+    };
+  }, [completeIntro]);
 
   return (
     <section className="py-20 lg:py-24 pb-6 relative hero-section flex items-center min-h-[90vh] bg-[#0a1628]">
@@ -48,32 +67,41 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-8 lg:justify-between w-full relative">
           {/* Text column */}
           <div className={`lg:w-[55%] ${isRtl ? "text-right" : ""}`}>
-            {/* Headline — always structurally present for height */}
+            {/* Cinematic Headline Sequence */}
             <h1
-              className="text-[36px] md:text-[48px] lg:text-[64px] tracking-tight font-bold text-white leading-[1.1] max-w-4xl"
+              className={`text-[36px] md:text-[48px] lg:text-[64px] tracking-tight font-bold text-white leading-[1.1] max-w-4xl flex flex-wrap ${isRtl ? "justify-end text-right flex-row-reverse" : "justify-start text-left items-baseline"}`}
               style={{ minHeight: "1.2em", textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}
             >
-              <span className="whitespace-pre-wrap">{displayedText}</span>
-              {showCursor && (
-                <span className="animate-pulse text-primary font-light">|</span>
-              )}
-              {!showCursor && displayedText.length > 0 && (
-                <span className="text-primary">.</span>
-              )}
+              <span
+                className={`inline-block whitespace-pre transition-all duration-600 ease-out will-change-transform ${stage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[20px]"}`}
+              >
+                {isRtl ? "ماذا لو... " : "What if... "}
+              </span>
+              <span
+                className={`inline-block whitespace-pre transition-all duration-600 ease-out will-change-transform ${stage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[20px]"}`}
+              >
+                {isRtl ? "العمل يُنجز تلقائيًا" : "work runs by itself"}
+              </span>
+              <span
+                className={`inline-block text-primary transition-all duration-500 will-change-transform ${stage >= 3 ? "opacity-100 scale-100" : "opacity-0 scale-0"}`}
+                style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
+              >
+                .
+              </span>
             </h1>
 
-            {/* Subheadline — stage 1 */}
+            {/* Subheadline — stage 4 */}
             <p
-              className={`mt-6 text-[18px] md:text-[22px] max-w-2xl leading-[1.5] transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${stage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              className={`mt-6 text-[18px] md:text-[22px] max-w-2xl leading-[1.5] transition-opacity duration-500 ease-out will-change-opacity ${stage >= 4 ? "opacity-100" : "opacity-0"
                 }`}
               style={{ color: "rgba(255,255,255,0.7)", textShadow: "0 1px 10px rgba(0,0,0,0.8)" }}
             >
               {t("hero.subheadline")}
             </p>
 
-            {/* Trust line — stage 2 */}
+            {/* Trust line / Pill badge — stage 5 */}
             <div
-              className={`mt-8 inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/20 bg-black/40 backdrop-blur-xl shadow-2xl transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${stage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              className={`mt-8 inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/20 bg-black/40 backdrop-blur-xl shadow-2xl transition-all duration-400 ease-out will-change-transform ${stage >= 5 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[10px]"
                 }`}
             >
               <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse shadow-[0_0_15px_currentColor]" />
@@ -82,9 +110,9 @@ const HeroSection = () => {
               </p>
             </div>
 
-            {/* CTAs — stage 3 */}
+            {/* CTAs — stage 6 */}
             <div
-              className={`mt-10 flex gap-4 ${isRtl ? "justify-end" : ""} transition-all duration-700 ease-out ${stage >= 3 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
+              className={`mt-10 flex gap-4 ${isRtl ? "justify-end" : ""} transition-opacity duration-400 ease-out will-change-opacity ${stage >= 6 ? "opacity-100" : "opacity-0"
                 }`}
             >
               <button
@@ -104,7 +132,7 @@ const HeroSection = () => {
 
           {/* Right column: Animated Keywords */}
           <div className="lg:w-[45%] w-full flex items-center justify-center min-h-[140px] lg:min-h-0 relative z-10">
-            <HeroKeywords startAnimation={typingDone} />
+            <HeroKeywords startAnimation={stage >= 6} />
           </div>
         </div>
       </div>
