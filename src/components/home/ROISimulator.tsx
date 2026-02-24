@@ -112,41 +112,41 @@ export default function ROISimulator() {
       </section>
 
       {open && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-4 bg-black/60 backdrop-blur-md" style={{ animation: "fadeIn 0.3s ease-out" }}>
+        <div className="fixed inset-0 z-[9998] flex items-center justify-center p-0 md:p-4 bg-[rgba(0,0,0,0.85)]" style={{ animation: "fadeIn 0.3s ease-out" }}>
           <div className="absolute inset-0" onClick={() => setOpen(false)} />
           <div
-            className="relative z-10 w-full md:max-w-[900px] max-h-[100vh] md:max-h-[95vh] md:rounded-3xl border-0 md:border border-white/10 bg-[#060b13] md:bg-[#060b13]/95 backdrop-blur-3xl shadow-[0_0_80px_hsl(var(--primary)/0.15)] flex flex-col"
+            className="relative z-[9999] w-full md:max-w-[900px] max-h-[100vh] md:max-h-[90vh] md:rounded-[16px] border-0 md:border md:border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-hidden"
             style={{ animation: "slideUpFade 0.4s ease-out" }}
             dir={isRtl ? "rtl" : "ltr"}
           >
-            <div className="absolute inset-0 bg-primary/5 blur-[100px] pointer-events-none md:rounded-3xl" />
+            <div className="absolute inset-0 bg-primary/5 blur-[100px] pointer-events-none md:rounded-[16px]" />
 
             <button
               onClick={() => setOpen(false)}
-              className={`absolute top-4 ${isRtl ? "left-4" : "right-4"} text-muted-foreground hover:text-white transition-colors z-20 duration-300 bg-white/5 hover:bg-white/10 p-2 rounded-full hidden md:block`}
+              className={`absolute top-4 ${isRtl ? "left-4" : "right-4"} text-white hover:text-white transition-colors z-20 duration-300 bg-white/10 hover:bg-white/20 p-2 rounded-full hidden md:block`}
             >
               <X className="w-5 h-5" />
             </button>
-            <div className="p-4 flex items-center justify-between border-b border-white/10 md:hidden relative z-20 bg-[#060b13]">
-              <h2 className={`text-[18px] font-bold text-white ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+            <div className="p-4 flex items-center justify-between border-b border-white/10 md:hidden relative z-20 bg-[#0f1f35]">
+              <h2 className={`text-[16px] font-[600] text-white ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
                 {isRtl ? "سؤالان. رقم واحد." : "Two questions. One number."}
               </h2>
               <button
                 onClick={() => setOpen(false)}
-                className="text-muted-foreground hover:text-white transition-colors p-2 rounded-full"
+                className="text-white hover:text-white transition-colors bg-white/10 p-2 rounded-full"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Content Area */}
-            <div className="overflow-y-auto no-scrollbar relative z-10 flex-1 p-5 md:p-10 flex flex-col gap-8 items-stretch">
+            {/* Content Area - No Scroll Required */}
+            <div className="relative z-10 flex-1 p-[20px] md:p-[40px] flex flex-col gap-6 md:gap-8 items-stretch overflow-y-auto md:overflow-visible">
 
               {/* Two inputs side by side on desktop */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                 {/* Input 1 */}
-                <div className="space-y-4">
-                  <label className={`block text-[15px] font-bold text-white/90 leading-snug ${isRtl ? "font-['Tajawal',sans-serif] text-right" : ""}`}>
+                <div className="space-y-3 md:space-y-4">
+                  <label className={`block text-[16px] font-[600] text-white leading-snug ${isRtl ? "font-['Tajawal',sans-serif] text-right" : ""}`}>
                     {isRtl ? "كم عدد أعضاء الفريق الذين يتعاملون مع مهام يدوية أو متكررة؟" : "How many team members handle manual or repetitive tasks?"}
                   </label>
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
@@ -154,7 +154,7 @@ export default function ROISimulator() {
                       <button
                         key={opt.key}
                         onClick={() => setTeamOption(opt.key as any)}
-                        className={`py-3 px-1 text-[14px] font-semibold rounded-lg border transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${teamOption === opt.key
+                        className={`py-2 px-1 md:py-3 text-[15px] font-semibold rounded-lg border transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${teamOption === opt.key
                           ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
                           : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
                           }`}
@@ -166,8 +166,8 @@ export default function ROISimulator() {
                 </div>
 
                 {/* Input 2 */}
-                <div className="space-y-4">
-                  <label className={`block text-[15px] font-bold text-white/90 leading-snug ${isRtl ? "font-['Tajawal',sans-serif] text-right" : ""}`}>
+                <div className="space-y-3 md:space-y-4">
+                  <label className={`block text-[16px] font-[600] text-white leading-snug ${isRtl ? "font-['Tajawal',sans-serif] text-right" : ""}`}>
                     {isRtl ? "كم ساعة في الأسبوع يقضي كل شخص في المهام اليدوية؟" : "How many hours per week does each person spend on manual tasks?"}
                   </label>
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
@@ -175,7 +175,7 @@ export default function ROISimulator() {
                       <button
                         key={opt.key}
                         onClick={() => setHoursOption(opt.key as any)}
-                        className={`py-3 px-1 text-[13px] font-semibold rounded-lg border transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${hoursOption === opt.key
+                        className={`py-2 px-1 md:py-3 text-[15px] font-semibold rounded-lg border transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${hoursOption === opt.key
                           ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
                           : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
                           }`}
@@ -189,38 +189,38 @@ export default function ROISimulator() {
 
               {/* Instant Results Area */}
               {isComplete && (
-                <div className="flex flex-col space-y-5 animate-in slide-in-from-bottom-4 fade-in duration-500 mt-2">
+                <div className="flex flex-col space-y-4 md:space-y-5 animate-in slide-in-from-bottom-4 fade-in duration-500 mt-2">
 
                   {/* Headline Result Panel */}
-                  <div className="text-center bg-[hsl(225_35%_12%)] border border-primary/40 rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-[0_0_30px_hsl(var(--primary)/0.15)]">
+                  <div className="text-center bg-[hsl(225_35%_12%)] border border-primary/40 rounded-2xl p-5 md:p-8 relative overflow-hidden shadow-[0_0_30px_hsl(var(--primary)/0.15)]">
                     <div className="absolute inset-x-0 bottom-0 h-1 bg-primary" />
                     <div className="absolute inset-0 bg-primary/10 blur-[60px] pointer-events-none" />
 
-                    <h3 className={`text-[32px] md:text-[38px] font-bold text-white leading-tight relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                    <h3 className={`text-[28px] font-bold text-white leading-tight relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
                       {isRtl ? `OMR ${formatNumber(totalRecoverableCapacity)} من الطاقة السنوية جاهزة لإعادة التوجيه.` : `OMR ${formatNumber(totalRecoverableCapacity)} in annual capacity — ready to be redirected.`}
                     </h3>
 
-                    <div className={`mt-5 space-y-2 relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-                      <p className="text-[16px] text-muted-foreground/90">
+                    <div className={`mt-4 space-y-2 relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                      <p className="text-[15px]">
                         {isRtl ? (
-                          <>أي <span className="text-primary font-bold text-[18px]">OMR {formatNumber(monthlyCapacity)}</span> تغادر عملياتك كل شهر.</>
+                          <>أي <span className="text-primary font-bold text-[15px]">OMR {formatNumber(monthlyCapacity)}</span> تغادر عملياتك كل شهر.</>
                         ) : (
-                          <>That's <span className="text-primary font-bold text-[18px]">OMR {formatNumber(monthlyCapacity)}</span> leaving your operation every month.</>
+                          <>That's <span className="text-primary font-bold text-[15px]">OMR {formatNumber(monthlyCapacity)}</span> leaving your operation every month.</>
                         )}
                       </p>
-                      <p className="text-[16px] text-muted-foreground/90">
+                      <p className="text-[15px]">
                         {isRtl ? (
-                          <>على مدى 5 سنوات: <span className="text-white font-bold">OMR {formatNumber(fiveYearCapacity)}</span> من الطاقة القابلة للاسترداد.</>
+                          <>على مدى 5 سنوات: <span className="text-white font-bold text-[15px]">OMR {formatNumber(fiveYearCapacity)}</span> من الطاقة القابلة للاسترداد.</>
                         ) : (
-                          <>Over 5 years: <span className="text-white font-bold">OMR {formatNumber(fiveYearCapacity)}</span> in recoverable capacity.</>
+                          <>Over 5 years: <span className="text-white font-bold text-[15px]">OMR {formatNumber(fiveYearCapacity)}</span> in recoverable capacity.</>
                         )}
                       </p>
                     </div>
 
-                    <p className={`mt-6 text-[15px] text-white/80 mx-auto relative z-10 leading-relaxed font-medium ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                    <p className={`mt-5 text-[15px] text-white/80 mx-auto relative z-10 leading-relaxed font-medium ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
                       {isRtl ? `استرداد الطاقة لخدمة أفضل، وقرارات أسرع، وعمل يحتاج فعلاً إلى إنسان.` : `Capacity recovery for better service, faster decisions, and work that actually needs a human.`}
                     </p>
-                    <p className={`mt-4 text-[11px] text-muted-foreground/60 italic mx-auto relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                    <p className={`mt-3 text-[11px] text-muted-foreground/60 italic mx-auto relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
                       {isRtl ? `بناءً على متوسط راتب شهري OMR 700. احجز تقييمك للحصول على رقم دقيق.` : `Based on an average salary of OMR 700/month. Book your assessment for a precise figure.`}
                     </p>
                   </div>
@@ -241,14 +241,14 @@ export default function ROISimulator() {
                     />
                   </div>
 
-                  <div className="mt-4 pt-4 relative z-10 flex flex-col items-center">
+                  <div className="mt-3 relative z-10 flex flex-col items-center">
                     <button
                       onClick={() => { setOpen(false); openCalendly(); }}
-                      className="w-full sm:w-auto btn-primary-hover bg-primary text-white text-[16px] font-bold px-12 py-4 rounded-xl shadow-[0_0_20px_hsl(var(--primary)/0.3)] transition-all duration-300 hover:scale-[1.02]"
+                      className="w-auto min-w-[200px] bg-[#00b4d8] text-white text-[16px] font-[700] px-10 py-3.5 rounded-xl transition-colors duration-300 hover:bg-[#009ac2]"
                     >
                       {isRtl ? "احجز تقييماً مجانياً ←" : "Book Free Assessment →"}
                     </button>
-                    <div className={`mt-3 text-[13px] text-muted-foreground/80 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                    <div className={`mt-2 text-[13px] text-muted-foreground/80 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
                       {isRtl ? "سنوضح لك بالضبط ما يمكن لفريقك القيام به بدلاً من ذلك." : "We will show you exactly what your team could be doing instead."}
                     </div>
                   </div>
@@ -279,15 +279,15 @@ export default function ROISimulator() {
 }
 
 const ResultCard = ({ label, value, supporting, isRtl }: { label: string; value: string; supporting: string; isRtl?: boolean }) => (
-  <div className="rounded-xl p-6 bg-[hsl(225_35%_10%)] border border-white/5 flex flex-col justify-center transition-all hover:bg-[hsl(225_35%_12%)] shadow-md relative overflow-hidden group w-full text-center md:text-left">
+  <div className="rounded-xl p-5 md:p-6 bg-[hsl(225_35%_10%)] border border-white/5 flex flex-col justify-center transition-all hover:bg-[hsl(225_35%_12%)] shadow-md relative overflow-hidden group w-full text-center md:text-left">
     <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-    <div className={`text-[12px] font-bold text-primary/80 tracking-[1px] mb-2 relative z-10 ${isRtl ? "md:text-right font-['Tajawal',sans-serif]" : "font-mono uppercase"}`}>
+    <div className={`text-[11px] font-bold text-primary tracking-[2px] mb-2 relative z-10 ${isRtl ? "md:text-right font-['Tajawal',sans-serif]" : "font-mono uppercase"}`}>
       {label}
     </div>
-    <div className={`text-[24px] font-bold font-mono leading-[1.1] mb-2 relative z-10 text-foreground ${isRtl ? "md:text-right" : ""}`}>
+    <div className={`text-[22px] font-bold font-mono leading-[1.1] mb-2 relative z-10 text-white ${isRtl ? "md:text-right" : ""}`}>
       {value}
     </div>
-    <div className={`text-[14px] text-muted-foreground leading-snug mt-auto relative z-10 ${isRtl ? "md:text-right font-['Tajawal',sans-serif]" : ""}`}>
+    <div className={`text-[13px] text-muted-foreground leading-snug mt-auto relative z-10 ${isRtl ? "md:text-right font-['Tajawal',sans-serif]" : ""}`}>
       {supporting}
     </div>
   </div>

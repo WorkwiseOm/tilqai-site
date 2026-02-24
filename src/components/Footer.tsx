@@ -93,13 +93,13 @@ export default function Footer() {
     const tajawalText = isRtl ? "font-['Tajawal',sans-serif]" : "";
 
     return (
-        <footer className="bg-[#0a1628] pt-[60px] pb-[60px] relative z-10" dir={isRtl ? "rtl" : "ltr"}>
+        <footer className="bg-[#0a1628] pt-[60px] pb-[60px] relative z-[1]" dir={isRtl ? "rtl" : "ltr"}>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
             <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
                 <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16 ${isRtl ? "text-right" : "text-left"}`}>
 
                     {/* Column 1 - Brand */}
-                    <div className={`${colClasses} ${isRtl ? "items-start" : "items-start"}`}>
+                    <div className={`${colClasses} ${isRtl ? "items-start" : "items-start"} logo-container`} style={{ background: 'transparent', border: 'none', boxShadow: 'none', outline: 'none', padding: 0 }}>
                         <img src={tilqaiLogo} alt="tilqai" className="h-[42px] mb-2 opacity-90 mix-blend-screen" />
                         <p className={`text-[14px] leading-[1.6] text-muted-foreground max-w-xs ${tajawalText}`}>{d.tagline}</p>
                         <a href="https://www.linkedin.com/in/tariqalmaskari/" target="_blank" rel="noopener noreferrer" className="mt-4 text-primary hover:brightness-125 transition-all duration-300 transform hover:-translate-y-1 w-fit drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)]">
