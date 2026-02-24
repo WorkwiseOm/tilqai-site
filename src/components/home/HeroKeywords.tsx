@@ -33,7 +33,7 @@ export const HeroKeywords = ({ startAnimation }: { startAnimation: boolean }) =>
 
         const interval = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % keywords.length);
-        }, 2500);
+        }, 3500);
 
         return () => clearInterval(interval);
     }, [startAnimation, keywords.length, isHovered]);
