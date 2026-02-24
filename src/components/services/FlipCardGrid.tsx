@@ -92,7 +92,6 @@ const FlipCard = ({
           </span>
         </div>
 
-        {/* BACK */}
         <div
           className={`flip-card-face flip-card-back flex flex-col p-6 rounded-2xl border border-white/5 shadow-2xl transition-all duration-500 group-hover:border-primary/40 group-hover:shadow-[0_0_30px_-5px_hsl(var(--primary)/0.2)] ${isRtl ? "text-right" : "text-left"}`}
           style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 100%), hsl(222 47% 5%)" }}
@@ -101,9 +100,9 @@ const FlipCard = ({
             {automatedLabel}
           </span>
 
-          <ul className={`flex-1 ${items.length > 5 ? "space-y-1.5" : "space-y-2.5"}`}>
+          <ul className={`pb-12 ${items.length > 5 ? "space-y-1.5" : "space-y-2.5"}`}>
             {items.map((item) => (
-              <li key={item} className={`flex items-start gap-2 text-muted-foreground ${isRtl ? "flex-row-reverse font-['Tajawal',sans-serif]" : ""} ${items.length > 5 ? "text-[13px] leading-tight" : "text-sm"}`}>
+              <li key={item} className={`flex items-start gap-2 text-muted-foreground ${isRtl ? "flex-row-reverse font-['Tajawal',sans-serif]" : ""} text-[13px] leading-tight`}>
                 <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                 <span>{item}</span>
               </li>
@@ -115,7 +114,7 @@ const FlipCard = ({
               e.stopPropagation();
               openCalendly();
             }}
-            className="mt-4 btn-primary-hover bg-primary text-primary-foreground text-[15px] font-medium px-4 py-2 rounded-md transition-all duration-300 w-full shadow-[0_4px_15px_hsl(var(--primary)/0.2)]"
+            className="absolute bottom-6 left-6 right-6 btn-primary-hover bg-primary text-primary-foreground text-[15px] font-medium px-4 py-2 rounded-md transition-all duration-300 shadow-[0_4px_15px_hsl(var(--primary)/0.2)]"
           >
             {ctaLabel} {arrow}
           </button>
