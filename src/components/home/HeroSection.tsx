@@ -17,42 +17,55 @@ const HeroSection = () => {
   const { t, isRtl } = useLanguage();
   const { completeIntro } = useHeroIntro();
 
-  // 0 = hidden, 1 = "What if...", 2 = "...runs by itself", 3 = dot, 4 = sub, 5 = trust, 6 = CTA, 7 = Keywords
+  // Stages: 0: Init, 1: Parent Breathe, 2: "What if...", 3: "Runs by itself", 4: Blue dot, 5: Subhead, 6: Pill, 7: CTA, 8: Keywords
   const [stage, setStage] = useState(0);
 
   // Fallback for prefers-reduced-motion
   useEffect(() => {
     const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (isReduced) {
-      setStage(7);
+      setStage(8);
       completeIntro();
       return;
     }
 
-    // Sequence timings
-    // 1. "What if..." starts instantly string load (stage 1)
+    // Sequence timings 12-second philosophy
+    // 1. Parent Hero wrapper begins fade in immediately.
     setStage(1);
 
-    // 2. "...runs by itself" starts 0.7s after step 1
-    const t2 = setTimeout(() => setStage(2), 700);
+    // 2. "What if..." starts 0.8s after page load
+    const t2 = setTimeout(() => setStage(2), 800);
 
-    // 3. Dot bounce starts 0.2s after word 2 finishes (700 + 800 = 1500 + 200 = 1700ms)
-    const t3 = setTimeout(() => setStage(3), 1700);
+    // 3. "...runs by itself" starts 1.6s after step 2 (800 + 1600 = 2400)
+    const t3 = setTimeout(() => setStage(3), 2400);
 
-    // 4. Subheadline fades in 1.0s after step 2 finishes (1500 + 1000 = 2500ms)
-    const t4 = setTimeout(() => setStage(4), 2500);
+    // 4. Blue dot starts 0.8s after step 3 begins (2400 + 800 = 3200)
+    const t4 = setTimeout(() => setStage(4), 3200);
 
-    // 5. Pill badge fades + slides 0.6s after subheadline finishes (2500 + 700 = 3200 + 600 = 3800ms)
-    const t5 = setTimeout(() => setStage(5), 3800);
+    // [PAUSE] 1.2 seconds of nothing after step 3 & 4 finish.
+    // Step 3 animation = 1.8s duration. Finishes at 2400 + 1800 = 4200ms
+    // Step 4 animation = 1.2s duration. Finishes at 3200 + 1200 = 4400ms
+    // 1.2s pause starting from the final frame of headline elements (from 4400ms) = 5600ms
 
-    // 6. CTAs start 0.5s after pill finishes (3800 + 600 = 4400 + 500 = 4900ms)
-    const t6 = setTimeout(() => setStage(6), 4900);
+    // 5. Subheadline breathes in at 5600ms
+    const t5 = setTimeout(() => setStage(5), 5600);
 
-    // 7. Right-side Keywords start 0.8s after buttons appear (4900 + 800 = 5700)
-    const t7 = setTimeout(() => {
-      setStage(7);
+    // [PAUSE] 0.8 seconds after subheadline finishes. 
+    // Subheadline duration = 2.0s. Finishes at 5600 + 2000 = 7600ms
+    // 0.8s pause from 7600ms = 8400ms
+
+    // 6. Pill badge appears at 8400ms
+    const t6 = setTimeout(() => setStage(6), 8400);
+
+    // 7. CTAs appear 0.6s after pill begins (8400 + 600 = 9000ms)
+    const t7 = setTimeout(() => setStage(7), 9000);
+
+    // 8. Right-side keywords begin exclusively after CTAs are fully visually established
+    // CTA duration = 1.2s. Finishes at 9000 + 1200 = 10200ms
+    const t8 = setTimeout(() => {
+      setStage(8);
       completeIntro(); // Tells Navbar it can reveal
-    }, 5700);
+    }, 10200);
 
     return () => {
       clearTimeout(t2);
@@ -61,11 +74,12 @@ const HeroSection = () => {
       clearTimeout(t5);
       clearTimeout(t6);
       clearTimeout(t7);
+      clearTimeout(t8);
     };
   }, [completeIntro]);
 
   return (
-    <section className="py-20 lg:py-24 pb-6 relative hero-section flex items-center min-h-[90vh] bg-[#0a1628]">
+    <section className={`py-20 lg:py-24 pb-6 relative hero-section flex items-center min-h-[90vh] transition-all duration-[1200ms] ease-in will-change-[background,opacity] ${stage >= 1 ? "bg-[#0a1628] opacity-100" : "bg-[#050a12] opacity-0"}`}>
 
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12 relative z-10 w-full">
         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-8 lg:justify-between w-full relative">
@@ -77,35 +91,34 @@ const HeroSection = () => {
               style={{ minHeight: "1.2em", textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}
             >
               <span
-                className={`inline-block whitespace-pre transition-all duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] will-change-transform ${stage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[20px]"}`}
+                className={`inline-block whitespace-pre transition-opacity duration-[1800ms] ease-[cubic-bezier(0.4,0,0.2,1)] will-change-opacity ${stage >= 2 ? "opacity-100" : "opacity-0"}`}
               >
                 {isRtl ? "ماذا لو... " : "What if... "}
               </span>
               <span
-                className={`inline-block whitespace-pre transition-all duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] will-change-transform ${stage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[20px]"}`}
+                className={`inline-block whitespace-pre transition-opacity duration-[1800ms] ease-[cubic-bezier(0.4,0,0.2,1)] will-change-opacity ${stage >= 3 ? "opacity-100" : "opacity-0"}`}
               >
                 {isRtl ? "العمل يُنجز تلقائيًا" : "work runs by itself"}
               </span>
               <span
-                className={`inline-block text-primary transition-all duration-[500ms] will-change-transform ${stage >= 3 ? "opacity-100 scale-100" : "opacity-0 scale-0"}`}
-                style={{ transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
+                className={`inline-block text-primary transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform will-change-opacity ${stage >= 4 ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
               >
                 .
               </span>
             </h1>
 
-            {/* Subheadline — stage 4 */}
+            {/* Subheadline — stage 5 */}
             <p
-              className={`mt-6 text-[18px] md:text-[22px] max-w-2xl leading-[1.5] transition-opacity duration-[700ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] will-change-opacity ${stage >= 4 ? "opacity-100" : "opacity-0"
+              className={`mt-6 text-[18px] md:text-[22px] max-w-2xl leading-[1.5] transition-opacity duration-[2000ms] ease-[cubic-bezier(0.4,0,0.2,1)] will-change-opacity ${stage >= 5 ? "opacity-75" : "opacity-0"
                 }`}
-              style={{ color: "rgba(255,255,255,0.7)", textShadow: "0 1px 10px rgba(0,0,0,0.8)" }}
+              style={{ color: "rgba(255,255,255,1)", textShadow: "0 1px 10px rgba(0,0,0,0.8)" }}
             >
               {t("hero.subheadline")}
             </p>
 
-            {/* Trust line / Pill badge — stage 5 */}
+            {/* Trust line / Pill badge — stage 6 */}
             <div
-              className={`mt-8 inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/20 bg-black/40 backdrop-blur-xl shadow-2xl transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] will-change-transform ${stage >= 5 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[10px]"
+              className={`mt-8 inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/20 bg-black/40 backdrop-blur-xl shadow-2xl transition-opacity duration-[1000ms] ease-[cubic-bezier(0.4,0,0.2,1)] will-change-opacity ${stage >= 6 ? "opacity-100" : "opacity-0"
                 }`}
             >
               <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse shadow-[0_0_15px_currentColor]" />
@@ -114,9 +127,9 @@ const HeroSection = () => {
               </p>
             </div>
 
-            {/* CTAs — stage 6 */}
+            {/* CTAs — stage 7 */}
             <div
-              className={`mt-10 flex gap-4 ${isRtl ? "justify-end" : ""} transition-opacity duration-[500ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] will-change-opacity ${stage >= 6 ? "opacity-100" : "opacity-0"
+              className={`mt-10 flex gap-4 ${isRtl ? "justify-end" : ""} transition-opacity duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)] will-change-opacity ${stage >= 7 ? "opacity-100" : "opacity-0"
                 }`}
             >
               <button
@@ -136,7 +149,7 @@ const HeroSection = () => {
 
           {/* Right column: Animated Keywords */}
           <div className="lg:w-[45%] w-full flex items-center justify-center min-h-[140px] lg:min-h-0 relative z-10">
-            <HeroKeywords startAnimation={stage >= 7} />
+            <HeroKeywords startAnimation={stage >= 8} />
           </div>
         </div>
       </div>
