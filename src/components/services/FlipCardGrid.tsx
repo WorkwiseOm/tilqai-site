@@ -115,7 +115,7 @@ const FlipCard = ({
               e.stopPropagation();
               openCalendly();
             }}
-            className="mt-4 bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded-md hover:bg-primary/90 transition-colors w-full"
+            className="mt-4 btn-primary-hover bg-primary text-primary-foreground text-[15px] font-medium px-4 py-2 rounded-md transition-all duration-300 w-full shadow-[0_4px_15px_hsl(var(--primary)/0.2)]"
           >
             {ctaLabel} {arrow}
           </button>

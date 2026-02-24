@@ -28,19 +28,19 @@ const About = () => {
             <div className="space-y-6 max-w-3xl">
               <div>
                 <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">{t("about.block1.label")}</div>
-                <p className="text-[16px] text-muted-foreground leading-[1.6]">
+                <p className="text-[18px] text-muted-foreground leading-[1.8] font-medium" style={{ fontSize: '18px' }}>
                   {t("about.block1.content")}
                 </p>
               </div>
               <div>
                 <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">{t("about.block2.label")}</div>
-                <p className="text-[16px] text-muted-foreground leading-[1.6]">
+                <p className="text-[18px] text-muted-foreground leading-[1.8] font-medium" style={{ fontSize: '18px' }}>
                   {t("about.block2.content")}
                 </p>
               </div>
               <div>
                 <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">{t("about.block3.label")}</div>
-                <p className="text-[16px] text-muted-foreground leading-[1.6]">
+                <p className="text-[18px] text-muted-foreground leading-[1.8] font-medium" style={{ fontSize: '18px' }}>
                   {t("about.block3.content")}
                 </p>
               </div>
