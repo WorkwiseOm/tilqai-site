@@ -56,7 +56,7 @@ const Navbar = () => {
             <img
               src={tilqaiLogo}
               alt="tilqai"
-              className={`h-[57px] max-md:h-[46px] transition-none logo-entrance mix-blend-screen opacity-90${logoLoaded ? " logo-visible" : ""}`}
+              className={`h-[57px] max-md:h-[46px] transition-none logo-entrance opacity-90${logoLoaded ? " logo-visible" : ""}`}
               style={{ background: 'transparent', border: 'none', boxShadow: 'none', outline: 'none', padding: 0 }}
             />
           </Link>
