@@ -13,7 +13,7 @@ export default function ROISimulator() {
 
   const [teamOption, setTeamOption] = useState<"1-5" | "6-10" | "11-20" | "21-50" | null>(null);
   const [salaryOption, setSalaryOption] = useState<"325-800" | "800-1200" | "1200-2000" | "2000+" | null>(null);
-  const [hoursOption, setHoursOption] = useState<"1-5" | "6-10" | "11-20" | "20+" | null>(null);
+  const [hoursOption, setHoursOption] = useState<"5-10" | "11-20" | "21-30" | "30+" | null>(null);
   const [processOption, setProcessOption] = useState<"1-3" | "4-6" | "7+" | null>(null);
 
   useEffect(() => {
@@ -49,10 +49,10 @@ export default function ROISimulator() {
   };
 
   const hoursMidpoints = {
-    '1-5': 3,
-    '6-10': 8,
+    '5-10': 7.5,
     '11-20': 15,
-    '20+': 25
+    '21-30': 25,
+    '30+': 35
   };
 
   const processMultipliers = {
@@ -76,10 +76,10 @@ export default function ROISimulator() {
   ];
 
   const hoursOptions = [
-    { key: "1-5", label: isRtl ? "1–5 س" : "1–5 hrs" },
-    { key: "6-10", label: isRtl ? "6–10 س" : "6–10 hrs" },
+    { key: "5-10", label: isRtl ? "5–10 س" : "5–10 hrs" },
     { key: "11-20", label: isRtl ? "11–20 س" : "11–20 hrs" },
-    { key: "20+", label: isRtl ? "+20 س" : "20+ hrs" }
+    { key: "21-30", label: isRtl ? "21–30 س" : "21–30 hrs" },
+    { key: "30+", label: isRtl ? "+30 س" : "30+ hrs" }
   ];
 
   const processOptions = [
@@ -95,6 +95,8 @@ export default function ROISimulator() {
   let qualityImprovementOpportunity = 0;
   let totalRecoverableCapacity = 0;
   let workingDaysRecoverable = 0;
+  let monthlyCapacity = 0;
+  let fiveYearCapacity = 0;
 
   if (isComplete) {
     const teamMembers = teamMidpoints[teamOption!];
@@ -110,6 +112,8 @@ export default function ROISimulator() {
     qualityImprovementOpportunity = trappedCapacityCost * 0.15;
     totalRecoverableCapacity = (trappedCapacityCost + qualityImprovementOpportunity) * multiplier;
     workingDaysRecoverable = totalAnnualHours / 8;
+    monthlyCapacity = Math.round(totalRecoverableCapacity / 12);
+    fiveYearCapacity = totalRecoverableCapacity * 5;
   }
 
   const formatNumber = (num: number) => Math.round(num).toLocaleString();
@@ -187,8 +191,8 @@ export default function ROISimulator() {
                           key={opt.key}
                           onClick={() => setTeamOption(opt.key as any)}
                           className={`py-2 px-1 text-[13px] font-medium rounded-md border transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${teamOption === opt.key
-                              ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
-                              : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
+                            ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
+                            : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
                             }`}
                         >
                           {opt.label}
@@ -208,8 +212,8 @@ export default function ROISimulator() {
                           key={opt.key}
                           onClick={() => setSalaryOption(opt.key as any)}
                           className={`py-2 px-1 text-[13px] font-medium rounded-md border transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${salaryOption === opt.key
-                              ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
-                              : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
+                            ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
+                            : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
                             }`}
                         >
                           {opt.label}
@@ -229,8 +233,8 @@ export default function ROISimulator() {
                           key={opt.key}
                           onClick={() => setHoursOption(opt.key as any)}
                           className={`py-2 px-1 text-[13px] font-medium rounded-md border transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${hoursOption === opt.key
-                              ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
-                              : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
+                            ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
+                            : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
                             }`}
                         >
                           {opt.label}
@@ -250,8 +254,8 @@ export default function ROISimulator() {
                           key={opt.key}
                           onClick={() => setProcessOption(opt.key as any)}
                           className={`py-2 px-1 text-[13px] font-medium rounded-md border transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${processOption === opt.key
-                              ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
-                              : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
+                            ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
+                            : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
                             }`}
                         >
                           {opt.label}
@@ -278,10 +282,28 @@ export default function ROISimulator() {
                     <div className="text-center bg-[hsl(225_35%_12%)] border border-primary/20 rounded-xl pt-6 pb-5 px-4 relative overflow-hidden shadow-lg">
                       <div className="absolute inset-x-0 bottom-0 h-1 bg-primary/80" />
                       <div className="absolute inset-0 bg-primary/5 blur-[50px] pointer-events-none" />
-                      <h3 className={`text-[28px] font-bold text-white leading-tight mb-2 relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                      <h3 className={`text-[28px] font-bold text-white leading-tight relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
                         {isRtl ? `OMR ${formatNumber(totalRecoverableCapacity)} جهود سنوية جاهزة لإعادة التوجيه.` : `OMR ${formatNumber(totalRecoverableCapacity)} in annual capacity — ready to be redirected.`}
                       </h3>
-                      <p className={`text-[13px] text-muted-foreground/90 mx-auto relative z-10 leading-relaxed ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+
+                      <div className={`mt-3 space-y-1 relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                        <p className="text-[16px] text-muted-foreground/90">
+                          {isRtl ? (
+                            <>أي <span className="text-primary font-bold text-[18px]">OMR {formatNumber(monthlyCapacity)}</span> تغادر عملياتك كل شهر.</>
+                          ) : (
+                            <>That's <span className="text-primary font-bold text-[18px]">OMR {formatNumber(monthlyCapacity)}</span> leaving your operation every month.</>
+                          )}
+                        </p>
+                        <p className="text-[16px] text-muted-foreground/90">
+                          {isRtl ? (
+                            <>على مدى 5 سنوات: <span className="text-white font-bold">OMR {formatNumber(fiveYearCapacity)}</span> من الجهود القابلة للاسترداد.</>
+                          ) : (
+                            <>Over 5 years: <span className="text-white font-bold">OMR {formatNumber(fiveYearCapacity)}</span> in recoverable capacity.</>
+                          )}
+                        </p>
+                      </div>
+
+                      <p className={`mt-4 text-[13px] text-muted-foreground/90 mx-auto relative z-10 leading-relaxed ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
                         {isRtl ? `لخدمة أفضل، وقرارات أسرع، وأعمال تحتاج فعلاً إلى عناية الفريق.` : `Capacity recovery for better service, faster decisions, and work that really needs teams attention.`}
                       </p>
                     </div>
