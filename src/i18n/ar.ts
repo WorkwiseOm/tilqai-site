@@ -11,7 +11,7 @@ const ar = {
   "hero.subheadline": "نحدد ما يبطّئ أداءك، ونصلحه، ونحوّله إلى تشغيل تلقائي",
   "hero.trustLine": "نظامك. بياناتك. حوكمتك.",
   "hero.primaryCta": "احجز التقييم المجاني",
-  "hero.secondaryCta": "احسب السعة المستردة",
+  "hero.secondaryCta": "احسب الجهود المهدرة",
 
   // Pipeline / How We Deliver
   "pipeline.sectionLabel": "منهجية العمل",

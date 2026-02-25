@@ -11,7 +11,7 @@ const en = {
   "hero.subheadline": "We map, fix, and automate the work that slows you down.",
   "hero.trustLine": "Your system. Your data. Your control.",
   "hero.primaryCta": "Book Free Assessment",
-  "hero.secondaryCta": "Calculate Capacity",
+  "hero.secondaryCta": "Calculate your lost capacity",
 
   // Pipeline / How We Deliver
   "pipeline.sectionLabel": "How We Deliver",
