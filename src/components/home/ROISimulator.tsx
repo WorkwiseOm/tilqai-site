@@ -115,7 +115,7 @@ export default function ROISimulator() {
         <div className="fixed inset-0 z-[9998] flex items-center justify-center p-0 md:p-4 bg-[rgba(0,0,0,0.88)]" style={{ animation: "fadeIn 0.3s ease-out" }}>
           <div className="absolute inset-0" onClick={() => setOpen(false)} />
           <div
-            className="relative z-[9999] w-full md:max-w-[860px] h-[100vh] md:h-auto md:max-h-[88vh] md:rounded-[16px] border-0 md:border md:border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-hidden"
+            className="calculator-modal relative z-[9999] w-full md:max-w-[860px] h-[100vh] md:h-auto md:max-h-[88vh] md:rounded-[16px] border-0 md:border md:border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-hidden"
             style={{ animation: "slideUpFade 0.4s ease-out" }}
             dir={isRtl ? "rtl" : "ltr"}
           >
@@ -140,7 +140,7 @@ export default function ROISimulator() {
             </div>
 
             {/* Content Area - No Scroll Permitted */}
-            <div className="relative z-10 flex-1 p-[20px] md:p-[28px] flex flex-col gap-4 md:gap-6 items-stretch overflow-hidden">
+            <div className="calculator-content relative z-10 flex-1 p-[20px] md:p-[28px] flex flex-col gap-4 md:gap-6 items-stretch overflow-hidden">
 
               {/* Two inputs side by side on desktop */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -245,6 +245,12 @@ export default function ROISimulator() {
                     <button
                       onClick={() => { setOpen(false); openCalendly(); }}
                       className="w-auto min-w-[220px] bg-[#00b4d8] text-white text-[16px] font-[700] px-10 py-3.5 rounded-xl transition-colors duration-300 hover:bg-[#009ac2] shadow-lg"
+                      style={{
+                        display: "block",
+                        visibility: "visible",
+                        opacity: 1,
+                        marginTop: "20px"
+                      }}
                     >
                       {isRtl ? "احجز تقييماً مجانياً ←" : "Book Free Assessment →"}
                     </button>
@@ -272,6 +278,21 @@ export default function ROISimulator() {
         .no-scrollbar::-webkit-scrollbar {
           width: 0px;
           display: none;
+        }
+
+        /* RTL-Specific Modal Layout Overrides for Results Visibility */
+        [dir="rtl"] .calculator-modal {
+          overflow-y: auto !important;
+          max-height: 92vh !important;
+          height: auto !important;
+          display: flex !important;
+          flex-direction: column !important;
+        }
+
+        [dir="rtl"] .calculator-modal .calculator-content {
+          overflow: visible !important;
+          height: auto !important;
+          flex-shrink: 0 !important;
         }
       `}</style>
     </>
