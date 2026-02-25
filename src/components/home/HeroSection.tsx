@@ -96,23 +96,24 @@ const HeroSection = () => {
                   <>
                     <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 4 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>أعمالك</span>
                     <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 5 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>تُنجز</span>
-                    <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 6 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>تلقائياً</span>
+                    <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] flex items-end ${stage >= 6 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>
+                      تلقائياً
+                      {/* 3. Pulsing Blue Dot - Injected right after last word in RTL */}
+                      <span className={`inline-block translate-y-[4px] mr-1 text-primary heartbeat-dot transition-opacity duration-500 delay-500 ${stage >= 6 ? "opacity-100" : "opacity-0"}`}>.</span>
+                    </span>
                   </>
                 ) : (
                   <>
                     <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 3 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>work</span>
                     <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 4 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>runs</span>
                     <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 5 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>by</span>
-                    <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 6 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>itself</span>
+                    <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] flex items-end ${stage >= 6 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>
+                      itself
+                      {/* 3. Pulsing Blue Dot - Injected right after last word in LTR */}
+                      <span className={`inline-block text-primary heartbeat-dot transition-opacity duration-500 delay-500 ${stage >= 6 ? "opacity-100" : "opacity-0"}`}>.</span>
+                    </span>
                   </>
                 )}
-              </span>
-
-              {/* 3. Pulsing Blue Dot */}
-              <span
-                className={`inline-block text-primary heartbeat-dot transition-opacity duration-500 delay-500 ${stage >= 6 ? "opacity-100" : "opacity-0"}`}
-              >
-                .
               </span>
             </h1>
 
