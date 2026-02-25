@@ -85,18 +85,18 @@ const HeroSection = () => {
             >
               {/* "What if..." */}
               <span
-                className={`inline-block whitespace-pre transition-all duration-[800ms] ease-out will-change-transform ${stage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[6px]"}`}
+                className={`inline-block whitespace-pre transition-all duration-[800ms] ease-out will-change-transform flex-shrink-0 ${stage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[6px]"}`}
               >
-                {isRtl ? "ماذا لو... " : "What if... "}
+                {isRtl ? "ماذا لو كانت " : "What if... "}
               </span>
 
               {/* ...work runs by itself — cascaded */}
               <span className="inline-flex gap-[12px] whitespace-pre">
                 {isRtl ? (
                   <>
-                    <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 6 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>تلقائيًا</span>
-                    <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 5 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>يُنجز</span>
-                    <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 4 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>العمل</span>
+                    <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 4 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>أعمالك</span>
+                    <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 5 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>تُنجز</span>
+                    <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 6 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>تلقائياً</span>
                   </>
                 ) : (
                   <>
