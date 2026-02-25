@@ -112,10 +112,10 @@ export default function ROISimulator() {
       </section>
 
       {open && (
-        <div className="fixed inset-0 z-[9998] flex items-center justify-center p-0 md:p-4 bg-[rgba(0,0,0,0.85)]" style={{ animation: "fadeIn 0.3s ease-out" }}>
+        <div className="fixed inset-0 z-[9998] flex items-center justify-center p-0 md:p-4 bg-[rgba(0,0,0,0.88)]" style={{ animation: "fadeIn 0.3s ease-out" }}>
           <div className="absolute inset-0" onClick={() => setOpen(false)} />
           <div
-            className="relative z-[9999] w-full md:max-w-[900px] max-h-[100vh] md:max-h-[90vh] md:rounded-[16px] border-0 md:border md:border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-hidden"
+            className="relative z-[9999] w-full md:max-w-[860px] h-[100vh] md:h-auto md:max-h-[88vh] md:rounded-[16px] border-0 md:border md:border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-hidden"
             style={{ animation: "slideUpFade 0.4s ease-out" }}
             dir={isRtl ? "rtl" : "ltr"}
           >
@@ -139,8 +139,8 @@ export default function ROISimulator() {
               </button>
             </div>
 
-            {/* Content Area - No Scroll Required */}
-            <div className="relative z-10 flex-1 p-[20px] md:p-[40px] flex flex-col gap-6 md:gap-8 items-stretch overflow-y-auto md:overflow-visible">
+            {/* Content Area - No Scroll Permitted */}
+            <div className="relative z-10 flex-1 p-[20px] md:p-[28px] flex flex-col gap-4 md:gap-6 items-stretch overflow-hidden">
 
               {/* Two inputs side by side on desktop */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -189,38 +189,38 @@ export default function ROISimulator() {
 
               {/* Instant Results Area */}
               {isComplete && (
-                <div className="flex flex-col space-y-4 md:space-y-5 animate-in slide-in-from-bottom-4 fade-in duration-500 mt-2">
+                <div className="flex flex-col space-y-3 md:space-y-4 animate-in slide-in-from-bottom-4 fade-in duration-500 mt-2">
 
                   {/* Headline Result Panel */}
-                  <div className="text-center bg-[hsl(225_35%_12%)] border border-primary/40 rounded-2xl p-5 md:p-8 relative overflow-hidden shadow-[0_0_30px_hsl(var(--primary)/0.15)]">
+                  <div className="text-center bg-[hsl(225_35%_12%)] border border-primary/40 rounded-2xl p-4 relative overflow-hidden shadow-[0_0_30px_hsl(var(--primary)/0.15)] flex-shrink-0">
                     <div className="absolute inset-x-0 bottom-0 h-1 bg-primary" />
                     <div className="absolute inset-0 bg-primary/10 blur-[60px] pointer-events-none" />
 
-                    <h3 className={`text-[28px] font-bold text-white leading-tight relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-                      {isRtl ? `OMR ${formatNumber(totalRecoverableCapacity)} من الطاقة السنوية جاهزة لإعادة التوجيه.` : `OMR ${formatNumber(totalRecoverableCapacity)} in annual capacity — ready to be redirected.`}
+                    <h3 className={`text-[20px] md:text-[24px] font-bold text-white leading-tight relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                      {isRtl ? `OMR ${formatNumber(totalRecoverableCapacity)} من الطاقة السنوية جاهزة لإعادة التوجيه` : `OMR ${formatNumber(totalRecoverableCapacity)} in annual capacity — ready to be redirected.`}
                     </h3>
 
-                    <div className={`mt-4 space-y-2 relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-                      <p className="text-[15px]">
+                    <div className={`mt-3 space-y-1 relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                      <p className="text-[14px]">
                         {isRtl ? (
-                          <>أي <span className="text-primary font-bold text-[15px]">OMR {formatNumber(monthlyCapacity)}</span> تغادر عملياتك كل شهر.</>
+                          <>أي <span className="text-primary font-bold text-[14px]">OMR {formatNumber(monthlyCapacity)}</span> تغادر عملياتك كل شهر.</>
                         ) : (
-                          <>That's <span className="text-primary font-bold text-[15px]">OMR {formatNumber(monthlyCapacity)}</span> leaving your operation every month.</>
+                          <>That's <span className="text-primary font-bold text-[14px]">OMR {formatNumber(monthlyCapacity)}</span> leaving your operation every month.</>
                         )}
                       </p>
-                      <p className="text-[15px]">
+                      <p className="text-[14px]">
                         {isRtl ? (
-                          <>على مدى 5 سنوات: <span className="text-white font-bold text-[15px]">OMR {formatNumber(fiveYearCapacity)}</span> من الطاقة القابلة للاسترداد.</>
+                          <>على مدى 5 سنوات: <span className="text-white font-bold text-[14px]">OMR {formatNumber(fiveYearCapacity)}</span> من الطاقة القابلة للاسترداد.</>
                         ) : (
-                          <>Over 5 years: <span className="text-white font-bold text-[15px]">OMR {formatNumber(fiveYearCapacity)}</span> in recoverable capacity.</>
+                          <>Over 5 years: <span className="text-white font-bold text-[14px]">OMR {formatNumber(fiveYearCapacity)}</span> in recoverable capacity.</>
                         )}
                       </p>
                     </div>
 
-                    <p className={`mt-5 text-[15px] text-white/80 mx-auto relative z-10 leading-relaxed font-medium ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                    <p className={`mt-3 text-[14px] text-white/80 mx-auto relative z-10 leading-relaxed font-medium ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
                       {isRtl ? `استرداد الطاقة لخدمة أفضل، وقرارات أسرع، وعمل يحتاج فعلاً إلى إنسان.` : `Capacity recovery for better service, faster decisions, and work that actually needs a human.`}
                     </p>
-                    <p className={`mt-3 text-[11px] text-muted-foreground/60 italic mx-auto relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                    <p className={`mt-1 text-[11px] text-muted-foreground/60 italic mx-auto relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
                       {isRtl ? `بناءً على متوسط راتب شهري OMR 700. احجز تقييمك للحصول على رقم دقيق.` : `Based on an average salary of OMR 700/month. Book your assessment for a precise figure.`}
                     </p>
                   </div>
@@ -241,10 +241,10 @@ export default function ROISimulator() {
                     />
                   </div>
 
-                  <div className="mt-3 relative z-10 flex flex-col items-center">
+                  <div className="mt-6 mx-auto relative z-[10000] flex flex-col items-center flex-shrink-0">
                     <button
                       onClick={() => { setOpen(false); openCalendly(); }}
-                      className="w-auto min-w-[200px] bg-[#00b4d8] text-white text-[16px] font-[700] px-10 py-3.5 rounded-xl transition-colors duration-300 hover:bg-[#009ac2]"
+                      className="w-auto min-w-[220px] bg-[#00b4d8] text-white text-[16px] font-[700] px-10 py-3.5 rounded-xl transition-colors duration-300 hover:bg-[#009ac2] shadow-lg"
                     >
                       {isRtl ? "احجز تقييماً مجانياً ←" : "Book Free Assessment →"}
                     </button>
@@ -279,15 +279,15 @@ export default function ROISimulator() {
 }
 
 const ResultCard = ({ label, value, supporting, isRtl }: { label: string; value: string; supporting: string; isRtl?: boolean }) => (
-  <div className="rounded-xl p-5 md:p-6 bg-[hsl(225_35%_10%)] border border-white/5 flex flex-col justify-center transition-all hover:bg-[hsl(225_35%_12%)] shadow-md relative overflow-hidden group w-full text-center md:text-left">
+  <div className="rounded-xl p-4 bg-[hsl(225_35%_10%)] border border-white/5 flex flex-col justify-center transition-all hover:bg-[hsl(225_35%_12%)] shadow-md relative overflow-hidden group w-full text-center md:text-left flex-shrink-0">
     <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-    <div className={`text-[11px] font-bold text-primary tracking-[2px] mb-2 relative z-10 ${isRtl ? "md:text-right font-['Tajawal',sans-serif]" : "font-mono uppercase"}`}>
+    <div className={`text-[11px] font-bold text-primary tracking-[2px] mb-1 relative z-10 ${isRtl ? "md:text-right font-['Tajawal',sans-serif]" : "font-mono uppercase"}`}>
       {label}
     </div>
-    <div className={`text-[19px] lg:text-[20px] font-bold font-mono leading-[1.1] mb-2 relative z-10 text-white ${isRtl ? "md:text-right" : ""}`}>
+    <div className={`text-[18px] lg:text-[20px] font-bold font-mono leading-[1.1] mb-1 relative z-10 text-white ${isRtl ? "md:text-right" : ""}`}>
       {value}
     </div>
-    <div className={`text-[12px] lg:text-[13px] text-muted-foreground leading-snug mt-auto relative z-10 ${isRtl ? "md:text-right font-['Tajawal',sans-serif]" : ""}`}>
+    <div className={`text-[12px] text-muted-foreground leading-snug mt-auto relative z-10 ${isRtl ? "md:text-right font-['Tajawal',sans-serif]" : ""}`}>
       {supporting}
     </div>
   </div>
