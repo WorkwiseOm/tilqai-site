@@ -25,18 +25,28 @@ export const HeroKeywords = ({ startAnimation }: { startAnimation: boolean }) =>
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+    const [trackDrawn, setTrackDrawn] = useState(false);
     const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+    // Initial line draw effect
     useEffect(() => {
-        // Pause auto-scroll when hovered for easier interaction
-        if (!startAnimation || isHovered) return;
+        if (!startAnimation) return;
+        const t1 = setTimeout(() => {
+            setTrackDrawn(true);
+        }, 1200); // Trigger drawing the vertical line slightly after base container appears
+        return () => clearTimeout(t1);
+    }, [startAnimation]);
+
+    useEffect(() => {
+        // Pause auto-scroll when hovered for easier interaction, and WAIT until line is drawn
+        if (!startAnimation || !trackDrawn || isHovered) return;
 
         const interval = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % keywords.length);
         }, 3500);
 
         return () => clearInterval(interval);
-    }, [startAnimation, keywords.length, isHovered]);
+    }, [startAnimation, trackDrawn, keywords.length, isHovered]);
 
     const handleWheel = (e: React.WheelEvent) => {
         // Throttle wheel scroll to prevent wild spinning
@@ -66,8 +76,10 @@ export const HeroKeywords = ({ startAnimation }: { startAnimation: boolean }) =>
                 onMouseLeave={() => setIsHovered(false)}
                 className="relative h-[60px] w-full max-w-[500px] flex items-center"
             >
-                {/* Static indicator track line */}
-                <div className={`absolute top-0 bottom-0 w-[2px] bg-primary/20 ${isRtl ? 'right-0' : 'left-0'}`} />
+                {/* Static indicator track line — ANIMATING DRAWN */}
+                <div
+                    className={`absolute top-0 w-[2px] bg-primary/20 ${isRtl ? 'right-0' : 'left-0'} transition-all duration-[900ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${trackDrawn ? "h-full bg-primary/40" : "h-0 bg-primary/0"}`}
+                />
 
                 {/* Overlapping text container */}
                 <div className="relative w-full h-full px-6">
@@ -83,8 +95,7 @@ export const HeroKeywords = ({ startAnimation }: { startAnimation: boolean }) =>
                             >
                                 {/* Active subtle border glow dot indicator perfectly overlapping the track */}
                                 <div
-                                    className={`absolute top-1/2 -translate-y-[50%] w-[2px] h-[30px] bg-primary transition-opacity duration-[800ms] ease-in-out shadow-[0_0_10px_#00b4d8] ${isRtl ? '-right-[24px]' : '-left-[24px]'}`}
-                                    style={{ opacity: isActive ? 1 : 0 }}
+                                    className={`absolute top-1/2 -translate-y-[50%] w-[2px] h-[30px] bg-primary transition-all duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${isRtl ? '-right-[24px]' : '-left-[24px]'} ${isActive && trackDrawn ? "opacity-100 shadow-[0_0_15px_#00b4d8]" : "opacity-0 shadow-none"}`}
                                 />
 
                                 <h2
