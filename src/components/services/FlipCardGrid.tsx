@@ -98,8 +98,8 @@ const HologramCard = ({ idx, icon: Icon, name, hook, isRtl, onClick }: HologramC
         </div>
       </div>
 
-      <h3 className="relative z-10 text-[22px] font-bold text-white mb-3 tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,1)]">{name}</h3>
-      <p className="relative z-10 text-[15px] text-[#8ba2be] font-light leading-relaxed max-w-[250px]">{hook}</p>
+      <h3 className="relative z-10 text-[22px] font-bold text-white tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,1)]">{name}</h3>
+      <p className={`relative z-10 text-[14px] text-[rgba(255,255,255,0.6)] leading-[1.6] mt-[8px] max-w-[280px] ${isRtl ? "text-right font-['Tajawal',sans-serif]" : "text-center"}`}>{hook}</p>
     </div>
   );
 };
@@ -138,21 +138,21 @@ const ServicePopup = ({
         {/* Deep Overlay */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-          className="absolute inset-0 bg-[rgba(0,0,0,0.85)] z-0"
+          className="absolute inset-0 bg-[rgba(0,0,0,0.88)] z-0"
           onClick={onClose}
         />
 
         {/* Cinematic Popup Modal */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative z-10 w-full max-w-[780px] bg-[#0f1f35] border border-[rgba(0,180,216,0.3)] rounded-[16px] shadow-[0_30px_100px_rgba(0,180,216,0.15)] flex flex-col overflow-hidden"
-          style={{ maxHeight: '90vh' }}
+          className="relative z-10 w-full bg-[#0f1f35] border border-[rgba(0,180,216,0.3)] rounded-[16px] shadow-[0_30px_100px_rgba(0,180,216,0.15)] flex flex-col overflow-hidden"
+          style={{ width: 'min(1000px, 90vw)', minHeight: '580px', maxHeight: '90vh' }}
         >
           {/* Close Header Bar */}
-          <div className={`p-6 flex items-center justify-between border-b border-cyan-400/10 relative z-20 ${isRtl ? 'flex-row-reverse' : ''}`}>
+          <div className={`px-[48px] pt-[48px] pb-6 flex items-center justify-between border-b border-cyan-400/10 relative z-20 ${isRtl ? 'flex-row-reverse' : ''}`}>
             <div className={`flex items-center gap-3 ${isRtl ? 'flex-row-reverse' : ''}`}>
               <service.icon className="w-6 h-6 text-[#00b4d8]" />
-              <h2 className={`text-[20px] font-bold text-white ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+              <h2 className={`text-[24px] font-[700] text-white ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
                 {service.name}
               </h2>
             </div>
@@ -162,18 +162,18 @@ const ServicePopup = ({
           </div>
 
           {/* Two-Column Scrollable Body */}
-          <div className="overflow-y-auto p-10 hide-scrollbar flex-1 relative z-10 w-full">
-            <div className={`flex flex-col md:flex-row w-full gap-10 md:gap-0 ${isRtl ? 'md:flex-row-reverse' : ''}`}>
+          <div className="overflow-y-auto px-[48px] pb-[48px] pt-4 hide-scrollbar flex-1 relative z-10 w-full">
+            <div className={`flex flex-col md:flex-row w-full gap-[48px] ${isRtl ? 'md:flex-row-reverse' : ''}`}>
 
               {/* Left Column: Automated */}
-              <div className="flex-1 w-full md:pr-10 md:border-r border-[rgba(0,180,216,0.3)] rtl:md:pr-0 rtl:md:pl-10 rtl:md:border-l rtl:md:border-r-0">
-                <h4 className={`text-[11px] font-mono font-bold text-[#00b4d8] uppercase tracking-[3px] mb-6 ${isRtl ? "text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
+              <div className="flex-1 w-full md:border-r border-[rgba(0,180,216,0.3)] rtl:md:border-l rtl:md:border-r-0">
+                <h4 className={`text-[12px] font-mono font-bold text-[#00b4d8] uppercase tracking-[3px] mb-6 ${isRtl ? "text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
                   {colAutomatedLabel}
                 </h4>
                 <ul className="space-y-4">
                   {service.items.map((item: string, i: number) => (
-                    <li key={i} className={`flex items-start gap-4 text-[15px] text-white leading-[1.8] ${isRtl ? "flex-row-reverse text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#00b4d8]/80 mt-[10px] flex-shrink-0" />
+                    <li key={i} className={`flex items-start gap-4 text-[16px] text-white leading-[2] ${isRtl ? "flex-row-reverse text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00b4d8]/80 mt-[12px] flex-shrink-0" />
                       <span className="opacity-95">{item}</span>
                     </li>
                   ))}
@@ -181,14 +181,14 @@ const ServicePopup = ({
               </div>
 
               {/* Right Column: Gains */}
-              <div className="flex-1 w-full md:pl-10 rtl:md:pl-0 rtl:md:pr-10">
-                <h4 className={`text-[11px] font-mono font-bold text-[#00b4d8] uppercase tracking-[3px] mb-6 ${isRtl ? "text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
+              <div className="flex-1 w-full">
+                <h4 className={`text-[12px] font-mono font-bold text-[#00b4d8] uppercase tracking-[3px] mb-6 ${isRtl ? "text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
                   {colGainsLabel}
                 </h4>
                 <ul className="space-y-4">
                   {service.gains.map((gain: string, i: number) => (
-                    <li key={i} className={`flex items-start gap-4 text-[15px] text-white leading-[1.8] ${isRtl ? "flex-row-reverse text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
-                      <Check className="w-4 h-4 text-[#00b4d8] mt-[7px] flex-shrink-0 drop-shadow-[0_0_5px_rgba(0,180,216,0.5)]" strokeWidth={3} />
+                    <li key={i} className={`flex items-start gap-4 text-[16px] text-white leading-[2] ${isRtl ? "flex-row-reverse text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
+                      <Check className="w-4 h-4 text-[#00b4d8] mt-[8px] flex-shrink-0 drop-shadow-[0_0_5px_rgba(0,180,216,0.5)]" strokeWidth={3} />
                       <span className="opacity-95">{gain}</span>
                     </li>
                   ))}
@@ -198,14 +198,14 @@ const ServicePopup = ({
             </div>
 
             {/* CTA Form Bottom Block */}
-            <div className={`mt-12 w-full flex ${isMobile ? 'justify-center' : isRtl ? 'justify-start' : 'justify-end'}`}>
+            <div className="mt-12 w-full flex justify-center">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   onClose();
                   openCalendly();
                 }}
-                className={`w-full md:w-auto px-8 py-3.5 rounded-lg border border-[rgba(0,180,216,0.5)] bg-transparent hover:bg-[rgba(0,180,216,0.1)] text-white font-medium text-[15px] transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}
+                className={`w-full md:w-auto min-w-[260px] px-8 py-3.5 rounded-lg bg-[#00b4d8] hover:bg-[#0096b4] text-white font-[700] text-[16px] text-center transition-all duration-300 mx-auto ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}
               >
                 {btnLabel}
               </button>
@@ -222,13 +222,35 @@ const FlipCardGrid = () => {
   const isMobile = useIsMobile();
   const [selectedService, setSelectedService] = useState<any | null>(null);
 
+  const parsedHooksEn = [
+    "From job posting to offer letter — without the manual follow-up",
+    "New hire ready on day one — paperwork handled before they arrive",
+    "Requests approved, balances updated, no back-and-forth",
+    "Review cycles that run on schedule — without HR chasing anyone",
+    "The right training assigned automatically, completion tracked",
+    "Every document where it should be — without the filing",
+    "Offboarding completed cleanly — access revoked, assets returned",
+    "Stay compliant automatically — no scramble before audits"
+  ];
+
+  const parsedHooksAr = [
+    "من تخطيط احتياجات الموارد البشرية الى العرض الوظيفي — دون متابعة يدوية",
+    "الموظف الجديد جاهز من اليوم الأول — الأوراق منجزة قبل وصوله",
+    "الطلبات معتمدة، الأرصدة محدّثة، دون مراسلات متكررة",
+    "دورات التقييم تسير في موعدها — دون متابعة مستمرة",
+    "التدريب المناسب يُسنَد تلقائياً ويتبعه تحديثات الإنجاز",
+    "كل وثيقة في مكانها الصحيح — دون جهد الأرشفة",
+    "إنهاء الخدمة يتم بسلاسة — الصلاحيات تُلغى والعُهد تُستعاد",
+    "الامتثال يسير تلقائياً — دون ارتباك قبيل المراجعات"
+  ];
+
   const services = Array.from({ length: 8 }, (_, i) => {
     const idx = i + 1;
     return {
       id: idx,
       icon: serviceIcons[i],
       name: t(`services.tab${idx}`),
-      hook: t(`services.s${idx}.hook`),
+      hook: isRtl ? parsedHooksAr[i] : parsedHooksEn[i],
       targetItems: [
         t(`services.s${idx}.b1`),
         t(`services.s${idx}.b2`),
