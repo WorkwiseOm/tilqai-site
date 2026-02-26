@@ -963,3 +963,14 @@ html {
     opacity: 0.7;
   }
 }
+
+/* ========================================
+   SPLINE WATERMARK OVERRIDES
+   ======================================== */
+a[href^="https://spline.design"],
+#logo {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
