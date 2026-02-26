@@ -72,20 +72,28 @@ const HeroSection = () => {
 
       {/* 2. Noise Texture (Removed over Spline to preserve 60FPS WebGL Context) */}
 
-      {/* 3. Interactive Spline Background */}
+      {/* 3. Interactive Spline Background - Positioned 50% Right overlay w/ fade-in & gradient mask */}
       <div
-        className={`absolute inset-0 z-0 transition-opacity duration-[1500ms] ease-out flex items-center justify-center ${stage >= 1 ? "opacity-100" : "opacity-0"}`}
+        className={`hidden lg:flex absolute inset-y-0 bottom-0 z-0 transition-opacity duration-[1500ms] ease-out items-end justify-center ${stage >= 1 ? "opacity-100" : "opacity-0"} ${isRtl ? "left-0 w-1/2" : "right-0 w-1/2"}`}
+        style={{
+          WebkitMaskImage: isRtl
+            ? "linear-gradient(to left, transparent 0%, black 30%)"
+            : "linear-gradient(to right, transparent 0%, black 30%)",
+          maskImage: isRtl
+            ? "linear-gradient(to left, transparent 0%, black 30%)"
+            : "linear-gradient(to right, transparent 0%, black 30%)"
+        }}
       >
         <Spline
-          className="w-full h-full"
+          className="w-full h-full object-cover"
           scene="https://prod.spline.design/BI1RZe8ZeB8-NbNf/scene.splinecode"
         />
       </div>
 
-      <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12 relative z-10 w-full pointer-events-none">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:gap-8 lg:justify-between w-full relative">
-          {/* Text column */}
-          <div className={`lg:w-[48%] ${isRtl ? "text-right lg:ml-auto" : "lg:mr-auto"} pointer-events-auto`}>
+      <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12 relative z-10 w-full pointer-events-none lg:pl-[80px]">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full relative">
+          {/* Text column - Strictly 520px width & no overlap */}
+          <div className={`w-full lg:max-w-[520px] ${isRtl ? "text-right lg:ml-auto lg:pl-0 lg:pr-[80px]" : "lg:mr-auto"} pointer-events-auto`}>
             {/* Headline */}
             <h1
               className={`text-[32px] md:text-[42px] lg:text-[56px] tracking-tight font-bold text-white leading-[1.1] flex flex-wrap ${isRtl ? "justify-end text-right flex-row-reverse" : "justify-start text-left items-baseline"}`}
