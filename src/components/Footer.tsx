@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Linkedin } from "lucide-react";
-import tilqaiLogo from "@/assets/tilqai-logo-dark.png";
+import tilqaiLogo from "@/assets/tilqai_logo_transparent.png";
 import { openCalendly } from "@/lib/calendly";
 import { useLanguage } from "@/i18n/LanguageContext";
 

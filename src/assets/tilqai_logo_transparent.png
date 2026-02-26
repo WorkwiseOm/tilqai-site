@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?><Error><Code>SignatureDoesNotMatch</Code><Message>Access denied.</Message><Details>The request signature we calculated does not match the signature you provided. Check your Google secret key and signing method.</Details><StringToSign>GET
+
+
+1740683058
+/chatstorage/chat_attachments/b15c7e3f4fc4459f2af4b82c6cfb4a03caba5eecb20755ee4a887aa85d4ab0bb</StringToSign></Error>

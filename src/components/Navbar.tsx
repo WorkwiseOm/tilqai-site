@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { openCalendly } from "@/lib/calendly";
-import tilqaiLogo from "@/assets/tilqai-logo-dark.png";
+import tilqaiLogo from "@/assets/tilqai_logo_transparent.png";
 import { useNavbarScroll } from "@/hooks/use-scroll-animations";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useHeroIntro } from "@/hooks/use-hero-intro";
