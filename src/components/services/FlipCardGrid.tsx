@@ -13,7 +13,7 @@ import {
 import { openCalendly } from "@/lib/calendly";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 
 const serviceIcons = [UserPlus, Rocket, Calendar, BarChart3, GraduationCap, FileText, DoorOpen, ShieldCheck];
 
@@ -49,135 +49,181 @@ const Glass3DCard = ({
   const handleInteraction = () => setIsActive((prev) => !prev);
   const arrow = isRtl ? "←" : "→";
 
+  // Mouse Tracking for Relief Tilt & Directional Light
+  const x = useMotionValue(0.5);
+  const y = useMotionValue(0.5);
+
+  const rotateX = useTransform(y, [0, 1], [8, -8]);
+  const rotateY = useTransform(x, [0, 1], [-8, 8]);
+
+  const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
+  const springRotateX = useSpring(rotateX, springConfig);
+  const springRotateY = useSpring(rotateY, springConfig);
+
+  const lightX = useTransform(x, [0, 1], ["0%", "100%"]);
+  const lightY = useTransform(y, [0, 1], ["0%", "100%"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isMobile) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - rect.left) / rect.width);
+    y.set((e.clientY - rect.top) / rect.height);
+  };
+
+  const handleMouseLeave = () => {
+    if (isMobile) return;
+    setIsActive(false);
+    x.set(0.5);
+    y.set(0.5);
+  };
+
   return (
     <motion.div
       layout
       onMouseEnter={!isMobile ? () => setIsActive(true) : undefined}
-      onMouseLeave={!isMobile ? () => setIsActive(false) : undefined}
+      onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMove}
       onClick={isMobile ? handleInteraction : undefined}
-      className={`relative group cursor-pointer perspective-[1200px] h-full ${isActive ? "z-50" : "z-10"}`}
+      className={`relative group cursor-pointer perspective-[1500px] h-full ${isActive ? "z-50" : "z-10"}`}
       style={{ direction: isRtl ? "rtl" : "ltr" }}
     >
       <motion.div
         animate={{
-          rotateX: isActive ? 0 : 4,
-          rotateY: isActive ? 0 : isRtl ? 4 : -4,
           scale: isActive ? 1.05 : 1,
-          translateZ: isActive ? 40 : 0,
+          translateZ: isActive ? 30 : 0,
         }}
-        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-        className="relative w-full h-full min-h-[420px] rounded-2xl transform-style-3d overflow-hidden border border-white/5 transition-colors duration-500"
         style={{
-          background: isActive
-            ? "linear-gradient(145deg, rgba(34, 211, 238, 0.03) 0%, rgba(0, 0, 0, 0.6) 100%), hsl(222 47% 3%)"
-            : "linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%), hsl(222 47% 5%)",
-          backdropFilter: "blur(24px)",
+          rotateX: isMobile ? 0 : springRotateX,
+          rotateY: isMobile ? 0 : springRotateY,
+          // Dark Obsidian Matte Base
+          backgroundColor: "#080c12",
+          backgroundImage: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.5) 100%)",
           boxShadow: isActive
-            ? "0 30px 60px -12px rgba(0,0,0,0.8), inset 0 0 30px rgba(34,211,238,0.05)"
-            : "0 10px 30px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.05), inset 0 -1px 1px rgba(0,0,0,0.3)",
+            ? "0 40px 80px -20px rgba(0,0,0,1), inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -2px 5px rgba(0,0,0,0.8)"
+            : "0 15px 35px -10px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.05), inset 0 -1px 3px rgba(0,0,0,0.6)",
         }}
+        transition={{ type: "spring", stiffness: 250, damping: 25 }}
+        className="relative w-full h-full min-h-[420px] rounded-[1.25rem] transform-style-3d overflow-hidden border border-[#1a2233]"
       >
-        {/* Cinematic Volumetric Light */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-50 transition-opacity duration-500 group-hover:opacity-100 mix-blend-screen"
-          style={{ background: 'radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.15), transparent 70%)' }}
-        />
+        {/* Physical Directional Light (No ambient glowing) */}
+        {!isMobile && (
+          <motion.div
+            className="absolute inset-0 pointer-events-none mix-blend-overlay z-0"
+            style={{
+              background: useTransform(
+                [lightX, lightY],
+                ([lx, ly]) =>
+                  `radial-gradient(circle at ${lx} ${ly}, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.4) 60%)`
+              ),
+            }}
+          />
+        )}
 
         {/* Content Panel */}
-        <div className="relative z-10 p-8 h-full flex flex-col items-center text-center">
+        <div className="relative z-10 p-8 h-full flex flex-col items-center text-center transform-style-3d">
 
           {isHighlighted && !isActive && (
             <motion.div
               initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="absolute top-4 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/20 bg-primary/10 shadow-sm"
+              className="absolute top-4 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 px-3 py-1 rounded-md border border-[#1a2233] bg-[#0c121c] shadow-[0_2px_5px_rgba(0,0,0,0.5),inset_0_1px_rgba(255,255,255,0.03)]"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_currentColor]" />
-              <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-wider whitespace-nowrap drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">
+              <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-[inset_0_1px_2px_rgba(0,0,0,0.5)]" />
+              <span className="text-[10px] font-mono font-semibold text-[#809ab5] uppercase tracking-wider whitespace-nowrap">
                 {tag}
               </span>
             </motion.div>
           )}
 
-          {/* Holographic Circular Icon */}
+          {/* Cyan Metallic Carved Icon Element */}
           <motion.div
             animate={{
-              rotateY: isActive ? 180 : 0,
-              rotateZ: isActive ? [0, 5, -5, 0] : 0,
-              scale: isActive ? 0.75 : 1,
               y: isActive ? -15 : 0,
+              scale: isActive ? 0.8 : 1,
             }}
-            transition={{ duration: 1.5, type: isActive ? "spring" : "tween" }}
-            className={`relative flex items-center justify-center w-24 h-24 mb-6 rounded-full ${isActive ? 'mt-0' : 'mt-8'}`}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className={`relative flex items-center justify-center w-24 h-24 mb-6 rounded-2xl bg-[#0a1018] border border-[#111827] shadow-[inset_0_2px_10px_rgba(0,0,0,0.8),0_1px_rgba(255,255,255,0.02)] ${isActive ? 'mt-0' : 'mt-8'}`}
+            style={{ transformStyle: "preserve-3d" }}
           >
-            {/* Holographic Orbits */}
-            <div className={`absolute inset-0 rounded-full border border-cyan-400/20 shadow-[0_0_30px_rgba(34,211,238,0.2)] transition-opacity duration-500 ${isActive ? 'opacity-100 animate-[spin_8s_linear_infinite]' : 'opacity-50'}`} />
-            <div className={`absolute inset-2 rounded-full border border-primary/40 shadow-[inset_0_0_20px_rgba(37,99,235,0.3)] transition-opacity duration-500 ${isActive ? 'opacity-100 animate-[spin_6s_linear_infinite_reverse]' : 'opacity-50'}`} />
+            {/* Inner Metallic Bevel */}
+            <div className="absolute inset-2 rounded-xl bg-[#0d141f] border-t border-[#1a2533] border-b border-[#000] shadow-[0_4px_10px_rgba(0,0,0,0.5)] flex items-center justify-center" style={{ transform: "translateZ(10px)" }}>
+              {/* The sharp cyan metallic fill */}
+              <Icon className="w-9 h-9 text-transparent" style={{ stroke: 'url(#cyan-metallic)', strokeWidth: 1.5, filter: 'drop-shadow(0px 2px 2px rgba(0,0,0,0.8))' }} />
 
-            <Icon className="w-10 h-10 text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.9)] relative z-10" />
-
-            {/* Holographic Scanline */}
-            <motion.div
-              animate={{ y: ["-120%", "120%"] }}
-              transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-              className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/20 to-transparent h-1/2 mix-blend-screen pointer-events-none rounded-full"
-            />
+              <svg width="0" height="0" className="absolute">
+                <defs>
+                  <linearGradient id="cyan-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#8be9fd" />
+                    <stop offset="50%" stopColor="#1e90ff" />
+                    <stop offset="100%" stopColor="#0052cc" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
           </motion.div>
 
-          {/* Service Name */}
-          <h3 className="text-2xl font-bold text-white mb-2 tracking-wide" style={{ textShadow: "0 2px 15px rgba(0,0,0,0.8)" }}>{name}</h3>
+          {/* Physical Stamped Service Name */}
+          <h3 className="text-[22px] font-bold text-[#e1e7ef] mb-3 tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,1)]" style={{ transform: "translateZ(15px)" }}>
+            {name}
+          </h3>
 
           <AnimatePresence mode="wait">
             {!isActive ? (
               <motion.div
                 key="front"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, transition: { duration: 0.15 } }}
                 className="flex-1 flex flex-col justify-center w-full mt-2"
+                style={{ transform: "translateZ(10px)" }}
               >
-                <p className="text-base text-muted-foreground/90 font-light leading-relaxed px-2">
+                <p className="text-[15px] text-[#788a9f] font-light leading-relaxed px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,1)]">
                   {hook}
                 </p>
-                <span className="mt-8 text-[11px] text-primary/50 font-mono tracking-widest uppercase animate-pulse">
-                  {t("services.flipExplore")}
-                </span>
+                <div className="mt-8 flex justify-center">
+                  <div className="h-1 w-8 rounded-full bg-[#1e293b] shadow-[inset_0_1px_2px_rgba(0,0,0,0.8),0_1px_rgba(255,255,255,0.05)]" />
+                </div>
               </motion.div>
             ) : (
               <motion.div
                 key="back"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
+                initial={{ opacity: 0, filter: "blur(4px)" }}
+                animate={{ opacity: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, filter: "blur(4px)", transition: { duration: 0.15 } }}
                 className="flex-1 flex flex-col w-full h-full relative z-20"
+                style={{ transform: "translateZ(20px)" }}
               >
-                <span className="inline-block text-[11px] font-mono text-cyan-400 uppercase tracking-widest mb-6 opacity-80" style={{ textShadow: "0 0 10px rgba(34,211,238,0.5)" }}>
+                <span className="inline-block text-[10px] font-mono font-semibold text-[#5a728c] uppercase tracking-widest mb-6 border-b border-[#111827] pb-2 text-center w-full drop-shadow-[0_1px_1px_rgba(0,0,0,1)]">
                   {automatedLabel}
                 </span>
 
                 <ul className="flex-1 w-full space-y-3 pb-6">
                   {items.map((item, idx) => (
                     <motion.li
-                      initial={{ opacity: 0, x: isRtl ? 10 : -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.04 }}
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.03, duration: 0.2 }}
                       key={item}
-                      className={`flex items-start gap-3 text-[14px] text-white/90 ${isRtl ? "flex-row-reverse" : "text-left leading-tight"}`}
+                      className={`flex items-start gap-3 text-[13px] text-[#bac5d5] ${isRtl ? "flex-row-reverse" : "text-left leading-tight"}`}
                     >
-                      <Check className="w-4 h-4 text-cyan-400 mt-[3px] flex-shrink-0 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
-                      <span className="opacity-95" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.9)" }}>{item}</span>
+                      <div className="w-4 h-4 rounded mt-[2px] flex-shrink-0 bg-[#0c121c] border border-[#162133] shadow-[inset_0_1px_2px_rgba(0,0,0,0.5)] flex items-center justify-center">
+                        <Check className="w-2.5 h-2.5 text-cyan-500" strokeWidth={3} />
+                      </div>
+                      <span className="drop-shadow-[0_1px_2px_rgba(0,0,0,1)]">{item}</span>
                     </motion.li>
                   ))}
                 </ul>
 
+                {/* Matte Recessed CTA Button */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     openCalendly();
                   }}
-                  className="w-full mt-auto relative overflow-hidden group/btn bg-primary/20 hover:bg-primary/40 text-primary-foreground border border-primary/30 hover:border-cyan-400/80 text-[15px] font-medium px-4 py-3.5 rounded-xl transition-all duration-500 shadow-[0_0_20px_rgba(37,99,235,0.1)] hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] backdrop-blur-md"
+                  className="w-full mt-auto relative bg-[#111824] hover:bg-[#151e2e] text-[#d0dbe8] border border-[#1c2738] border-b-[#0b1016] text-[14px] font-medium px-4 py-3.5 rounded-xl transition-colors duration-300 shadow-[inset_0_1px_rgba(255,255,255,0.02),0_4px_10px_rgba(0,0,0,0.5)]"
                 >
-                  <span className="relative z-10">{ctaLabel} {arrow}</span>
-                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:animate-[shimmer_1.5s_infinite]" />
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    {ctaLabel} <span className="text-[#4b617a]">{arrow}</span>
+                  </span>
                 </button>
               </motion.div>
             )}
