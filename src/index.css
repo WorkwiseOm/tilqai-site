@@ -992,11 +992,11 @@ img.logo,
 }
 
 .navbar-logo {
-  height: 36px !important;
+  height: 64px !important;
   width: auto !important;
 }
 
 .footer-logo {
-  height: 32px !important;
+  height: 56px !important;
   width: auto !important;
 }
