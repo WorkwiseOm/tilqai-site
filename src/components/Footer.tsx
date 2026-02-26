@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Linkedin } from "lucide-react";
-import tilqaiLogo from "@/assets/tilqai_logo_transparent.png";
+import tilqaiLogo from "@/assets/tilqai-logo-transparent.png";
 import { openCalendly } from "@/lib/calendly";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -100,7 +100,7 @@ export default function Footer() {
 
                     {/* Column 1 - Brand */}
                     <div className={`${colClasses} ${isRtl ? "items-start" : "items-start"} logo-container`} style={{ background: 'transparent', border: 'none', boxShadow: 'none', outline: 'none', padding: 0 }}>
-                        <img src={tilqaiLogo} alt="tilqai" className="h-[42px] mb-2 opacity-90" style={{ background: 'transparent', border: 'none', boxShadow: 'none', outline: 'none', padding: 0, borderRadius: 0 }} />
+                        <img src={tilqaiLogo} alt="tilqai" className="footer-logo mb-2 opacity-90" style={{ background: 'transparent', border: 'none', boxShadow: 'none', outline: 'none', padding: 0, borderRadius: 0 }} />
                         <p className={`text-[14px] leading-[1.6] text-muted-foreground max-w-xs ${tajawalText}`}>{d.tagline}</p>
                         <a href="https://www.linkedin.com/in/tariqalmaskari/" target="_blank" rel="noopener noreferrer" className="mt-4 text-primary hover:brightness-125 transition-all duration-300 transform hover:-translate-y-1 w-fit drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)]">
                             <Linkedin size={28} strokeWidth={1.5} fill="currentColor" />

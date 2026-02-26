@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { openCalendly } from "@/lib/calendly";
-import tilqaiLogo from "@/assets/tilqai_logo_transparent.png";
+import tilqaiLogo from "@/assets/tilqai-logo-transparent.png";
 import { useNavbarScroll } from "@/hooks/use-scroll-animations";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useHeroIntro } from "@/hooks/use-hero-intro";
@@ -56,7 +56,7 @@ const Navbar = () => {
             <img
               src={tilqaiLogo}
               alt="tilqai"
-              className={`h-[57px] max-md:h-[46px] transition-none logo-entrance opacity-90${logoLoaded ? " logo-visible" : ""}`}
+              className={`navbar-logo transition-none logo-entrance opacity-90${logoLoaded ? " logo-visible" : ""}`}
               style={{ background: 'transparent', border: 'none', boxShadow: 'none', outline: 'none', padding: 0 }}
             />
           </Link>
