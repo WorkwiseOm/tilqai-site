@@ -115,7 +115,7 @@ export default function ROISimulator() {
         <div className="fixed inset-0 z-[9998] flex items-center justify-center p-0 md:p-4 bg-[rgba(0,0,0,0.88)]" style={{ animation: "fadeIn 0.3s ease-out" }}>
           <div className="absolute inset-0" onClick={() => setOpen(false)} />
           <div
-            className="calculator-modal relative z-[9999] w-full md:max-w-[860px] md:w-[860px] h-[100vh] md:h-[560px] md:rounded-[16px] border-0 md:border md:border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-hidden shrink-0 shadow-2xl"
+            className="calculator-modal relative z-[9999] w-full md:max-w-[860px] md:w-[860px] h-[100vh] md:h-auto md:min-h-[560px] md:p-[36px] md:rounded-[16px] border-0 md:border md:border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-visible shrink-0 shadow-2xl"
             style={{ animation: "slideUpFade 0.4s ease-out" }}
             dir={isRtl ? "rtl" : "ltr"}
           >
@@ -139,11 +139,14 @@ export default function ROISimulator() {
               </button>
             </div>
 
-            {/* Content Area - Fixed Dimension System */}
-            <div className="calculator-content relative z-10 w-full h-full flex flex-col items-stretch overflow-hidden">
+            {/* Content Area - Restored Flow Layout */}
+            <div className="calculator-content relative z-10 w-full h-full flex flex-col items-stretch">
 
-              {/* Top Input Section - Fixed 220px Height */}
-              <div className="w-full shrink-0 flex flex-col justify-center p-[20px] md:px-[28px] md:h-[220px]">
+              {/* Top Input Section - Dynamic Height */}
+              <div
+                className="calculator-inputs w-full shrink-0 flex flex-col justify-center p-[20px] md:p-0 md:mb-[24px]"
+                style={{ display: "flex", visibility: "visible", opacity: 1, flexShrink: 0 }}
+              >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                   {/* Input 1 */}
                   <div className="space-y-3 md:space-y-4">
@@ -189,13 +192,13 @@ export default function ROISimulator() {
                 </div>
 
                 {/* Thin Divider Line */}
-                <div className="w-full h-px bg-white/10 shrink-0 hidden md:block" />
+                <div className="w-full h-px bg-white/10 shrink-0 hidden md:block mt-4 md:mt-0 mb-4 md:mb-6" />
 
-                {/* Bottom Results Section - Fixed 340px Height */}
-                <div className="w-full relative flex-1 md:flex-none md:h-[340px] p-[20px] md:px-[28px] md:py-[24px] overflow-y-auto overflow-x-hidden md:overflow-hidden bg-[#0f1f35]/50 flex flex-col justify-center">
+                {/* Bottom Results Section - Fills remaining space */}
+                <div className="w-full relative flex-1 p-[20px] md:p-0 flex flex-col justify-center">
                   {!isComplete ? (
                     /* Placeholder State */
-                    <div className="w-full flex items-center justify-center animate-in fade-in duration-300">
+                    <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-300 min-h-[200px]">
                       <p className={`text-[14px] text-muted-foreground/60 text-center ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
                         {isRtl ? "اختر كلا الخيارين لرؤية نتائجك" : "Select both options to see your results"}
                       </p>
@@ -286,13 +289,13 @@ export default function ROISimulator() {
 
         /* RTL-Specific Modal Layout Overrides for Results Visibility */
         [dir="rtl"] .calculator-modal {
-          overflow: hidden !important;
+          overflow: visible !important;
           display: flex !important;
           flex-direction: column !important;
         }
 
         [dir="rtl"] .calculator-modal .calculator-content {
-          overflow: hidden !important;
+          overflow: visible !important;
           flex-shrink: 0 !important;
         }
       `}</style>
