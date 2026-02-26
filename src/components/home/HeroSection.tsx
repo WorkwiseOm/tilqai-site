@@ -101,7 +101,7 @@ const HeroSection = () => {
               <span
                 className={`inline-block whitespace-pre transition-all duration-[800ms] ease-out will-change-transform flex-shrink-0 ${stage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[6px]"}`}
               >
-                {isRtl ? "ماذا لو كانت " : "What if... "}
+                {isRtl ? "ماذا لو كانت... " : "What if... "}
               </span>
 
               {/* ...work runs by itself — cascaded */}
@@ -111,9 +111,9 @@ const HeroSection = () => {
                     <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 4 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>أعمالك</span>
                     <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 5 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>تُنجز</span>
                     <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] flex items-end ${stage >= 6 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>
-                      تلقائياً
                       {/* 3. Pulsing Blue Dot - Injected right after last word in RTL */}
-                      <span className={`inline-block translate-y-[4px] mr-1 text-primary heartbeat-dot transition-opacity duration-500 delay-500 ${stage >= 6 ? "opacity-100" : "opacity-0"}`}>.</span>
+                      <span className={`inline-block mr-0 ml-1 text-primary heartbeat-dot transition-opacity duration-500 delay-500 ${stage >= 6 ? "opacity-100" : "opacity-0"}`}>.</span>
+                      تلقائياً
                     </span>
                   </>
                 ) : (
@@ -150,7 +150,7 @@ const HeroSection = () => {
             </div>
 
             {/* CTAs */}
-            <div className={`mt-10 flex gap-4 ${isRtl ? "justify-end" : ""}`}>
+            <div className={`mt-10 flex gap-4 ${isRtl ? "justify-start flex-row-reverse" : ""}`}>
               <button
                 onClick={openCalendly}
                 className={`btn-primary-hover bg-primary text-primary-foreground text-[16px] font-semibold px-8 py-3.5 rounded-lg shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-[500ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 9 ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"}`}
