@@ -96,10 +96,10 @@ export default function ROISimulator() {
           <div ref={sectionRefFade} className={`text-center max-w-3xl mx-auto fade-up ${sectionVisible ? "visible" : ""}`}>
             <div className="section-label">{t("roi.sectionLabel")}</div>
             <h2 className={`text-2xl sm:text-4xl font-bold text-foreground mb-4 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-              {isRtl ? "كم من طاقة فريقك مقيّدة في العمل اليدوي؟" : "How Much of Your Team's Capacity Is Tied Up in Manual Work?"}
+              {isRtl ? "كم من سعة فريقك مقيّدة بالعمل اليدوي؟" : "How much of your team's capacity is tied up in manual work?"}
             </h2>
             <p className={`text-lg text-muted-foreground mb-8 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-              {isRtl ? "سؤالان. رقم واحد." : "Two questions. One number."}
+              {isRtl ? "احسب ما يكلّفه العمل اليدوي لفريقَك في صمت." : "Find out what manual work is quietly costing your team."}
             </p>
             <button
               onClick={() => setOpen(true)}
@@ -129,7 +129,7 @@ export default function ROISimulator() {
             </button>
             <div className="p-4 flex items-center justify-between border-b border-white/10 md:hidden relative z-20 bg-[#0f1f35]">
               <h2 className={`text-[16px] font-[600] text-white ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-                {isRtl ? "سؤالان. رقم واحد." : "Two questions. One number."}
+                {isRtl ? "احسب ما يكلّفه العمل اليدوي لفريقَك في صمت." : "Find out what manual work is quietly costing your team."}
               </h2>
               <button
                 onClick={() => setOpen(false)}
