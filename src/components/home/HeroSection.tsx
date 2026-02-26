@@ -4,6 +4,7 @@ import { openROIModal } from "@/components/home/ROISimulator";
 import { HeroKeywords } from "@/components/home/HeroKeywords";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useHeroIntro } from "@/hooks/use-hero-intro";
+import Spline from '@splinetool/react-spline';
 
 /**
  * Cinematic hero load sequence:
@@ -74,10 +75,17 @@ const HeroSection = () => {
         className={`absolute inset-0 z-0 pointer-events-none noise-bg-element transition-opacity duration-1000 ease-in-out ${stage >= 1 ? "opacity-[0.035]" : "opacity-0"}`}
       />
 
-      <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12 relative z-10 w-full">
+      {/* 3. Interactive Spline Background */}
+      <div
+        className={`absolute inset-0 z-0 transition-opacity duration-[1500ms] ease-out ${stage >= 1 ? "opacity-100" : "opacity-0"}`}
+      >
+        <Spline scene="https://prod.spline.design/BI1RZe8ZeB8-NbNf/scene.splinecode" />
+      </div>
+
+      <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12 relative z-10 w-full pointer-events-none">
         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-8 lg:justify-between w-full relative">
           {/* Text column */}
-          <div className={`lg:w-[55%] ${isRtl ? "text-right" : ""}`}>
+          <div className={`lg:w-[55%] ${isRtl ? "text-right" : ""} pointer-events-auto`}>
             {/* Headline */}
             <h1
               className={`text-[36px] md:text-[48px] lg:text-[64px] tracking-tight font-bold text-white leading-[1.1] max-w-4xl flex flex-wrap ${isRtl ? "justify-end text-right flex-row-reverse" : "justify-start text-left items-baseline"}`}
@@ -150,11 +158,6 @@ const HeroSection = () => {
                 {t("hero.secondaryCta")}
               </button>
             </div>
-          </div>
-
-          {/* Right column: Animated Keywords */}
-          <div className="lg:w-[45%] w-full flex items-center justify-center min-h-[140px] lg:min-h-0 relative z-10">
-            <HeroKeywords startAnimation={stage >= 1} />
           </div>
         </div>
       </div>
