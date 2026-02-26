@@ -98,14 +98,11 @@ export default function ROISimulator() {
             <h2 className={`text-2xl sm:text-4xl font-bold text-foreground mb-4 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
               {isRtl ? "كم من سعة فريقك مقيّدة بالعمل اليدوي؟" : "How much of your team's capacity is tied up in manual work?"}
             </h2>
-            <p className={`text-lg text-muted-foreground mb-8 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-              {isRtl ? "احسب ما يكلّفه العمل اليدوي لفريقَك في صمت." : "Find out what manual work is quietly costing your team."}
-            </p>
             <button
               onClick={() => setOpen(true)}
-              className="btn-outline-hover border border-white/30 bg-transparent text-white text-[16px] font-semibold px-8 py-3.5 rounded-lg hover:border-white hover:text-white hover:bg-transparent transition-all duration-300"
+              className="btn-outline-hover border border-white/30 bg-transparent text-white text-[16px] font-semibold px-8 py-3.5 rounded-lg hover:border-white hover:text-white hover:bg-transparent transition-all duration-300 mt-4"
             >
-              {isRtl ? "احسب السعة المستردة الأسبوعية" : "Calculate Recoverable Capacity"} {arrowR}
+              {isRtl ? "احسب ما يكلّفه العمل اليدوي لفريقَك في صمت." : "Find out what manual work is quietly costing your team."} {arrowR}
             </button>
           </div>
         </div>
