@@ -101,19 +101,20 @@ const HeroSection = () => {
               <span
                 className={`inline-block whitespace-pre transition-all duration-[800ms] ease-out will-change-transform flex-shrink-0 ${stage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[6px]"}`}
               >
-                {isRtl ? "ماذا لو كانت... " : "What if... "}
+                {isRtl ? "ماذا لو ... " : "What if... "}
               </span>
 
               {/* ...work runs by itself — cascaded */}
               <span className="inline-flex gap-[12px] whitespace-pre">
                 {isRtl ? (
                   <>
+                    <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 3 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>كانت</span>
                     <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 4 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>أعمالك</span>
                     <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 5 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>تُنجز</span>
                     <span className={`transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] flex items-end ${stage >= 6 ? "opacity-100 rotate-0" : "opacity-0 -rotate-[1deg]"}`}>
                       {/* 3. Pulsing Blue Dot - Injected right after last word in RTL */}
                       <span className={`inline-block mr-0 ml-1 text-primary heartbeat-dot transition-opacity duration-500 delay-500 ${stage >= 6 ? "opacity-100" : "opacity-0"}`}>.</span>
-                      تلقائياً
+                      تلقائيًا
                     </span>
                   </>
                 ) : (
