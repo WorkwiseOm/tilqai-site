@@ -63,7 +63,7 @@ const HeroSection = () => {
   }, [completeIntro]);
 
   return (
-    <section className={`py-20 lg:py-24 pb-6 relative hero-section flex items-center min-h-[90vh] transition-colors duration-1000 ease-in-out ${stage >= 1 ? "bg-[#0a1628]" : "bg-[#050a12]"} overflow-hidden`}>
+    <section className={`py-20 lg:py-24 pb-6 relative hero-section flex items-center min-h-[100vh] transition-colors duration-1000 ease-in-out ${stage >= 1 ? "bg-[#0a1628]" : "bg-[#050a12]"} overflow-hidden`}>
 
       {/* 1. Breathing Gradient */}
       <div
@@ -85,10 +85,10 @@ const HeroSection = () => {
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12 relative z-10 w-full pointer-events-none">
         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-8 lg:justify-between w-full relative">
           {/* Text column */}
-          <div className={`lg:w-[55%] ${isRtl ? "text-right" : ""} pointer-events-auto`}>
+          <div className={`lg:w-[48%] ${isRtl ? "text-right lg:ml-auto" : "lg:mr-auto"} pointer-events-auto`}>
             {/* Headline */}
             <h1
-              className={`text-[36px] md:text-[48px] lg:text-[64px] tracking-tight font-bold text-white leading-[1.1] max-w-4xl flex flex-wrap ${isRtl ? "justify-end text-right flex-row-reverse" : "justify-start text-left items-baseline"}`}
+              className={`text-[32px] md:text-[42px] lg:text-[56px] tracking-tight font-bold text-white leading-[1.1] flex flex-wrap ${isRtl ? "justify-end text-right flex-row-reverse" : "justify-start text-left items-baseline"}`}
               style={{ minHeight: "1.2em", textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}
             >
               {/* "What if..." */}
