@@ -70,16 +70,16 @@ const HeroSection = () => {
         className="absolute inset-0 z-0 pointer-events-none opacity-50 hero-breathing-gradient"
       />
 
-      {/* 2. Noise Texture */}
-      <div
-        className={`absolute inset-0 z-0 pointer-events-none noise-bg-element transition-opacity duration-1000 ease-in-out ${stage >= 1 ? "opacity-[0.035]" : "opacity-0"}`}
-      />
+      {/* 2. Noise Texture (Removed over Spline to preserve 60FPS WebGL Context) */}
 
       {/* 3. Interactive Spline Background */}
       <div
-        className={`absolute inset-0 z-0 transition-opacity duration-[1500ms] ease-out ${stage >= 1 ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 z-0 transition-opacity duration-[1500ms] ease-out flex items-center justify-center ${stage >= 1 ? "opacity-100" : "opacity-0"}`}
       >
-        <Spline scene="https://prod.spline.design/BI1RZe8ZeB8-NbNf/scene.splinecode" />
+        <Spline
+          className="w-full h-full"
+          scene="https://prod.spline.design/BI1RZe8ZeB8-NbNf/scene.splinecode"
+        />
       </div>
 
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12 relative z-10 w-full pointer-events-none">
