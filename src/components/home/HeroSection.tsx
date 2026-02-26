@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { openCalendly } from "@/lib/calendly";
-import { openROIModal } from "@/components/home/ROISimulator";
-import { HeroKeywords } from "@/components/home/HeroKeywords";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useHeroIntro } from "@/hooks/use-hero-intro";
 import Spline from '@splinetool/react-spline';
@@ -158,12 +156,6 @@ const HeroSection = () => {
                 className={`btn-primary-hover bg-primary text-primary-foreground text-[16px] font-semibold px-8 py-3.5 rounded-lg shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-[500ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 9 ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"}`}
               >
                 {t("hero.primaryCta")}
-              </button>
-              <button
-                onClick={() => openROIModal()}
-                className={`btn-outline-hover border border-white/30 bg-transparent text-white text-[16px] font-semibold px-8 py-3.5 rounded-lg hover:border-white hover:text-white hover:bg-transparent transition-all duration-[500ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 10 ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"}`}
-              >
-                {t("hero.secondaryCta")}
               </button>
             </div>
           </div>
