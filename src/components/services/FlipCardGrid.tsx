@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   UserPlus,
   Rocket,
@@ -9,243 +9,227 @@ import {
   DoorOpen,
   ShieldCheck,
   Check,
+  X,
 } from "lucide-react";
 import { openCalendly } from "@/lib/calendly";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const serviceIcons = [UserPlus, Rocket, Calendar, BarChart3, GraduationCap, FileText, DoorOpen, ShieldCheck];
 
-interface Glass3DCardProps {
-  index: number;
+const generatedGains = [
+  // 1 Hiring
+  ["80% Faster Time-to-Hire", "Bias-Free Candidate Filtering", "Unified Talent Pipeline", "Real-time Stakeholder Visibility"],
+  // 2 Onboarding
+  ["Day 1 Productivity Boost", "Zero Compliance Gaps", "Automated Asset Provisioning", "Elevated Employee Experience"],
+  // 3 Leave
+  ["Instant Balance Verification", "Zero Calculation Errors", "Automated Payroll Sync", "Eliminated Manager Bottlenecks"],
+  // 4 Performance
+  ["100% Review Completion Rate", "Bias-mitigated Scoring", "Real-time Goal Tracking", "Dynamic Compensation Linking"],
+  // 5 Training
+  ["Continuous Skill Progression", "Automated Certification Renewals", "Targeted Role Alignment", "Zero L&D Blind Spots"],
+  // 6 Documents
+  ["Instant Audit-Ready Retrieval", "Zero Lost Files", "Automated Version Control", "Secure Role-based Access"],
+  // 7 Exit
+  ["Secured System Offboarding", "Automated Exit Interviews", "Instant Asset Recovery", "Protected Corporate Data"],
+  // 8 Compliance
+  ["Zero Regulatory Fines", "Continuous Policy Tracking", "Automated Labor Law Sync", "Real-time Audit Trails"]
+];
+
+const generatedGainsAr = [
+  // 1 Hiring
+  ["توظيف أسرع بنسبة 80%", "تصفية حيادية للمرشحين", "مسار مواهب موحد", "رؤية فورية لأصحاب المصلحة"],
+  // 2 Onboarding
+  ["إنتاجية من اليوم الأول", "انعدام فجوات الامتثال", "استخراج الأصول تلقائياً", "تجربة موظف استثنائية"],
+  // 3 Leave
+  ["تحقق فوري من الرصيد", "انعدام أخطاء الحساب", "مزامنة تلقائية مع الرواتب", "القضاء على تأخير المديرين"],
+  // 4 Performance
+  ["اكتمال التقييمات 100%", "تقييم خالي من التحيز", "تتبع فوري للأهداف", "ربط ديناميكي للتعويضات"],
+  // 5 Training
+  ["تطوير مستمر للمهارات", "تجديد تلقائي للشهادات", "مواءمة دقيقة مع الأدوار", "رؤية شاملة للتدريب"],
+  // 6 Documents
+  ["استرجاع فوري للاستعداد للتدقيق", "انعدام الملفات المفقودة", "تحكم تلقائي في الإصدارات", "وصول آمن حسب الصلاحيات"],
+  // 7 Exit
+  ["إلغاء الوصول للأنظمة بأمان", "مقابلات خروج تلقائية", "استرداد فوري للأصول", "حماية البيانات المؤسسية"],
+  // 8 Compliance
+  ["انعدام غرامات المخالفات", "تتبع مستمر للسياسات", "مزامنة تلقائية لقوانين العمل", "سجلات تدقيق فورية"]
+];
+
+interface HologramCardProps {
+  idx: number;
   icon: React.ElementType;
   name: string;
   hook: string;
-  tag: string;
-  isHighlighted: boolean;
   items: string[];
-  automatedLabel: string;
-  ctaLabel: string;
+  gains: string[];
   isRtl: boolean;
-  isMobile: boolean;
+  onClick: () => void;
 }
 
-const Glass3DCard = ({
-  icon: Icon,
-  name,
-  hook,
-  tag,
-  isHighlighted,
-  items,
-  automatedLabel,
-  ctaLabel,
+const HologramCard = ({ idx, icon: Icon, name, hook, isRtl, onClick }: HologramCardProps) => {
+  return (
+    <div
+      onClick={onClick}
+      className={`relative group cursor-pointer h-full min-h-[340px] rounded-2xl overflow-hidden border border-cyan-400/10 bg-[#080c12] transition-all duration-500 hover:border-cyan-400/40 hover:shadow-[0_0_40px_rgba(0,180,216,0.15)] flex flex-col items-center justify-center p-8 text-center ${isRtl ? 'direction-rtl' : 'direction-ltr'}`}
+    >
+      {/* Background Matrix/Glow */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0f1f35]/50 to-[#080c12] opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+
+      {/* 3D Holographic Base Assembly */}
+      <div className="relative w-32 h-32 flex flex-col items-center justify-end mb-8">
+
+        {/* Floating Icon (Hologram projection) */}
+        <motion.div
+          animate={{ y: [-4, 4, -4] }}
+          transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
+          className="absolute z-10 bottom-8 drop-shadow-[0_0_15px_rgba(0,180,216,0.9)]"
+        >
+          <Icon className="w-12 h-12 text-[#22d3ee] filter brightness-110" strokeWidth={1.5} />
+        </motion.div>
+
+        {/* 3D Metallic Lens Underneath */}
+        <div className="absolute bottom-0 w-24 h-12" style={{ transformStyle: 'preserve-3d', perspective: '500px' }}>
+          <div className="w-full h-full rounded-[100%] bg-gradient-to-t from-[#020617] via-[#0f1f35] to-[#1e293b] border border-cyan-500/30 shadow-[0_15px_30px_rgba(0,180,216,0.4),inset_0_2px_10px_rgba(255,255,255,0.1)] group-hover:shadow-[0_20px_45px_rgba(0,180,216,0.6),inset_0_2px_15px_rgba(255,255,255,0.2)] transition-shadow duration-500" style={{ transform: 'rotateX(75deg)' }} />
+          {/* Glowing lens core */}
+          <div className="absolute inset-0 rounded-[100%] bg-cyan-400/10 blur-[8px] group-hover:bg-cyan-400/20 transition-all duration-500" style={{ transform: 'rotateX(75deg)' }} />
+          {/* Projection Cone */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[20px] h-[60px] bg-gradient-to-t from-cyan-400/40 to-transparent blur-[12px] opacity-0 group-hover:opacity-70 transition-opacity duration-700 pointer-events-none" style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }} />
+        </div>
+      </div>
+
+      <h3 className="relative z-10 text-[22px] font-bold text-white mb-3 tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,1)]">{name}</h3>
+      <p className="relative z-10 text-[15px] text-[#8ba2be] font-light leading-relaxed max-w-[250px]">{hook}</p>
+    </div>
+  );
+};
+
+const ServicePopup = ({
+  service,
+  isOpen,
+  onClose,
   isRtl,
   isMobile,
-}: Glass3DCardProps) => {
-  const [isActive, setIsActive] = useState(false);
-  const { t } = useLanguage();
+  t
+}: {
+  service: any,
+  isOpen: boolean,
+  onClose: () => void,
+  isRtl: boolean,
+  isMobile: boolean,
+  t: any
+}) => {
+  // Lock body scroll
+  useEffect(() => {
+    if (isOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
 
-  const handleInteraction = () => setIsActive((prev) => !prev);
-  const arrow = isRtl ? "←" : "→";
+  if (!isOpen || !service) return null;
 
-  // Mouse Tracking for Relief Tilt & Directional Light
-  const x = useMotionValue(0.5);
-  const y = useMotionValue(0.5);
-
-  const rotateX = useTransform(y, [0, 1], [8, -8]);
-  const rotateY = useTransform(x, [0, 1], [-8, 8]);
-
-  const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
-  const springRotateX = useSpring(rotateX, springConfig);
-  const springRotateY = useSpring(rotateY, springConfig);
-
-  const lightX = useTransform(x, [0, 1], ["0%", "100%"]);
-  const lightY = useTransform(y, [0, 1], ["0%", "100%"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isMobile) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    x.set((e.clientX - rect.left) / rect.width);
-    y.set((e.clientY - rect.top) / rect.height);
-  };
-
-  const handleMouseLeave = () => {
-    if (isMobile) return;
-    setIsActive(false);
-    x.set(0.5);
-    y.set(0.5);
-  };
+  const colAutomatedLabel = isRtl ? "ما يتم تلقائياً" : "WHAT GETS AUTOMATED";
+  const colGainsLabel = isRtl ? "ما يكسبه فريقك" : "WHAT YOUR TEAM GAINS";
+  const btnLabel = isRtl ? "احجز تقييماً مجانياً ←" : "Book Free Assessment →";
 
   return (
-    <motion.div
-      layout
-      onMouseEnter={!isMobile ? () => setIsActive(true) : undefined}
-      onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
-      onClick={isMobile ? handleInteraction : undefined}
-      className={`relative group cursor-pointer perspective-[1500px] h-full ${isActive ? "z-50" : "z-10"}`}
-      style={{ direction: isRtl ? "rtl" : "ltr" }}
-    >
-      <motion.div
-        animate={{
-          scale: isActive ? 1.05 : 1,
-          translateZ: isActive ? 30 : 0,
-        }}
-        style={{
-          rotateX: isMobile ? 0 : springRotateX,
-          rotateY: isMobile ? 0 : springRotateY,
-          // Dark Obsidian Matte Base
-          backgroundColor: "#080c12",
-          backgroundImage: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.5) 100%)",
-          boxShadow: isActive
-            ? "0 40px 80px -20px rgba(0,0,0,1), inset 0 1px 1px rgba(255,255,255,0.1), inset 0 -2px 5px rgba(0,0,0,0.8)"
-            : "0 15px 35px -10px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.05), inset 0 -1px 3px rgba(0,0,0,0.6)",
-        }}
-        transition={{ type: "spring", stiffness: 250, damping: 25 }}
-        className="relative w-full h-full min-h-[420px] rounded-[1.25rem] transform-style-3d overflow-hidden border border-[#1a2233]"
-      >
-        {/* Physical Directional Light (No ambient glowing) */}
-        {!isMobile && (
-          <motion.div
-            className="absolute inset-0 pointer-events-none mix-blend-overlay z-0"
-            style={{
-              background: useTransform(
-                [lightX, lightY],
-                ([lx, ly]) =>
-                  `radial-gradient(circle at ${lx} ${ly}, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.4) 60%)`
-              ),
-            }}
-          />
-        )}
+    <AnimatePresence>
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+        {/* Deep Overlay */}
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          className="absolute inset-0 bg-[rgba(0,0,0,0.85)] z-0"
+          onClick={onClose}
+        />
 
-        {/* Content Panel */}
-        <div className="relative z-10 p-8 h-full flex flex-col items-center text-center transform-style-3d">
-
-          {isHighlighted && !isActive && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="absolute top-4 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 px-3 py-1 rounded-md border border-[#1a2233] bg-[#0c121c] shadow-[0_2px_5px_rgba(0,0,0,0.5),inset_0_1px_rgba(255,255,255,0.03)]"
-            >
-              <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-[inset_0_1px_2px_rgba(0,0,0,0.5)]" />
-              <span className="text-[10px] font-mono font-semibold text-[#809ab5] uppercase tracking-wider whitespace-nowrap">
-                {tag}
-              </span>
-            </motion.div>
-          )}
-
-          {/* Cyan Metallic Carved Icon Element */}
-          <motion.div
-            animate={{
-              y: isActive ? -15 : 0,
-              scale: isActive ? 0.8 : 1,
-            }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className={`relative flex items-center justify-center w-24 h-24 mb-6 rounded-2xl bg-[#0a1018] border border-[#111827] shadow-[inset_0_2px_10px_rgba(0,0,0,0.8),0_1px_rgba(255,255,255,0.02)] ${isActive ? 'mt-0' : 'mt-8'}`}
-            style={{ transformStyle: "preserve-3d" }}
-          >
-            {/* Inner Metallic Bevel */}
-            <div className="absolute inset-2 rounded-xl bg-[#0d141f] border-t border-[#1a2533] border-b border-[#000] shadow-[0_4px_10px_rgba(0,0,0,0.5)] flex items-center justify-center" style={{ transform: "translateZ(10px)" }}>
-              {/* The sharp cyan metallic fill */}
-              <Icon className="w-9 h-9 text-transparent" style={{ stroke: 'url(#cyan-metallic)', strokeWidth: 1.5, filter: 'drop-shadow(0px 2px 2px rgba(0,0,0,0.8))' }} />
-
-              <svg width="0" height="0" className="absolute">
-                <defs>
-                  <linearGradient id="cyan-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#8be9fd" />
-                    <stop offset="50%" stopColor="#1e90ff" />
-                    <stop offset="100%" stopColor="#0052cc" />
-                  </linearGradient>
-                </defs>
-              </svg>
+        {/* Cinematic Popup Modal */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          className="relative z-10 w-full max-w-[780px] bg-[#0f1f35] border border-[rgba(0,180,216,0.3)] rounded-[16px] shadow-[0_30px_100px_rgba(0,180,216,0.15)] flex flex-col overflow-hidden"
+          style={{ maxHeight: '90vh' }}
+        >
+          {/* Close Header Bar */}
+          <div className={`p-6 flex items-center justify-between border-b border-cyan-400/10 relative z-20 ${isRtl ? 'flex-row-reverse' : ''}`}>
+            <div className={`flex items-center gap-3 ${isRtl ? 'flex-row-reverse' : ''}`}>
+              <service.icon className="w-6 h-6 text-[#00b4d8]" />
+              <h2 className={`text-[20px] font-bold text-white ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                {service.name}
+              </h2>
             </div>
-          </motion.div>
+            <button onClick={onClose} className="p-2 rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors">
+              <X className="w-6 h-6" />
+            </button>
+          </div>
 
-          {/* Physical Stamped Service Name */}
-          <h3 className="text-[22px] font-bold text-[#e1e7ef] mb-3 tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,1)]" style={{ transform: "translateZ(15px)" }}>
-            {name}
-          </h3>
+          {/* Two-Column Scrollable Body */}
+          <div className="overflow-y-auto p-10 hide-scrollbar flex-1 relative z-10 w-full">
+            <div className={`flex flex-col md:flex-row w-full gap-10 md:gap-0 ${isRtl ? 'md:flex-row-reverse' : ''}`}>
 
-          <AnimatePresence mode="wait">
-            {!isActive ? (
-              <motion.div
-                key="front"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0, transition: { duration: 0.15 } }}
-                className="flex-1 flex flex-col justify-center w-full mt-2"
-                style={{ transform: "translateZ(10px)" }}
-              >
-                <p className="text-[15px] text-[#788a9f] font-light leading-relaxed px-2 drop-shadow-[0_1px_2px_rgba(0,0,0,1)]">
-                  {hook}
-                </p>
-                <div className="mt-8 flex justify-center">
-                  <div className="h-1 w-8 rounded-full bg-[#1e293b] shadow-[inset_0_1px_2px_rgba(0,0,0,0.8),0_1px_rgba(255,255,255,0.05)]" />
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="back"
-                initial={{ opacity: 0, filter: "blur(4px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, filter: "blur(4px)", transition: { duration: 0.15 } }}
-                className="flex-1 flex flex-col w-full h-full relative z-20"
-                style={{ transform: "translateZ(20px)" }}
-              >
-                <span className="inline-block text-[10px] font-mono font-semibold text-[#5a728c] uppercase tracking-widest mb-6 border-b border-[#111827] pb-2 text-center w-full drop-shadow-[0_1px_1px_rgba(0,0,0,1)]">
-                  {automatedLabel}
-                </span>
-
-                <ul className="flex-1 w-full space-y-3 pb-6">
-                  {items.map((item, idx) => (
-                    <motion.li
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.03, duration: 0.2 }}
-                      key={item}
-                      className={`flex items-start gap-3 text-[13px] text-[#bac5d5] ${isRtl ? "flex-row-reverse" : "text-left leading-tight"}`}
-                    >
-                      <div className="w-4 h-4 rounded mt-[2px] flex-shrink-0 bg-[#0c121c] border border-[#162133] shadow-[inset_0_1px_2px_rgba(0,0,0,0.5)] flex items-center justify-center">
-                        <Check className="w-2.5 h-2.5 text-cyan-500" strokeWidth={3} />
-                      </div>
-                      <span className="drop-shadow-[0_1px_2px_rgba(0,0,0,1)]">{item}</span>
-                    </motion.li>
+              {/* Left Column: Automated */}
+              <div className="flex-1 w-full md:pr-10 md:border-r border-[rgba(0,180,216,0.3)] rtl:md:pr-0 rtl:md:pl-10 rtl:md:border-l rtl:md:border-r-0">
+                <h4 className={`text-[11px] font-mono font-bold text-[#00b4d8] uppercase tracking-[3px] mb-6 ${isRtl ? "text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
+                  {colAutomatedLabel}
+                </h4>
+                <ul className="space-y-4">
+                  {service.items.map((item: string, i: number) => (
+                    <li key={i} className={`flex items-start gap-4 text-[15px] text-white leading-[1.8] ${isRtl ? "flex-row-reverse text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00b4d8]/80 mt-[10px] flex-shrink-0" />
+                      <span className="opacity-95">{item}</span>
+                    </li>
                   ))}
                 </ul>
+              </div>
 
-                {/* Matte Recessed CTA Button */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    openCalendly();
-                  }}
-                  className="w-full mt-auto relative bg-[#111824] hover:bg-[#151e2e] text-[#d0dbe8] border border-[#1c2738] border-b-[#0b1016] text-[14px] font-medium px-4 py-3.5 rounded-xl transition-colors duration-300 shadow-[inset_0_1px_rgba(255,255,255,0.02),0_4px_10px_rgba(0,0,0,0.5)]"
-                >
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    {ctaLabel} <span className="text-[#4b617a]">{arrow}</span>
-                  </span>
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.div>
-    </motion.div>
+              {/* Right Column: Gains */}
+              <div className="flex-1 w-full md:pl-10 rtl:md:pl-0 rtl:md:pr-10">
+                <h4 className={`text-[11px] font-mono font-bold text-[#00b4d8] uppercase tracking-[3px] mb-6 ${isRtl ? "text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
+                  {colGainsLabel}
+                </h4>
+                <ul className="space-y-4">
+                  {service.gains.map((gain: string, i: number) => (
+                    <li key={i} className={`flex items-start gap-4 text-[15px] text-white leading-[1.8] ${isRtl ? "flex-row-reverse text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
+                      <Check className="w-4 h-4 text-[#00b4d8] mt-[7px] flex-shrink-0 drop-shadow-[0_0_5px_rgba(0,180,216,0.5)]" strokeWidth={3} />
+                      <span className="opacity-95">{gain}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
+
+            {/* CTA Form Bottom Block */}
+            <div className={`mt-12 w-full flex ${isMobile ? 'justify-center' : isRtl ? 'justify-start' : 'justify-end'}`}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onClose();
+                  openCalendly();
+                }}
+                className={`w-full md:w-auto px-8 py-3.5 rounded-lg border border-[rgba(0,180,216,0.5)] bg-transparent hover:bg-[rgba(0,180,216,0.1)] text-white font-medium text-[15px] transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}
+              >
+                {btnLabel}
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </AnimatePresence>
   );
 };
 
 const FlipCardGrid = () => {
   const { t, isRtl } = useLanguage();
   const isMobile = useIsMobile();
+  const [selectedService, setSelectedService] = useState<any | null>(null);
 
   const services = Array.from({ length: 8 }, (_, i) => {
     const idx = i + 1;
     return {
+      id: idx,
       icon: serviceIcons[i],
       name: t(`services.tab${idx}`),
       hook: t(`services.s${idx}.hook`),
-      tag: t(`services.s${idx}.tag`),
-      items: [
+      targetItems: [
         t(`services.s${idx}.b1`),
         t(`services.s${idx}.b2`),
         t(`services.s${idx}.b3`),
@@ -255,28 +239,42 @@ const FlipCardGrid = () => {
         t(`services.s${idx}.b7`),
         t(`services.s${idx}.b8`),
       ].filter((item) => !item.startsWith("services.s")),
+      targetGains: isRtl ? generatedGainsAr[i] : generatedGains[i]
     };
   });
 
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ${isRtl ? "direction-rtl" : ""}`}>
-      {services.map((s, i) => (
-        <Glass3DCard
-          key={i}
-          index={i}
-          icon={s.icon}
-          name={s.name}
-          hook={s.hook}
-          tag={s.tag}
-          isHighlighted={i === 0}
-          items={s.items}
-          automatedLabel={t("services.automatedLabel")}
-          ctaLabel={t("services.discussService")}
-          isRtl={isRtl}
-          isMobile={isMobile}
-        />
-      ))}
-    </div>
+    <>
+      <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6`}>
+        {services.map((s, i) => (
+          <HologramCard
+            key={i}
+            idx={i}
+            icon={s.icon}
+            name={s.name}
+            hook={s.hook}
+            items={s.targetItems}
+            gains={s.targetGains}
+            isRtl={isRtl}
+            onClick={() => setSelectedService(s)}
+          />
+        ))}
+      </div>
+
+      <ServicePopup
+        service={selectedService ? {
+          icon: selectedService.icon,
+          name: selectedService.name,
+          items: selectedService.targetItems,
+          gains: selectedService.targetGains
+        } : null}
+        isOpen={!!selectedService}
+        onClose={() => setSelectedService(null)}
+        isRtl={isRtl}
+        isMobile={isMobile}
+        t={t}
+      />
+    </>
   );
 };
 
