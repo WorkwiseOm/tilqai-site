@@ -72,7 +72,7 @@ const HeroSection = () => {
 
       {/* 3. Interactive Spline Background - Positioned 50% Right overlay w/ fade-in & gradient mask */}
       <div
-        className={`hidden lg:flex absolute inset-y-0 bottom-0 z-0 transition-opacity duration-[1500ms] ease-out items-end justify-center ${stage >= 1 ? "opacity-100" : "opacity-0"} ${isRtl ? "left-0 w-1/2" : "right-0 w-1/2"}`}
+        className={`flex absolute inset-y-0 bottom-0 z-0 transition-opacity duration-[1500ms] ease-out items-end justify-center ${stage >= 1 ? "opacity-30 lg:opacity-100" : "opacity-0"} ${isRtl ? "left-0 w-[100vw] lg:w-1/2" : "right-0 w-[100vw] lg:w-1/2"} pointer-events-none lg:pointer-events-auto`}
         style={{
           WebkitMaskImage: isRtl
             ? "linear-gradient(to left, transparent 0%, black 30%)"

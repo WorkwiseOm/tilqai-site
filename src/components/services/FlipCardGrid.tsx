@@ -146,10 +146,10 @@ const ServicePopup = ({
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
           className="relative z-10 w-full bg-[#0f1f35] border border-[rgba(0,180,216,0.3)] rounded-[16px] shadow-[0_30px_100px_rgba(0,180,216,0.15)] flex flex-col overflow-hidden"
-          style={{ width: 'min(1000px, 90vw)', minHeight: '580px', maxHeight: '90vh' }}
+          style={{ width: 'min(1000px, 90vw)', minHeight: isMobile ? 'auto' : '580px', maxHeight: '90vh' }}
         >
           {/* Close Header Bar */}
-          <div className={`px-[48px] pt-[48px] pb-6 flex items-center justify-between border-b border-cyan-400/10 relative z-20 ${isRtl ? 'flex-row-reverse' : ''}`}>
+          <div className={`p-6 md:px-[48px] md:pt-[48px] md:pb-6 flex items-center justify-between border-b border-cyan-400/10 relative z-20 ${isRtl ? 'flex-row-reverse' : ''}`}>
             <div className={`flex items-center gap-3 ${isRtl ? 'flex-row-reverse' : ''}`}>
               <service.icon className="w-6 h-6 text-[#00b4d8]" />
               <h2 className={`text-[24px] font-[700] text-white ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
@@ -162,11 +162,11 @@ const ServicePopup = ({
           </div>
 
           {/* Two-Column Scrollable Body */}
-          <div className="overflow-y-auto px-[48px] pb-[48px] pt-4 hide-scrollbar flex-1 relative z-10 w-full">
-            <div className={`flex flex-col md:flex-row w-full gap-[48px] ${isRtl ? 'md:flex-row-reverse' : ''}`}>
+          <div className="overflow-y-auto p-6 md:px-[48px] md:pb-[48px] md:pt-4 hide-scrollbar flex-1 relative z-10 w-full">
+            <div className={`flex flex-col md:flex-row w-full gap-8 md:gap-[48px] ${isRtl ? 'md:flex-row-reverse' : ''}`}>
 
               {/* Left Column: Automated */}
-              <div className="flex-1 w-full md:border-r border-[rgba(0,180,216,0.3)] rtl:md:border-l rtl:md:border-r-0">
+              <div className="flex-1 w-full md:pr-10 md:border-r border-[rgba(0,180,216,0.3)] rtl:md:pr-0 rtl:md:pl-10 rtl:md:border-l rtl:md:border-r-0">
                 <h4 className={`text-[12px] font-mono font-bold text-[#00b4d8] uppercase tracking-[3px] mb-6 ${isRtl ? "text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
                   {colAutomatedLabel}
                 </h4>
@@ -181,7 +181,7 @@ const ServicePopup = ({
               </div>
 
               {/* Right Column: Gains */}
-              <div className="flex-1 w-full">
+              <div className="flex-1 w-full md:pl-10 rtl:md:pl-0 rtl:md:pr-10">
                 <h4 className={`text-[12px] font-mono font-bold text-[#00b4d8] uppercase tracking-[3px] mb-6 ${isRtl ? "text-right font-['Tajawal',sans-serif]" : "text-left"}`}>
                   {colGainsLabel}
                 </h4>
