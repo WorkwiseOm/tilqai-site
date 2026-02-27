@@ -100,7 +100,7 @@ const HeroSection = () => {
       >
         <Spline
           className="w-full h-full object-cover"
-          scene="https://prod.spline.design/BI1RZe8ZeB8-NbNf/scene.splinecode"
+          scene="https://prod.spline.design/bsXaJvEHg1mgdQo1/scene.splinecode"
           onLoad={handleSplineLoad}
         />
       </div>
