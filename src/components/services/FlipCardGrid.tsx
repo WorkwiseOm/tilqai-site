@@ -134,7 +134,7 @@ const ServicePopup = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-end md:justify-center p-0 md:p-4">
         {/* Deep Overlay */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
@@ -143,11 +143,21 @@ const ServicePopup = ({
         />
 
         {/* Cinematic Popup Modal */}
+        {/* Cinematic Popup Modal / Mobile Bottom Sheet */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative z-10 w-full bg-[#0f1f35] border border-[rgba(0,180,216,0.3)] rounded-[16px] shadow-[0_30px_100px_rgba(0,180,216,0.15)] flex flex-col overflow-hidden"
-          style={{ width: 'min(1000px, 90vw)', minHeight: isMobile ? 'auto' : '580px', maxHeight: '90dvh' }}
+          initial={{ opacity: 0, scale: isMobile ? 1 : 0.95, y: isMobile ? "100%" : 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: isMobile ? 1 : 0.95, y: isMobile ? "100%" : 20 }}
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          className="relative z-10 w-full bg-[#0f1f35] border-t md:border border-[rgba(0,180,216,0.3)] rounded-t-[24px] md:rounded-[16px] shadow-[0_-30px_100px_rgba(0,180,216,0.15)] flex flex-col overflow-hidden max-h-[90dvh]"
+          style={{ width: isMobile ? '100vw' : 'min(1000px, 90vw)', minHeight: isMobile ? '50dvh' : '580px' }}
         >
+          {/* Mobile Grab Bar */}
+          {isMobile && (
+            <div className="w-full flex justify-center pt-4 pb-2 bg-[#0f1f35] shrink-0">
+              <div className="w-12 h-1.5 bg-white/20 rounded-full" />
+            </div>
+          )}
           {/* Close Header Bar */}
           <div className={`p-6 md:px-[48px] md:pt-[48px] md:pb-6 flex items-center justify-between border-b border-cyan-400/10 relative z-20 ${isRtl ? 'flex-row-reverse' : ''}`}>
             <div className={`flex items-center gap-3 ${isRtl ? 'flex-row-reverse' : ''}`}>
@@ -156,7 +166,7 @@ const ServicePopup = ({
                 {service.name}
               </h2>
             </div>
-            <button onClick={onClose} className="p-2 rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors">
+            <button onClick={onClose} className="w-[44px] h-[44px] flex items-center justify-center rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors">
               <X className="w-6 h-6" />
             </button>
           </div>
@@ -197,19 +207,20 @@ const ServicePopup = ({
 
             </div>
 
-            {/* CTA Form Bottom Block */}
-            <div className="mt-12 w-full flex justify-center">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onClose();
-                  openCalendly();
-                }}
-                className={`w-full md:w-auto min-w-[260px] px-8 py-3.5 rounded-lg bg-[#00b4d8] hover:bg-[#0096b4] text-white font-[700] text-[16px] text-center transition-all duration-300 mx-auto ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}
-              >
-                {btnLabel}
-              </button>
-            </div>
+          </div> {/* End Scrollable Body */}
+
+          {/* Fixed CTA Sticky Bottom Footer */}
+          <div className="p-6 md:px-[48px] md:py-8 bg-[#0f1f35] border-t border-[rgba(0,180,216,0.2)] shrink-0 w-full flex justify-center z-20">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onClose();
+                openCalendly();
+              }}
+              className={`w-full md:w-auto min-w-[260px] h-[52px] px-8 rounded-lg bg-[#00b4d8] hover:bg-[#0096b4] text-white font-[700] text-[16px] flex items-center justify-center transition-all duration-300 mx-auto ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}
+            >
+              {btnLabel}
+            </button>
           </div>
         </motion.div>
       </div>
