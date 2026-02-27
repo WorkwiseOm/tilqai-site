@@ -1,9 +1,17 @@
 {
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "redirects": [
+        {
+            "source": "/(www\\.)?tilqai-site\\.vercel\\.app(.*)",
+            "destination": "https://tilqai.om$2",
+            "permanent": true
+        }
+    ],
     "rewrites": [
         {
             "source": "/(.*)",
             "destination": "/index.html"
         }
-    ],
-    "cleanUrls": true
+    ]
 }
