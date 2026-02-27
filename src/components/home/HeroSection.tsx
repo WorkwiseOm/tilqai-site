@@ -61,7 +61,7 @@ const HeroSection = () => {
   }, [completeIntro]);
 
   return (
-    <section className={`py-20 lg:py-24 pb-6 relative hero-section flex items-center min-h-[100vh] transition-colors duration-1000 ease-in-out ${stage >= 1 ? "bg-[#0a1628]" : "bg-[#050a12]"} overflow-hidden`}>
+    <section className={`py-20 lg:py-24 pb-6 relative hero-section flex items-center min-h-[100dvh] transition-colors duration-1000 ease-in-out ${stage >= 1 ? "bg-[#0a1628]" : "bg-[#050a12]"} overflow-hidden`}>
 
       {/* 1. Breathing Gradient */}
       <div
@@ -85,6 +85,7 @@ const HeroSection = () => {
         <Spline
           className="w-full h-full object-cover"
           scene="https://prod.spline.design/BI1RZe8ZeB8-NbNf/scene.splinecode"
+          loading="lazy"
         />
       </div>
 

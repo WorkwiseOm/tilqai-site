@@ -146,7 +146,7 @@ const ServicePopup = ({
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
           className="relative z-10 w-full bg-[#0f1f35] border border-[rgba(0,180,216,0.3)] rounded-[16px] shadow-[0_30px_100px_rgba(0,180,216,0.15)] flex flex-col overflow-hidden"
-          style={{ width: 'min(1000px, 90vw)', minHeight: isMobile ? 'auto' : '580px', maxHeight: '90vh' }}
+          style={{ width: 'min(1000px, 90vw)', minHeight: isMobile ? 'auto' : '580px', maxHeight: '90dvh' }}
         >
           {/* Close Header Bar */}
           <div className={`p-6 md:px-[48px] md:pt-[48px] md:pb-6 flex items-center justify-between border-b border-cyan-400/10 relative z-20 ${isRtl ? 'flex-row-reverse' : ''}`}>
@@ -267,7 +267,7 @@ const FlipCardGrid = () => {
 
   return (
     <>
-      <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6`}>
+      <div className={`grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6`}>
         {services.map((s, i) => (
           <HologramCard
             key={i}
