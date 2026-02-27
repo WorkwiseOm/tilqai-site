@@ -134,7 +134,7 @@ const ServicePopup = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-end md:justify-center p-0 md:p-4" style={{ height: '100dvh' }}>
+      <div className="fixed inset-0 z-[10000] flex flex-col items-center justify-end md:justify-center p-0 md:p-4 overflow-hidden shadow-2xl">
         {/* Deep Overlay */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
@@ -149,8 +149,8 @@ const ServicePopup = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: isMobile ? 1 : 0.95, y: isMobile ? "100%" : 20 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="relative z-10 w-full bg-[#0f1f35] border-t md:border border-[rgba(0,180,216,0.3)] rounded-t-[24px] md:rounded-[16px] shadow-[0_-30px_100px_rgba(0,180,216,0.15)] flex flex-col overflow-hidden mt-auto md:mt-0 max-h-[90dvh]"
-          style={{ width: isMobile ? '100vw' : 'min(1000px, 90vw)', minHeight: isMobile ? '50dvh' : '580px' }}
+          className="relative z-10 w-full bg-[#0f1f35] border-t md:border border-[rgba(0,180,216,0.3)] rounded-t-[24px] md:rounded-[16px] shadow-[0_-30px_100px_rgba(0,180,216,0.15)] flex flex-col overflow-hidden mt-auto md:mt-0 max-h-[90vh]"
+          style={{ width: isMobile ? '100vw' : 'min(1000px, 90vw)', minHeight: isMobile ? '50vh' : '580px' }}
         >
           {/* Mobile Grab Bar */}
           {isMobile && (

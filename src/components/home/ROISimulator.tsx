@@ -109,10 +109,10 @@ export default function ROISimulator() {
       </section>
 
       {open && (
-        <div className="fixed inset-0 z-[9998] flex flex-col items-center justify-end md:justify-center p-0 md:p-4 bg-[rgba(0,0,0,0.88)] overflow-hidden" style={{ animation: "fadeIn 0.3s ease-out" }}>
+        <div className="fixed inset-0 z-[10000] flex flex-col items-center justify-end md:justify-center p-0 md:p-4 bg-[rgba(0,0,0,0.88)] overflow-hidden" style={{ animation: "fadeIn 0.3s ease-out" }}>
           <div className="absolute inset-0 bg-transparent cursor-pointer" onClick={() => setOpen(false)} />
           <div
-            className="calculator-modal relative z-[9999] w-full md:max-w-[860px] md:w-[860px] h-auto mt-auto md:mt-0 max-h-[90dvh] md:h-auto md:min-h-[560px] md:p-[36px] rounded-t-[24px] md:rounded-[16px] border-t md:border border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-y-auto shrink-0 shadow-[0_-30px_100px_rgba(0,180,216,0.15)]"
+            className="calculator-modal relative z-[9999] w-full md:max-w-[860px] md:w-[860px] h-auto mt-auto md:mt-0 max-h-[90vh] md:h-auto md:min-h-[560px] md:p-[36px] rounded-t-[24px] md:rounded-[16px] border-t md:border border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-y-auto shrink-0 shadow-[0_-30px_100px_rgba(0,180,216,0.15)]"
             style={{ animation: "slideUpFade 0.4s ease-out" }}
             dir={isRtl ? "rtl" : "ltr"}
           >
