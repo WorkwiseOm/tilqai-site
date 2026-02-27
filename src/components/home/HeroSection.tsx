@@ -16,7 +16,7 @@ import Spline from '@splinetool/react-spline';
  */
 const HeroSection = () => {
   const { t, isRtl } = useLanguage();
-  const { completeIntro, setHasCompleted } = useHeroIntro();
+  const { completeIntro } = useHeroIntro();
   const isMobile = useIsMobile();
 
   const [bgStage, setBgStage] = useState(0);
@@ -43,7 +43,7 @@ const HeroSection = () => {
       setSubheadlineVisible(true);
       setBadgeVisible(true);
       setCtaVisible(true);
-      setHasCompleted(true);
+      completeIntro();
       return;
     }
 
@@ -52,11 +52,11 @@ const HeroSection = () => {
       const t2 = setTimeout(() => setBadgeVisible(true), 400 + 300);
       const t3 = setTimeout(() => {
         setCtaVisible(true);
-        setHasCompleted(true);
+        completeIntro();
       }, 400 + 300 + 300);
       return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
     }
-  }, [headlineDone, setHasCompleted]);
+  }, [headlineDone, completeIntro]);
 
   const handleSplineLoad = (splineApp: any) => {
     // Inject mobile performance clamp
@@ -84,7 +84,7 @@ const HeroSection = () => {
 
       {/* 3. Interactive Spline Background - Positioned 50% Right overlay w/ fade-in & gradient mask */}
       <div
-        className={`flex absolute z-0 transition-opacity duration-[1500ms] ease-out items-end justify-center pointer-events-none lg:pointer-events-auto ${stage >= 1 ? "opacity-100" : "opacity-0"} ${isMobile
+        className={`hero-robot flex absolute z-0 transition-opacity duration-[1500ms] ease-out items-end justify-center pointer-events-none lg:pointer-events-auto ${bgStage >= 1 ? "opacity-100" : "opacity-0"} ${isMobile
           ? "inset-0 h-[100dvh] overflow-hidden"
           : `inset-y-0 bottom-0 w-[100vw] lg:w-1/2 ${isRtl ? "left-0" : "right-0"}`
           }`}
