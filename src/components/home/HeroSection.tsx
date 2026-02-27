@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { openCalendly } from "@/lib/calendly";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useHeroIntro } from "@/hooks/use-hero-intro";
+import { useIsMobile } from "@/hooks/use-mobile";
 import Spline from '@splinetool/react-spline';
 
 /**
@@ -15,6 +16,7 @@ import Spline from '@splinetool/react-spline';
 const HeroSection = () => {
   const { t, isRtl } = useLanguage();
   const { completeIntro } = useHeroIntro();
+  const isMobile = useIsMobile();
 
   // Stages:
   // 0: Init
@@ -86,12 +88,12 @@ const HeroSection = () => {
 
       {/* 3. Interactive Spline Background - Positioned 50% Right overlay w/ fade-in & gradient mask */}
       <div
-        className={`flex absolute inset-y-0 bottom-0 z-0 transition-opacity duration-[1500ms] ease-out items-end justify-center ${stage >= 1 ? "opacity-30 lg:opacity-100" : "opacity-0"} ${isRtl ? "left-0 w-[100vw] lg:w-1/2" : "right-0 w-[100vw] lg:w-1/2"} pointer-events-none lg:pointer-events-auto`}
+        className={`flex absolute inset-y-0 bottom-0 z-0 transition-opacity duration-[1500ms] ease-out items-end justify-center ${stage >= 1 ? (isMobile ? "opacity-15" : "opacity-100") : "opacity-0"} ${isRtl ? "left-0 w-[100vw] lg:w-1/2" : "right-0 w-[100vw] lg:w-1/2"} pointer-events-none lg:pointer-events-auto`}
         style={{
-          WebkitMaskImage: isRtl
+          WebkitMaskImage: isMobile ? "none" : isRtl
             ? "linear-gradient(to left, transparent 0%, black 30%)"
             : "linear-gradient(to right, transparent 0%, black 30%)",
-          maskImage: isRtl
+          maskImage: isMobile ? "none" : isRtl
             ? "linear-gradient(to left, transparent 0%, black 30%)"
             : "linear-gradient(to right, transparent 0%, black 30%)"
         }}
@@ -106,10 +108,10 @@ const HeroSection = () => {
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12 relative z-10 w-full pointer-events-none lg:pl-[80px]">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full relative">
           {/* Text column - Strictly 520px width & no overlap */}
-          <div className={`w-full lg:max-w-[520px] ${isRtl ? "text-right lg:ml-auto lg:pl-0 lg:pr-[80px]" : "lg:mr-auto"} pointer-events-auto`}>
+          <div className={`w-full lg:max-w-[520px] ${isRtl ? "lg:text-right lg:ml-auto lg:pl-0 lg:pr-[80px] text-center" : "lg:text-left text-center lg:mr-auto"} pointer-events-auto flex flex-col items-center lg:items-start`}>
             {/* Headline */}
             <h1
-              className={`text-[32px] md:text-[42px] lg:text-[56px] tracking-tight font-bold text-white leading-[1.1] flex flex-wrap ${isRtl ? "justify-end text-right flex-row-reverse" : "justify-start text-left items-baseline"}`}
+              className={`text-[32px] md:text-[42px] lg:text-[56px] tracking-tight font-bold text-white leading-[1.1] flex flex-wrap justify-center ${isRtl ? "lg:justify-end text-center lg:text-right lg:flex-row-reverse" : "lg:justify-start text-center lg:text-left items-baseline"}`}
               style={{ minHeight: "1.2em", textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}
             >
               {/* "What if..." */}
@@ -149,7 +151,7 @@ const HeroSection = () => {
 
             {/* Subheadline */}
             <p
-              className={`mt-6 text-[18px] md:text-[22px] max-w-2xl leading-[1.5] transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] will-change-transform ${stage >= 7 ? "opacity-75 translate-y-0 blur-none" : "opacity-0 translate-y-[5px] blur-[2px]"}`}
+              className={`mt-6 text-[18px] md:text-[22px] max-w-2xl leading-[1.5] text-center lg:text-left transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] will-change-transform ${stage >= 7 ? "opacity-75 translate-y-0 blur-none" : "opacity-0 translate-y-[5px] blur-[2px]"} ${isRtl ? "lg:text-right" : ""}`}
               style={{ color: "rgba(255,255,255,1)", textShadow: "0 1px 10px rgba(0,0,0,0.8)" }}
             >
               {t("hero.subheadline")}
@@ -166,10 +168,10 @@ const HeroSection = () => {
             </div>
 
             {/* CTAs */}
-            <div className={`mt-10 flex gap-4 ${isRtl ? "justify-start" : ""}`}>
+            <div className={`mt-10 flex w-full lg:w-auto gap-4 ${isRtl ? "justify-center lg:justify-start" : "justify-center lg:justify-start"}`}>
               <button
                 onClick={openCalendly}
-                className={`btn-primary-hover min-w-[44px] min-h-[44px] bg-primary text-primary-foreground text-[16px] font-semibold px-8 py-3.5 rounded-lg shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-[500ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 9 ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"}`}
+                className={`btn-primary-hover min-w-[44px] min-h-[44px] w-full sm:w-auto bg-[#00b4d8] text-white hover:bg-[#009ac2] text-[16px] font-semibold px-8 py-4 md:py-3.5 rounded-lg shadow-[0_0_20px_rgba(0,180,216,0.3)] transition-all duration-[500ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] flex items-center justify-center ${stage >= 9 ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"}`}
               >
                 {t("hero.primaryCta")}
               </button>
