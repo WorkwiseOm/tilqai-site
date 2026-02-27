@@ -137,11 +137,11 @@ const ServicePopup = ({
 
   return createPortal(
     <AnimatePresence>
-      <div className="fixed inset-[0] z-[10000] flex flex-col items-center justify-end md:justify-center p-0 md:p-4 pointer-events-none">
+      <div className="fixed inset-0 z-[10000] w-full h-full flex flex-col items-center justify-end md:justify-center p-0 md:p-4 pointer-events-none">
         {/* Deep Overlay */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-          className="absolute inset-[0] bg-[rgba(0,0,0,0.88)] z-0 pointer-events-auto"
+          className="absolute inset-0 w-full h-full bg-[rgba(0,0,0,0.88)] z-0 pointer-events-auto"
           onClick={onClose}
         />
 
