@@ -60,6 +60,20 @@ const HeroSection = () => {
     };
   }, [completeIntro]);
 
+  const handleSplineLoad = (splineApp: any) => {
+    // Inject mobile performance clamp
+    if (window.innerWidth < 480) {
+      try {
+        if (splineApp._app?.renderer) {
+          splineApp._app.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+          splineApp._app.renderer.powerPreference = "high-performance";
+        }
+      } catch (e) {
+        // Silently catch if internals shift
+      }
+    }
+  };
+
   return (
     <section className={`py-20 lg:py-24 pb-6 relative hero-section flex items-center min-h-[100dvh] transition-colors duration-1000 ease-in-out ${stage >= 1 ? "bg-[#0a1628]" : "bg-[#050a12]"} overflow-hidden`}>
 
@@ -85,7 +99,7 @@ const HeroSection = () => {
         <Spline
           className="w-full h-full object-cover"
           scene="https://prod.spline.design/BI1RZe8ZeB8-NbNf/scene.splinecode"
-          loading="lazy"
+          onLoad={handleSplineLoad}
         />
       </div>
 
@@ -155,7 +169,7 @@ const HeroSection = () => {
             <div className={`mt-10 flex gap-4 ${isRtl ? "justify-start" : ""}`}>
               <button
                 onClick={openCalendly}
-                className={`btn-primary-hover bg-primary text-primary-foreground text-[16px] font-semibold px-8 py-3.5 rounded-lg shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-[500ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 9 ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"}`}
+                className={`btn-primary-hover min-w-[44px] min-h-[44px] bg-primary text-primary-foreground text-[16px] font-semibold px-8 py-3.5 rounded-lg shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all duration-[500ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${stage >= 9 ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"}`}
               >
                 {t("hero.primaryCta")}
               </button>
