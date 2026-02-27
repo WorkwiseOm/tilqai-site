@@ -80,37 +80,51 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-2">
-            {/* Language Toggle */}
+          <div className="flex items-center gap-2 md:gap-3">
+            {/* Desktop Language Toggle & CTA */}
+            <div className="hidden md:flex items-center gap-2">
+              <button
+                onClick={toggleLocale}
+                className="flex items-center gap-1 text-[13px] font-mono text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded border border-border/50 hover:border-primary/40"
+              >
+                <span className={locale === "en" ? "text-foreground font-semibold" : ""}>EN</span>
+                <span className="text-border">|</span>
+                <span className={locale === "ar" ? "text-foreground font-semibold" : ""}>عربي</span>
+              </button>
+
+              <button
+                onClick={openCalendly}
+                className="btn-primary-hover bg-primary text-primary-foreground text-[15px] font-medium px-4 py-1.5 rounded-md"
+              >
+                {t("nav.bookAssessment")}
+              </button>
+            </div>
+
+            {/* Mobile Language Toggle */}
             <button
               onClick={toggleLocale}
-              className="flex items-center gap-1 text-[13px] font-mono text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded border border-border/50 hover:border-primary/40"
+              className="md:hidden flex items-center gap-1 text-[12px] font-mono text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded border border-border/40"
             >
-              <span className={locale === "en" ? "text-foreground font-semibold" : ""}>EN</span>
-              <span className="text-border">|</span>
-              <span className={locale === "ar" ? "text-foreground font-semibold" : ""}>عربي</span>
+              <span className={locale === "en" ? "text-foreground font-[700]" : ""}>EN</span>
+              <span className="text-border/60">|</span>
+              <span className={locale === "ar" ? "text-foreground font-[700]" : ""}>عربي</span>
             </button>
 
+            {/* Mobile Menu Toggle */}
             <button
-              onClick={openCalendly}
-              className="btn-primary-hover bg-primary text-primary-foreground text-[15px] font-medium px-4 py-1.5 rounded-md"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="md:hidden text-muted-foreground p-1.5 -mr-1.5 hover:text-foreground transition-colors"
+              aria-label="Toggle Menu"
             >
-              {t("nav.bookAssessment")}
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {mobileOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
             </button>
           </div>
-
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-muted-foreground p-2"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              {mobileOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
         </div>
       </div>
 
@@ -132,16 +146,8 @@ const Navbar = () => {
             ))}
             <div className="pt-3 mt-3 border-t border-border flex flex-col gap-2">
               <button
-                onClick={toggleLocale}
-                className="flex items-center justify-center gap-1 text-[13px] font-mono text-muted-foreground px-2 py-2 rounded border border-border/50"
-              >
-                <span className={locale === "en" ? "text-foreground font-semibold" : ""}>EN</span>
-                <span className="text-border">|</span>
-                <span className={locale === "ar" ? "text-foreground font-semibold" : ""}>عربي</span>
-              </button>
-              <button
                 onClick={() => { openCalendly(); setMobileOpen(false); }}
-                className="w-full btn-primary-hover bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded-md"
+                className="w-full btn-primary-hover bg-primary text-primary-foreground text-[15px] font-medium px-4 py-3 rounded-md"
               >
                 {t("nav.bookAssessment")}
               </button>
