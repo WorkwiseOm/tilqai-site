@@ -112,14 +112,14 @@ export default function ROISimulator() {
         <div className="fixed inset-0 z-[10000] flex flex-col items-center justify-end md:justify-center p-0 md:p-4 bg-[rgba(0,0,0,0.88)] overflow-hidden" style={{ animation: "fadeIn 0.3s ease-out" }}>
           <div className="absolute inset-0 bg-transparent cursor-pointer" onClick={() => setOpen(false)} />
           <div
-            className="calculator-modal relative z-[9999] w-full md:max-w-[860px] md:w-[860px] h-auto mt-auto md:mt-0 max-h-[90vh] md:h-auto md:min-h-[560px] md:p-[36px] rounded-t-[24px] md:rounded-[16px] border-t md:border border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-y-auto shrink-0 shadow-[0_-30px_100px_rgba(0,180,216,0.15)]"
+            className="calculator-modal relative z-[9999] w-full md:max-w-[860px] md:w-[860px] mt-auto md:mt-0 max-h-[90vh] md:max-h-[85vh] md:min-h-[560px] rounded-t-[24px] md:rounded-[16px] border-t md:border border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-hidden shadow-[0_-30px_100px_rgba(0,180,216,0.15)] pointer-events-auto"
             style={{ animation: "slideUpFade 0.4s ease-out" }}
             dir={isRtl ? "rtl" : "ltr"}
           >
             <div className="absolute inset-0 bg-primary/5 blur-[100px] pointer-events-none md:rounded-[16px]" />
 
             {/* Mobile Grab Bar */}
-            <div className="w-full flex justify-center pt-4 pb-2 md:hidden bg-[#0f1f35] shrink-0 sticky top-0 z-50">
+            <div className="w-full flex justify-center pt-4 pb-2 md:hidden bg-[#0f1f35] shrink-0 relative z-50">
               <div className="w-12 h-1.5 bg-white/20 rounded-full" />
             </div>
 
@@ -129,7 +129,7 @@ export default function ROISimulator() {
             >
               <X className="w-5 h-5" />
             </button>
-            <div className="p-4 flex items-center justify-between border-b border-white/10 md:hidden relative z-20 bg-[#0f1f35]">
+            <div className="p-4 flex items-center justify-between border-b border-white/10 md:hidden relative z-20 bg-[#0f1f35] shrink-0">
               <h2 className={`text-[16px] font-[600] text-white ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
                 {isRtl ? "احسب ما يكلّفه العمل اليدوي لفريقَك في صمت." : "Find out what manual work is quietly costing your team."}
               </h2>
@@ -141,134 +141,137 @@ export default function ROISimulator() {
               </button>
             </div>
 
-            {/* Content Area - Restored Flow Layout */}
-            <div className="calculator-content relative z-10 w-full shrink-0 h-auto flex flex-col items-stretch">
+            {/* Inner Scrolling Frame */}
+            <div className="flex-1 w-full overflow-y-auto overflow-x-hidden hide-scrollbar relative z-10 md:p-[36px]">
+              {/* Content Area - Restored Flow Layout */}
+              <div className="calculator-content relative z-10 w-full h-auto flex flex-col items-stretch">
 
-              {/* Top Input Section - Dynamic Height */}
-              <div
-                className="calculator-inputs w-full shrink-0 flex flex-col justify-center p-[20px] md:p-0 md:mb-[24px]"
-                style={{ display: "flex", visibility: "visible", opacity: 1, flexShrink: 0 }}
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                  {/* Input 1 */}
-                  <div className="space-y-3 md:space-y-4">
-                    <label className={`block text-[16px] font-[600] text-white ${isRtl ? "font-['Tajawal',sans-serif] text-right leading-[2]" : "leading-snug"}`}>
-                      {isRtl ? "كم عدد أعضاء الفريق الذين يتعاملون مع مهام يدوية أو متكررة؟" : "How many team members handle manual or repetitive tasks?"}
-                    </label>
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-                      {teamOptions.map(opt => (
-                        <button
-                          key={opt.key}
-                          onClick={() => setTeamOption(opt.key as any)}
-                          className={`py-2 px-1 md:py-3 text-[15px] font-semibold rounded-lg border transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${teamOption === opt.key
-                            ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
-                            : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
-                            }`}
-                        >
-                          {opt.label}
-                        </button>
-                      ))}
+                {/* Top Input Section - Dynamic Height */}
+                <div
+                  className="calculator-inputs w-full shrink-0 flex flex-col justify-center p-[20px] md:p-0 md:mb-[24px]"
+                  style={{ display: "flex", visibility: "visible", opacity: 1, flexShrink: 0 }}
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                    {/* Input 1 */}
+                    <div className="space-y-3 md:space-y-4">
+                      <label className={`block text-[16px] font-[600] text-white ${isRtl ? "font-['Tajawal',sans-serif] text-right leading-[2]" : "leading-snug"}`}>
+                        {isRtl ? "كم عدد أعضاء الفريق الذين يتعاملون مع مهام يدوية أو متكررة؟" : "How many team members handle manual or repetitive tasks?"}
+                      </label>
+                      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+                        {teamOptions.map(opt => (
+                          <button
+                            key={opt.key}
+                            onClick={() => setTeamOption(opt.key as any)}
+                            className={`py-2 px-1 md:py-3 text-[15px] font-semibold rounded-lg border transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${teamOption === opt.key
+                              ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
+                              : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
+                              }`}
+                          >
+                            {opt.label}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Input 2 */}
-                  <div className="space-y-3 md:space-y-4">
-                    <label className={`block text-[16px] font-[600] text-white ${isRtl ? "font-['Tajawal',sans-serif] text-right leading-[2]" : "leading-snug"}`}>
-                      {isRtl ? "كم ساعة في الأسبوع يقضي كل شخص في المهام اليدوية؟" : "How many hours per week does each person spend on manual tasks?"}
-                    </label>
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-                      {hoursOptions.map(opt => (
-                        <button
-                          key={opt.key}
-                          onClick={() => setHoursOption(opt.key as any)}
-                          className={`py-2 px-1 md:py-3 text-[15px] font-semibold rounded-lg border transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${hoursOption === opt.key
-                            ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
-                            : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
-                            }`}
-                        >
-                          {opt.label}
-                        </button>
-                      ))}
+                    {/* Input 2 */}
+                    <div className="space-y-3 md:space-y-4">
+                      <label className={`block text-[16px] font-[600] text-white ${isRtl ? "font-['Tajawal',sans-serif] text-right leading-[2]" : "leading-snug"}`}>
+                        {isRtl ? "كم ساعة في الأسبوع يقضي كل شخص في المهام اليدوية؟" : "How many hours per week does each person spend on manual tasks?"}
+                      </label>
+                      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+                        {hoursOptions.map(opt => (
+                          <button
+                            key={opt.key}
+                            onClick={() => setHoursOption(opt.key as any)}
+                            className={`py-2 px-1 md:py-3 text-[15px] font-semibold rounded-lg border transition-all duration-300 ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${hoursOption === opt.key
+                              ? "border-primary bg-primary text-white shadow-[0_0_15px_hsl(var(--primary)/0.3)]"
+                              : "border-white/20 hover:border-white/40 text-muted-foreground hover:text-white"
+                              }`}
+                          >
+                            {opt.label}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Thin Divider Line */}
-              <div className="w-full h-px bg-white/10 shrink-0 hidden md:block mt-4 md:mt-0 mb-4 md:mb-6" />
+                {/* Thin Divider Line */}
+                <div className="w-full h-px bg-white/10 shrink-0 hidden md:block mt-4 md:mt-0 mb-4 md:mb-6" />
 
-              {/* Bottom Results Section - Fills remaining space */}
-              <div className="w-full relative shrink-0 h-auto p-[20px] md:p-0 flex flex-col justify-center">
-                {!isComplete ? (
-                  /* Placeholder State */
-                  <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-300 min-h-[200px]">
-                    <p className={`text-[14px] text-muted-foreground/60 text-center ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-                      {isRtl ? "اختر كلا الخيارين لرؤية نتائجك" : "Select both options to see your results"}
-                    </p>
-                  </div>
-                ) : (
-                  /* Instant Results Area */
-                  <div className="flex flex-col shrink-0 h-auto space-y-4 md:justify-between animate-in fade-in duration-[400ms]">
+                {/* Bottom Results Section - Fills remaining space */}
+                <div className="w-full relative shrink-0 h-auto p-[20px] md:p-0 flex flex-col justify-center">
+                  {!isComplete ? (
+                    /* Placeholder State */
+                    <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-300 min-h-[200px]">
+                      <p className={`text-[14px] text-muted-foreground/60 text-center ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                        {isRtl ? "اختر كلا الخيارين لرؤية نتائجك" : "Select both options to see your results"}
+                      </p>
+                    </div>
+                  ) : (
+                    /* Instant Results Area */
+                    <div className="flex flex-col shrink-0 h-auto space-y-4 md:justify-between animate-in fade-in duration-[400ms]">
 
-                    {/* Headline Result Panel */}
-                    <div className="text-center bg-[hsl(225_35%_12%)] border border-primary/40 rounded-2xl p-4 relative overflow-hidden shadow-[0_0_30px_hsl(var(--primary)/0.15)] shrink-0">
-                      <div className="absolute inset-x-0 bottom-0 h-1 bg-primary" />
-                      <div className="absolute inset-0 bg-primary/10 blur-[60px] pointer-events-none" />
+                      {/* Headline Result Panel */}
+                      <div className="text-center bg-[hsl(225_35%_12%)] border border-primary/40 rounded-2xl p-4 relative overflow-hidden shadow-[0_0_30px_hsl(var(--primary)/0.15)] shrink-0">
+                        <div className="absolute inset-x-0 bottom-0 h-1 bg-primary" />
+                        <div className="absolute inset-0 bg-primary/10 blur-[60px] pointer-events-none" />
 
-                      <h3 className={`text-[20px] md:text-[24px] font-bold text-white leading-tight relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-                        {isRtl ? `OMR ${formatNumber(totalRecoverableCapacity)} من الطاقة السنوية جاهزة لإعادة التوجيه` : `OMR ${formatNumber(totalRecoverableCapacity)} in annual capacity — ready to be redirected.`}
-                      </h3>
+                        <h3 className={`text-[20px] md:text-[24px] font-bold text-white leading-tight relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                          {isRtl ? `OMR ${formatNumber(totalRecoverableCapacity)} من الطاقة السنوية جاهزة لإعادة التوجيه` : `OMR ${formatNumber(totalRecoverableCapacity)} in annual capacity — ready to be redirected.`}
+                        </h3>
 
-                      <div className={`mt-3 space-y-1 relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-                        <p className="text-[14px]">
-                          {isRtl ? (
-                            <>أي <span className="text-primary font-bold text-[14px]">OMR {formatNumber(monthlyCapacity)}</span> تغادر عملياتك كل شهر.</>
-                          ) : (
-                            <>That's <span className="text-primary font-bold text-[14px]">OMR {formatNumber(monthlyCapacity)}</span> leaving your operation every month.</>
-                          )}
-                        </p>
-                        <p className="text-[14px]">
-                          {isRtl ? (
-                            <>على مدى 5 سنوات: <span className="text-white font-bold text-[14px]">OMR {formatNumber(fiveYearCapacity)}</span> من الطاقة القابلة للاسترداد.</>
-                          ) : (
-                            <>Over 5 years: <span className="text-white font-bold text-[14px]">OMR {formatNumber(fiveYearCapacity)}</span> in recoverable capacity.</>
-                          )}
+                        <div className={`mt-3 space-y-1 relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                          <p className="text-[14px]">
+                            {isRtl ? (
+                              <>أي <span className="text-primary font-bold text-[14px]">OMR {formatNumber(monthlyCapacity)}</span> تغادر عملياتك كل شهر.</>
+                            ) : (
+                              <>That's <span className="text-primary font-bold text-[14px]">OMR {formatNumber(monthlyCapacity)}</span> leaving your operation every month.</>
+                            )}
+                          </p>
+                          <p className="text-[14px]">
+                            {isRtl ? (
+                              <>على مدى 5 سنوات: <span className="text-white font-bold text-[14px]">OMR {formatNumber(fiveYearCapacity)}</span> من الطاقة القابلة للاسترداد.</>
+                            ) : (
+                              <>Over 5 years: <span className="text-white font-bold text-[14px]">OMR {formatNumber(fiveYearCapacity)}</span> in recoverable capacity.</>
+                            )}
+                          </p>
+                        </div>
+
+                        <p className={`mt-3 text-[14px] text-white/80 mx-auto relative z-10 leading-relaxed font-medium ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                          {isRtl ? `استرداد الطاقة لخدمة أفضل، وقرارات أسرع، وعمل يحتاج فعلاً إلى إنسان.` : `Capacity recovery for better service, faster decisions, and work that actually needs a human.`}
                         </p>
                       </div>
 
-                      <p className={`mt-3 text-[14px] text-white/80 mx-auto relative z-10 leading-relaxed font-medium ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-                        {isRtl ? `استرداد الطاقة لخدمة أفضل، وقرارات أسرع، وعمل يحتاج فعلاً إلى إنسان.` : `Capacity recovery for better service, faster decisions, and work that actually needs a human.`}
-                      </p>
-                    </div>
+                      {/* Two Cards */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full shrink-0">
+                        <ResultCard
+                          label={isRtl ? "ساعات قابلة للاسترداد سنوياً" : "HOURS RECOVERABLE"}
+                          value={`${formatNumber(annualManualHours)} ${isRtl ? "س" : "hrs"} / ${isRtl ? "سنة" : "year"}`}
+                          supporting={`${formatNumber(workingDaysLost)} ${isRtl ? "يوم عمل سنوياً" : "working days annually"}`}
+                          isRtl={isRtl}
+                        />
+                        <ResultCard
+                          label={isRtl ? "فرصة تحسين الجودة سنوياً" : "QUALITY OPPORTUNITY"}
+                          value={`OMR ${formatNumber(qualityOpportunity)} / ${isRtl ? "سنة" : "year"}`}
+                          supporting={isRtl ? "العائد السنوي من تقليل الأخطاء اليدوية" : "Estimated gain from reducing manual errors"}
+                          isRtl={isRtl}
+                        />
+                      </div>
 
-                    {/* Two Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full shrink-0">
-                      <ResultCard
-                        label={isRtl ? "ساعات قابلة للاسترداد سنوياً" : "HOURS RECOVERABLE"}
-                        value={`${formatNumber(annualManualHours)} ${isRtl ? "س" : "hrs"} / ${isRtl ? "سنة" : "year"}`}
-                        supporting={`${formatNumber(workingDaysLost)} ${isRtl ? "يوم عمل سنوياً" : "working days annually"}`}
-                        isRtl={isRtl}
-                      />
-                      <ResultCard
-                        label={isRtl ? "فرصة تحسين الجودة سنوياً" : "QUALITY OPPORTUNITY"}
-                        value={`OMR ${formatNumber(qualityOpportunity)} / ${isRtl ? "سنة" : "year"}`}
-                        supporting={isRtl ? "العائد السنوي من تقليل الأخطاء اليدوية" : "Estimated gain from reducing manual errors"}
-                        isRtl={isRtl}
-                      />
-                    </div>
+                      {/* CTA Layout Bounds */}
+                      <div className="w-full text-center relative z-[10000] shrink-0 pt-6 pb-8 md:pt-4 md:pb-2 mt-auto">
+                        <button
+                          onClick={() => { setOpen(false); openCalendly(); }}
+                          className="min-w-[260px] h-[52px] flex items-center justify-center w-full md:w-auto mx-auto bg-[#00b4d8] text-white text-[16px] font-[700] px-10 rounded-xl transition-colors duration-300 hover:bg-[#009ac2] shadow-lg"
+                        >
+                          {isRtl ? "احجز تقييماً مجانياً ←" : "Book Free Assessment →"}
+                        </button>
+                      </div>
 
-                    {/* CTA Layout Bounds */}
-                    <div className="w-full text-center relative z-[10000] shrink-0 pt-6 pb-8 md:pt-4 md:pb-2 mt-auto">
-                      <button
-                        onClick={() => { setOpen(false); openCalendly(); }}
-                        className="min-w-[260px] h-[52px] flex items-center justify-center w-full md:w-auto mx-auto bg-[#00b4d8] text-white text-[16px] font-[700] px-10 rounded-xl transition-colors duration-300 hover:bg-[#009ac2] shadow-lg"
-                      >
-                        {isRtl ? "احجز تقييماً مجانياً ←" : "Book Free Assessment →"}
-                      </button>
                     </div>
-
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </div>
