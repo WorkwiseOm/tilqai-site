@@ -109,18 +109,23 @@ export default function ROISimulator() {
       </section>
 
       {open && (
-        <div className="fixed inset-0 z-[9998] flex items-center justify-center p-0 md:p-4 bg-[rgba(0,0,0,0.88)]" style={{ animation: "fadeIn 0.3s ease-out" }}>
-          <div className="absolute inset-0" onClick={() => setOpen(false)} />
+        <div className="fixed inset-0 z-[9998] flex flex-col items-center justify-end md:justify-center p-0 md:p-4 bg-[rgba(0,0,0,0.88)] overflow-hidden" style={{ animation: "fadeIn 0.3s ease-out" }}>
+          <div className="absolute inset-0 bg-transparent cursor-pointer" onClick={() => setOpen(false)} />
           <div
-            className="calculator-modal relative z-[9999] w-full md:max-w-[860px] md:w-[860px] h-[100vh] md:h-auto md:min-h-[560px] md:p-[36px] md:rounded-[16px] border-0 md:border md:border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-visible shrink-0 shadow-2xl"
+            className="calculator-modal relative z-[9999] w-full md:max-w-[860px] md:w-[860px] h-auto mt-auto md:mt-0 max-h-[90dvh] md:h-auto md:min-h-[560px] md:p-[36px] rounded-t-[24px] md:rounded-[16px] border-t md:border border-[rgba(0,180,216,0.3)] bg-[#0f1f35] flex flex-col overflow-y-auto shrink-0 shadow-[0_-30px_100px_rgba(0,180,216,0.15)]"
             style={{ animation: "slideUpFade 0.4s ease-out" }}
             dir={isRtl ? "rtl" : "ltr"}
           >
             <div className="absolute inset-0 bg-primary/5 blur-[100px] pointer-events-none md:rounded-[16px]" />
 
+            {/* Mobile Grab Bar */}
+            <div className="w-full flex justify-center pt-4 pb-2 md:hidden bg-[#0f1f35] shrink-0 sticky top-0 z-50">
+              <div className="w-12 h-1.5 bg-white/20 rounded-full" />
+            </div>
+
             <button
               onClick={() => setOpen(false)}
-              className={`absolute top-4 ${isRtl ? "left-4" : "right-4"} text-white hover:text-white transition-colors z-20 duration-300 bg-white/10 hover:bg-white/20 p-2 rounded-full hidden md:block`}
+              className={`absolute top-4 ${isRtl ? "left-4" : "right-4"} text-white hover:text-white transition-colors z-20 duration-300 bg-white/10 hover:bg-white/20 w-[44px] h-[44px] flex items-center justify-center rounded-full hidden md:flex`}
             >
               <X className="w-5 h-5" />
             </button>
@@ -130,7 +135,7 @@ export default function ROISimulator() {
               </h2>
               <button
                 onClick={() => setOpen(false)}
-                className="text-white hover:text-white transition-colors bg-white/10 p-2 rounded-full"
+                className="text-white w-[44px] h-[44px] flex items-center justify-center hover:text-white transition-colors bg-white/10 rounded-full"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -147,7 +152,7 @@ export default function ROISimulator() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                   {/* Input 1 */}
                   <div className="space-y-3 md:space-y-4">
-                    <label className={`block text-[16px] font-[600] text-white leading-snug ${isRtl ? "font-['Tajawal',sans-serif] text-right" : ""}`}>
+                    <label className={`block text-[16px] font-[600] text-white ${isRtl ? "font-['Tajawal',sans-serif] text-right leading-[2]" : "leading-snug"}`}>
                       {isRtl ? "كم عدد أعضاء الفريق الذين يتعاملون مع مهام يدوية أو متكررة؟" : "How many team members handle manual or repetitive tasks?"}
                     </label>
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
@@ -168,7 +173,7 @@ export default function ROISimulator() {
 
                   {/* Input 2 */}
                   <div className="space-y-3 md:space-y-4">
-                    <label className={`block text-[16px] font-[600] text-white leading-snug ${isRtl ? "font-['Tajawal',sans-serif] text-right" : ""}`}>
+                    <label className={`block text-[16px] font-[600] text-white ${isRtl ? "font-['Tajawal',sans-serif] text-right leading-[2]" : "leading-snug"}`}>
                       {isRtl ? "كم ساعة في الأسبوع يقضي كل شخص في المهام اليدوية؟" : "How many hours per week does each person spend on manual tasks?"}
                     </label>
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
@@ -252,11 +257,10 @@ export default function ROISimulator() {
                       </div>
 
                       {/* CTA Layout Bounds */}
-                      <div className="mt-2 text-center relative z-[10000] shrink-0 pb-1">
+                      <div className="w-full text-center relative z-[10000] shrink-0 sticky bottom-0 bg-[hsl(225_35%_10%)] md:bg-transparent pt-4 pb-4 md:pt-2 md:pb-1 mt-auto">
                         <button
                           onClick={() => { setOpen(false); openCalendly(); }}
-                          className="inline-block min-w-[220px] bg-[#00b4d8] text-white text-[16px] font-[700] px-10 py-3 rounded-xl transition-colors duration-300 hover:bg-[#009ac2] shadow-lg"
-                          style={{ display: "inline-block", visibility: "visible", opacity: 1 }}
+                          className="min-w-[260px] h-[52px] flex items-center justify-center w-full md:w-auto mx-auto bg-[#00b4d8] text-white text-[16px] font-[700] px-10 rounded-xl transition-colors duration-300 hover:bg-[#009ac2] shadow-lg"
                         >
                           {isRtl ? "احجز تقييماً مجانياً ←" : "Book Free Assessment →"}
                         </button>
