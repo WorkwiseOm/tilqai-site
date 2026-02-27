@@ -4,13 +4,13 @@ const ar = {
   "nav.services": "الخدمات",
   "nav.pricing": "الأسعار",
   "nav.about": "عن تلقائي",
-  "nav.bookAssessment": "احجز تقييم",
+  "nav.bookAssessment": "احجز تقييماً مجانياً",
 
   // Hero Section
   "hero.headline": "ماذا لو... كانت أعمالك تُنجز تلقائياً",
   "hero.subheadline": "نحدد ما يبطّئ أداءك، ونصلحه، ونحوّله إلى تشغيل تلقائي",
   "hero.trustLine": "نظامك. بياناتك. حوكمتك.",
-  "hero.primaryCta": "احجز التقييم المجاني",
+  "hero.primaryCta": "احجز تقييماً مجانياً",
   "hero.secondaryCta": "احسب الجهود المهدرة",
 
   // Pipeline / How We Deliver

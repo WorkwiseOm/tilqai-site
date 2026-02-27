@@ -85,11 +85,11 @@ const Navbar = () => {
             <div className="hidden md:flex items-center gap-2">
               <button
                 onClick={toggleLocale}
-                className="flex items-center gap-1 text-[13px] font-mono text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded border border-border/50 hover:border-primary/40"
+                dir="ltr"
+                className="flex items-center gap-0.5 text-[13px] font-mono text-muted-foreground transition-colors p-1 rounded-full border border-white/10 hover:border-primary/40 bg-black/20"
               >
-                <span className={locale === "en" ? "text-foreground font-semibold" : ""}>EN</span>
-                <span className="text-border">|</span>
-                <span className={locale === "ar" ? "text-foreground font-semibold" : ""}>عربي</span>
+                <span className={`px-2.5 py-1 rounded-full transition-all duration-300 ${locale === "en" ? "bg-primary text-white font-semibold shadow-sm" : "hover:text-white"}`}>EN</span>
+                <span className={`px-2.5 py-1 rounded-full transition-all duration-300 font-sans text-[14px] leading-none ${locale === "ar" ? "bg-primary text-white font-semibold shadow-sm" : "hover:text-white"}`}>ع</span>
               </button>
 
               <button
@@ -103,11 +103,11 @@ const Navbar = () => {
             {/* Mobile Language Toggle */}
             <button
               onClick={toggleLocale}
-              className="md:hidden flex items-center gap-1 text-[12px] font-mono text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded border border-border/40"
+              dir="ltr"
+              className="md:hidden flex items-center gap-0.5 text-[12px] font-mono text-muted-foreground transition-colors p-[3px] rounded-full border border-white/10 bg-black/20"
             >
-              <span className={locale === "en" ? "text-foreground font-[700]" : ""}>EN</span>
-              <span className="text-border/60">|</span>
-              <span className={locale === "ar" ? "text-foreground font-[700]" : ""}>عربي</span>
+              <span className={`px-2.5 py-1 rounded-full transition-all duration-300 ${locale === "en" ? "bg-primary text-white font-semibold shadow-sm" : ""}`}>EN</span>
+              <span className={`px-3 py-1 rounded-full transition-all duration-300 font-sans text-[13px] leading-none flex items-center ${locale === "ar" ? "bg-primary text-white font-semibold shadow-sm" : ""}`}>ع</span>
             </button>
 
             {/* Mobile Menu Toggle */}
