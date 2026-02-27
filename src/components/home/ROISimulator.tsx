@@ -142,7 +142,7 @@ export default function ROISimulator() {
             </div>
 
             {/* Content Area - Restored Flow Layout */}
-            <div className="calculator-content relative z-10 w-full h-full flex flex-col items-stretch">
+            <div className="calculator-content relative z-10 w-full flex-1 flex flex-col items-stretch">
 
               {/* Top Input Section - Dynamic Height */}
               <div
@@ -208,7 +208,7 @@ export default function ROISimulator() {
                   </div>
                 ) : (
                   /* Instant Results Area */
-                  <div className="flex flex-col h-full space-y-3 md:justify-between animate-in fade-in duration-[400ms]">
+                  <div className="flex flex-col flex-1 space-y-3 md:justify-between animate-in fade-in duration-[400ms]">
 
                     {/* Headline Result Panel */}
                     <div className="text-center bg-[hsl(225_35%_12%)] border border-primary/40 rounded-2xl p-4 relative overflow-hidden shadow-[0_0_30px_hsl(var(--primary)/0.15)] shrink-0">
@@ -258,7 +258,7 @@ export default function ROISimulator() {
                     </div>
 
                     {/* CTA Layout Bounds */}
-                    <div className="w-full text-center relative z-[10000] shrink-0 sticky bottom-0 bg-[hsl(225_35%_10%)] md:bg-transparent pt-4 pb-4 md:pt-2 md:pb-1 mt-auto">
+                    <div className="w-full text-center relative z-[10000] shrink-0 sticky bottom-0 bg-[#0f1f35] md:bg-transparent pt-4 pb-6 md:pt-2 md:pb-1 mt-auto border-t border-[rgba(0,180,216,0.2)] md:border-t-0">
                       <button
                         onClick={() => { setOpen(false); openCalendly(); }}
                         className="min-w-[260px] h-[52px] flex items-center justify-center w-full md:w-auto mx-auto bg-[#00b4d8] text-white text-[16px] font-[700] px-10 rounded-xl transition-colors duration-300 hover:bg-[#009ac2] shadow-lg"
