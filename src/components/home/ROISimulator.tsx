@@ -142,7 +142,7 @@ export default function ROISimulator() {
             </div>
 
             {/* Content Area - Restored Flow Layout */}
-            <div className="calculator-content relative z-10 w-full flex-1 flex flex-col items-stretch">
+            <div className="calculator-content relative z-10 w-full shrink-0 h-auto flex flex-col items-stretch">
 
               {/* Top Input Section - Dynamic Height */}
               <div
@@ -198,7 +198,7 @@ export default function ROISimulator() {
               <div className="w-full h-px bg-white/10 shrink-0 hidden md:block mt-4 md:mt-0 mb-4 md:mb-6" />
 
               {/* Bottom Results Section - Fills remaining space */}
-              <div className="w-full relative flex-1 p-[20px] md:p-0 flex flex-col justify-center">
+              <div className="w-full relative shrink-0 h-auto p-[20px] md:p-0 flex flex-col justify-center">
                 {!isComplete ? (
                   /* Placeholder State */
                   <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-300 min-h-[200px]">
@@ -208,7 +208,7 @@ export default function ROISimulator() {
                   </div>
                 ) : (
                   /* Instant Results Area */
-                  <div className="flex flex-col flex-1 space-y-3 md:justify-between animate-in fade-in duration-[400ms]">
+                  <div className="flex flex-col shrink-0 h-auto space-y-4 md:justify-between animate-in fade-in duration-[400ms]">
 
                     {/* Headline Result Panel */}
                     <div className="text-center bg-[hsl(225_35%_12%)] border border-primary/40 rounded-2xl p-4 relative overflow-hidden shadow-[0_0_30px_hsl(var(--primary)/0.15)] shrink-0">
@@ -258,7 +258,7 @@ export default function ROISimulator() {
                     </div>
 
                     {/* CTA Layout Bounds */}
-                    <div className="w-full text-center relative z-[10000] shrink-0 sticky bottom-0 bg-[#0f1f35] md:bg-transparent pt-4 pb-6 md:pt-2 md:pb-1 mt-auto border-t border-[rgba(0,180,216,0.2)] md:border-t-0">
+                    <div className="w-full text-center relative z-[10000] shrink-0 pt-6 pb-8 md:pt-4 md:pb-2 mt-auto">
                       <button
                         onClick={() => { setOpen(false); openCalendly(); }}
                         className="min-w-[260px] h-[52px] flex items-center justify-center w-full md:w-auto mx-auto bg-[#00b4d8] text-white text-[16px] font-[700] px-10 rounded-xl transition-colors duration-300 hover:bg-[#009ac2] shadow-lg"
