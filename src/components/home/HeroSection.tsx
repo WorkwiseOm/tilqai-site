@@ -89,24 +89,24 @@ const HeroSection = () => {
       {/* 3. Interactive Spline Background - Positioned 50% Right overlay w/ fade-in & gradient mask */}
       <div
         className={`flex absolute z-0 transition-opacity duration-[1500ms] ease-out items-end justify-center pointer-events-none lg:pointer-events-auto ${stage >= 1 ? "opacity-100" : "opacity-0"} ${isMobile
-          ? "inset-x-0 bottom-0 h-[50dvh]"
+          ? "inset-0 h-[100dvh] overflow-hidden"
           : `inset-y-0 bottom-0 w-[100vw] lg:w-1/2 ${isRtl ? "left-0" : "right-0"}`
           }`}
         style={{
           WebkitMaskImage: isMobile
-            ? "linear-gradient(to bottom, transparent 0%, black 20%)"
+            ? "none"
             : isRtl
               ? "linear-gradient(to left, transparent 0%, black 30%)"
               : "linear-gradient(to right, transparent 0%, black 30%)",
           maskImage: isMobile
-            ? "linear-gradient(to bottom, transparent 0%, black 20%)"
+            ? "none"
             : isRtl
               ? "linear-gradient(to left, transparent 0%, black 30%)"
               : "linear-gradient(to right, transparent 0%, black 30%)"
         }}
       >
         <Spline
-          className={`w-full h-full ${isMobile ? 'transform scale-[0.85] translate-y-4' : 'transform lg:scale-[0.75] lg:translate-y-[10%]'}`}
+          className={`w-full h-full ${isMobile ? 'transform scale-[0.95] translate-y-[25dvh]' : 'transform lg:scale-[0.75] lg:translate-y-[10%]'}`}
           scene="/scene.splinecode"
           onLoad={handleSplineLoad}
           style={{ background: 'transparent' }}
