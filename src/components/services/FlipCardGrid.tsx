@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import {
   UserPlus,
   Rocket,
@@ -132,7 +133,9 @@ const ServicePopup = ({
   const colGainsLabel = isRtl ? "ما يكسبه فريقك" : "WHAT YOUR TEAM GAINS";
   const btnLabel = isRtl ? "احجز تقييماً مجانياً ←" : "Book Free Assessment →";
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <AnimatePresence>
       <div className="fixed inset-[0] z-[10000] flex flex-col items-center justify-end md:justify-center p-0 md:p-4 pointer-events-none">
         {/* Deep Overlay */}
@@ -223,7 +226,8 @@ const ServicePopup = ({
           </div>
         </motion.div>
       </div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 
