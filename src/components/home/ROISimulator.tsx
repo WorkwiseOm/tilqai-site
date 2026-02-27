@@ -192,83 +192,83 @@ export default function ROISimulator() {
                     </div>
                   </div>
                 </div>
+              </div>
 
-                {/* Thin Divider Line */}
-                <div className="w-full h-px bg-white/10 shrink-0 hidden md:block mt-4 md:mt-0 mb-4 md:mb-6" />
+              {/* Thin Divider Line */}
+              <div className="w-full h-px bg-white/10 shrink-0 hidden md:block mt-4 md:mt-0 mb-4 md:mb-6" />
 
-                {/* Bottom Results Section - Fills remaining space */}
-                <div className="w-full relative flex-1 p-[20px] md:p-0 flex flex-col justify-center">
-                  {!isComplete ? (
-                    /* Placeholder State */
-                    <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-300 min-h-[200px]">
-                      <p className={`text-[14px] text-muted-foreground/60 text-center ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-                        {isRtl ? "اختر كلا الخيارين لرؤية نتائجك" : "Select both options to see your results"}
-                      </p>
-                    </div>
-                  ) : (
-                    /* Instant Results Area */
-                    <div className="flex flex-col h-full space-y-3 md:justify-between animate-in fade-in duration-[400ms]">
+              {/* Bottom Results Section - Fills remaining space */}
+              <div className="w-full relative flex-1 p-[20px] md:p-0 flex flex-col justify-center">
+                {!isComplete ? (
+                  /* Placeholder State */
+                  <div className="w-full flex flex-col items-center justify-center animate-in fade-in duration-300 min-h-[200px]">
+                    <p className={`text-[14px] text-muted-foreground/60 text-center ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                      {isRtl ? "اختر كلا الخيارين لرؤية نتائجك" : "Select both options to see your results"}
+                    </p>
+                  </div>
+                ) : (
+                  /* Instant Results Area */
+                  <div className="flex flex-col h-full space-y-3 md:justify-between animate-in fade-in duration-[400ms]">
 
-                      {/* Headline Result Panel */}
-                      <div className="text-center bg-[hsl(225_35%_12%)] border border-primary/40 rounded-2xl p-4 relative overflow-hidden shadow-[0_0_30px_hsl(var(--primary)/0.15)] shrink-0">
-                        <div className="absolute inset-x-0 bottom-0 h-1 bg-primary" />
-                        <div className="absolute inset-0 bg-primary/10 blur-[60px] pointer-events-none" />
+                    {/* Headline Result Panel */}
+                    <div className="text-center bg-[hsl(225_35%_12%)] border border-primary/40 rounded-2xl p-4 relative overflow-hidden shadow-[0_0_30px_hsl(var(--primary)/0.15)] shrink-0">
+                      <div className="absolute inset-x-0 bottom-0 h-1 bg-primary" />
+                      <div className="absolute inset-0 bg-primary/10 blur-[60px] pointer-events-none" />
 
-                        <h3 className={`text-[20px] md:text-[24px] font-bold text-white leading-tight relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-                          {isRtl ? `OMR ${formatNumber(totalRecoverableCapacity)} من الطاقة السنوية جاهزة لإعادة التوجيه` : `OMR ${formatNumber(totalRecoverableCapacity)} in annual capacity — ready to be redirected.`}
-                        </h3>
+                      <h3 className={`text-[20px] md:text-[24px] font-bold text-white leading-tight relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                        {isRtl ? `OMR ${formatNumber(totalRecoverableCapacity)} من الطاقة السنوية جاهزة لإعادة التوجيه` : `OMR ${formatNumber(totalRecoverableCapacity)} in annual capacity — ready to be redirected.`}
+                      </h3>
 
-                        <div className={`mt-3 space-y-1 relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-                          <p className="text-[14px]">
-                            {isRtl ? (
-                              <>أي <span className="text-primary font-bold text-[14px]">OMR {formatNumber(monthlyCapacity)}</span> تغادر عملياتك كل شهر.</>
-                            ) : (
-                              <>That's <span className="text-primary font-bold text-[14px]">OMR {formatNumber(monthlyCapacity)}</span> leaving your operation every month.</>
-                            )}
-                          </p>
-                          <p className="text-[14px]">
-                            {isRtl ? (
-                              <>على مدى 5 سنوات: <span className="text-white font-bold text-[14px]">OMR {formatNumber(fiveYearCapacity)}</span> من الطاقة القابلة للاسترداد.</>
-                            ) : (
-                              <>Over 5 years: <span className="text-white font-bold text-[14px]">OMR {formatNumber(fiveYearCapacity)}</span> in recoverable capacity.</>
-                            )}
-                          </p>
-                        </div>
-
-                        <p className={`mt-3 text-[14px] text-white/80 mx-auto relative z-10 leading-relaxed font-medium ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
-                          {isRtl ? `استرداد الطاقة لخدمة أفضل، وقرارات أسرع، وعمل يحتاج فعلاً إلى إنسان.` : `Capacity recovery for better service, faster decisions, and work that actually needs a human.`}
+                      <div className={`mt-3 space-y-1 relative z-10 ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                        <p className="text-[14px]">
+                          {isRtl ? (
+                            <>أي <span className="text-primary font-bold text-[14px]">OMR {formatNumber(monthlyCapacity)}</span> تغادر عملياتك كل شهر.</>
+                          ) : (
+                            <>That's <span className="text-primary font-bold text-[14px]">OMR {formatNumber(monthlyCapacity)}</span> leaving your operation every month.</>
+                          )}
+                        </p>
+                        <p className="text-[14px]">
+                          {isRtl ? (
+                            <>على مدى 5 سنوات: <span className="text-white font-bold text-[14px]">OMR {formatNumber(fiveYearCapacity)}</span> من الطاقة القابلة للاسترداد.</>
+                          ) : (
+                            <>Over 5 years: <span className="text-white font-bold text-[14px]">OMR {formatNumber(fiveYearCapacity)}</span> in recoverable capacity.</>
+                          )}
                         </p>
                       </div>
 
-                      {/* Two Cards */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full shrink-0">
-                        <ResultCard
-                          label={isRtl ? "ساعات قابلة للاسترداد سنوياً" : "HOURS RECOVERABLE"}
-                          value={`${formatNumber(annualManualHours)} ${isRtl ? "س" : "hrs"} / ${isRtl ? "سنة" : "year"}`}
-                          supporting={`${formatNumber(workingDaysLost)} ${isRtl ? "يوم عمل سنوياً" : "working days annually"}`}
-                          isRtl={isRtl}
-                        />
-                        <ResultCard
-                          label={isRtl ? "فرصة تحسين الجودة سنوياً" : "QUALITY OPPORTUNITY"}
-                          value={`OMR ${formatNumber(qualityOpportunity)} / ${isRtl ? "سنة" : "year"}`}
-                          supporting={isRtl ? "العائد السنوي من تقليل الأخطاء اليدوية" : "Estimated gain from reducing manual errors"}
-                          isRtl={isRtl}
-                        />
-                      </div>
-
-                      {/* CTA Layout Bounds */}
-                      <div className="w-full text-center relative z-[10000] shrink-0 sticky bottom-0 bg-[hsl(225_35%_10%)] md:bg-transparent pt-4 pb-4 md:pt-2 md:pb-1 mt-auto">
-                        <button
-                          onClick={() => { setOpen(false); openCalendly(); }}
-                          className="min-w-[260px] h-[52px] flex items-center justify-center w-full md:w-auto mx-auto bg-[#00b4d8] text-white text-[16px] font-[700] px-10 rounded-xl transition-colors duration-300 hover:bg-[#009ac2] shadow-lg"
-                        >
-                          {isRtl ? "احجز تقييماً مجانياً ←" : "Book Free Assessment →"}
-                        </button>
-                      </div>
-
+                      <p className={`mt-3 text-[14px] text-white/80 mx-auto relative z-10 leading-relaxed font-medium ${isRtl ? "font-['Tajawal',sans-serif]" : ""}`}>
+                        {isRtl ? `استرداد الطاقة لخدمة أفضل، وقرارات أسرع، وعمل يحتاج فعلاً إلى إنسان.` : `Capacity recovery for better service, faster decisions, and work that actually needs a human.`}
+                      </p>
                     </div>
-                  )}
-                </div>
+
+                    {/* Two Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full shrink-0">
+                      <ResultCard
+                        label={isRtl ? "ساعات قابلة للاسترداد سنوياً" : "HOURS RECOVERABLE"}
+                        value={`${formatNumber(annualManualHours)} ${isRtl ? "س" : "hrs"} / ${isRtl ? "سنة" : "year"}`}
+                        supporting={`${formatNumber(workingDaysLost)} ${isRtl ? "يوم عمل سنوياً" : "working days annually"}`}
+                        isRtl={isRtl}
+                      />
+                      <ResultCard
+                        label={isRtl ? "فرصة تحسين الجودة سنوياً" : "QUALITY OPPORTUNITY"}
+                        value={`OMR ${formatNumber(qualityOpportunity)} / ${isRtl ? "سنة" : "year"}`}
+                        supporting={isRtl ? "العائد السنوي من تقليل الأخطاء اليدوية" : "Estimated gain from reducing manual errors"}
+                        isRtl={isRtl}
+                      />
+                    </div>
+
+                    {/* CTA Layout Bounds */}
+                    <div className="w-full text-center relative z-[10000] shrink-0 sticky bottom-0 bg-[hsl(225_35%_10%)] md:bg-transparent pt-4 pb-4 md:pt-2 md:pb-1 mt-auto">
+                      <button
+                        onClick={() => { setOpen(false); openCalendly(); }}
+                        className="min-w-[260px] h-[52px] flex items-center justify-center w-full md:w-auto mx-auto bg-[#00b4d8] text-white text-[16px] font-[700] px-10 rounded-xl transition-colors duration-300 hover:bg-[#009ac2] shadow-lg"
+                      >
+                        {isRtl ? "احجز تقييماً مجانياً ←" : "Book Free Assessment →"}
+                      </button>
+                    </div>
+
+                  </div>
+                )}
               </div>
             </div>
           </div>
