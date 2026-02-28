@@ -1002,42 +1002,51 @@ img.logo,
 }
 
 @media (max-width: 768px) {
-  .hero-section {
+
+  /* Hero container — column layout, no dead space */
+  .hero-section,
+  section.hero {
+    display: flex !important;
     flex-direction: column !important;
-    padding-top: 20px !important;
+    padding-top: 16px !important;
     margin-top: 0 !important;
-    position: relative !important;
     min-height: auto !important;
-    height: 100dvh !important;
-    justify-content: center !important;
+    overflow: visible !important;
   }
 
+  /* Text block — first in visual order */
   .hero-content,
   .hero-text {
+    order: 1 !important;
     width: 100% !important;
     text-align: left !important;
     padding: 0 24px !important;
     position: relative !important;
     z-index: 2 !important;
+    margin-bottom: 24px !important;
   }
 
+  /* Arabic text — right aligned */
   [dir="rtl"] .hero-content,
   [dir="rtl"] .hero-text {
+    order: 1 !important;
     text-align: right !important;
-    padding: 0 24px !important;
   }
 
+  /* Robot/Spline — second in visual order, below text */
   spline-viewer,
   .hero-robot,
-  .hero-image {
+  .hero-image,
+  .hero-visual {
+    order: 2 !important;
     position: relative !important;
     width: 100% !important;
-    height: 350px !important;
-    margin-top: 16px !important;
-    z-index: 1 !important;
+    height: 300px !important;
     top: auto !important;
     right: auto !important;
     left: auto !important;
+    bottom: auto !important;
     transform: none !important;
+    z-index: 1 !important;
   }
 }
