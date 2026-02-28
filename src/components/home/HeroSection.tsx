@@ -102,7 +102,7 @@ const HeroSection = () => {
         }}
       >
         <Spline
-          className={`w-full h-full ${isMobile ? 'transform scale-[0.95] translate-y-[25dvh]' : 'transform lg:scale-[1.15] lg:translate-y-[5%]'}`}
+          className={`w-full h-full ${isMobile ? 'transform scale-[1.15] translate-y-[-2%]' : 'transform lg:scale-[1.15] lg:translate-y-[5%]'}`}
           scene="/scene.splinecode?v=3"
           onLoad={handleSplineLoad}
           style={{ background: 'transparent' }}
