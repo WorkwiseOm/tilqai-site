@@ -100,7 +100,7 @@ export default function ROISimulator() {
             </h2>
             <button
               onClick={() => setOpen(true)}
-              className="btn-outline-hover border border-white/30 bg-transparent text-white text-[16px] font-semibold px-8 py-3.5 rounded-lg hover:border-white hover:text-white hover:bg-transparent transition-all duration-300 mt-4"
+              className="btn-primary-hover bg-[#00b4d8] text-white hover:bg-[#009ac2] text-[16px] font-semibold px-8 py-3.5 rounded-lg shadow-[0_0_20px_rgba(0,180,216,0.3)] transition-all duration-300 mt-4"
             >
               {isRtl ? "احسب ما يكلّفه العمل اليدوي لفريقَك في صمت." : "Find out what manual work is quietly costing your team."} {arrowR}
             </button>
