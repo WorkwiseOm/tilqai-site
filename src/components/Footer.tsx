@@ -63,7 +63,7 @@ const schemaData = {
         "@type": "Person",
         "name": "Tariq Al Maskari",
         "jobTitle": "Founder & Executive Director",
-        "sameAs": "https://www.linkedin.com/in/tariqalmaskari/"
+        "sameAs": "https://www.linkedin.com/company/tilqai-om/"
     },
     "areaServed": "GCC",
     "serviceType": [
@@ -102,7 +102,7 @@ export default function Footer() {
                     <div className={`${colClasses} ${isRtl ? "items-start" : "items-start"} logo-container`} style={{ background: 'transparent', border: 'none', boxShadow: 'none', outline: 'none', padding: 0 }}>
                         <img src={tilqaiLogo} alt="tilqai" className="footer-logo mb-2 opacity-90" style={{ background: 'transparent', border: 'none', boxShadow: 'none', outline: 'none', padding: 0, borderRadius: 0 }} />
                         <p className={`text-[14px] leading-[1.6] text-muted-foreground max-w-xs ${tajawalText}`}>{d.tagline}</p>
-                        <a href="https://www.linkedin.com/in/tariqalmaskari/" target="_blank" rel="noopener noreferrer" className="mt-4 text-primary hover:brightness-125 transition-all duration-300 transform hover:-translate-y-1 w-fit drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)]">
+                        <a href="https://www.linkedin.com/company/tilqai-om/" target="_blank" rel="noopener noreferrer" className="mt-4 text-primary hover:brightness-125 transition-all duration-300 transform hover:-translate-y-1 w-fit drop-shadow-[0_0_12px_hsl(var(--primary)/0.6)]">
                             <Linkedin size={28} strokeWidth={1.5} fill="currentColor" />
                         </a>
                     </div>

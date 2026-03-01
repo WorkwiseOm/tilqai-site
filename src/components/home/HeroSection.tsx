@@ -24,7 +24,7 @@ const HeroSection = () => {
   // Exact Requested Typewriter Texts
   const headlineText = isRtl
     ? "ماذا لو... كانت أعمالك تُنجز تلقائيًا."
-    : "What if... work runs by itself.";
+    : "What if... your work runs by itself.";
 
   // Typewriter hook: 75ms speed, 400ms delay to start
   const { displayedText, showCursor, done: headlineDone } = useTypewriter(headlineText, 75, 400);

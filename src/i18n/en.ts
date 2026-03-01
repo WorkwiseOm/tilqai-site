@@ -7,7 +7,7 @@ const en = {
   "nav.bookAssessment": "Book Free Assessment",
 
   // Hero Section
-  "hero.headline": "What if... work runs by itself",
+  "hero.headline": "What if... your work runs by itself",
   "hero.subheadline": "We map, fix, and automate the work that slows you down.",
   "hero.trustLine": "Your system. Your data. Your control.",
   "hero.primaryCta": "Book Free Assessment",

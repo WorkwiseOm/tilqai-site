@@ -60,7 +60,7 @@ const About = () => {
               <p className="text-[14px] text-muted-foreground mt-1">{t("about.founder.title")}</p>
               <div className="text-[14px] text-muted-foreground">{t("about.founder.location")}</div>
               <a
-                href="https://www.linkedin.com/in/tariqalmaskari/"
+                href="https://www.linkedin.com/company/tilqai-om/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-3 text-primary hover:brightness-125 transition-all duration-300 w-fit inline-flex"
