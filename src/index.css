@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* Google Fonts loaded via <link> in index.html for non-blocking fetch */
 
 @font-face {
   font-family: 'Hacen Beirut Heading';
@@ -26,7 +26,7 @@
   font-family: 'Tajawal';
   font-style: normal;
   font-weight: 300;
-  font-display: block;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l5qjHrRpiYlJ.woff2) format('woff2');
   unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EEF1;
 }
@@ -36,7 +36,7 @@
   font-family: 'Tajawal';
   font-style: normal;
   font-weight: 300;
-  font-display: block;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l5qjHrFpiQ.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
@@ -46,7 +46,7 @@
   font-family: 'Tajawal';
   font-style: normal;
   font-weight: 400;
-  font-display: block;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/tajawal/v12/Iura6YBj_oCad4k1nzSBC45I.woff2) format('woff2');
   unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EEF1;
 }
@@ -56,7 +56,7 @@
   font-family: 'Tajawal';
   font-style: normal;
   font-weight: 400;
-  font-display: block;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/tajawal/v12/Iura6YBj_oCad4k1nzGBCw.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
@@ -66,7 +66,7 @@
   font-family: 'Tajawal';
   font-style: normal;
   font-weight: 500;
-  font-display: block;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l8KiHrRpiYlJ.woff2) format('woff2');
   unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EEF1;
 }
@@ -76,7 +76,7 @@
   font-family: 'Tajawal';
   font-style: normal;
   font-weight: 500;
-  font-display: block;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l8KiHrFpiQ.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
@@ -86,7 +86,7 @@
   font-family: 'Tajawal';
   font-style: normal;
   font-weight: 700;
-  font-display: block;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l4qkHrRpiYlJ.woff2) format('woff2');
   unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EEF1;
 }
@@ -96,7 +96,7 @@
   font-family: 'Tajawal';
   font-style: normal;
   font-weight: 700;
-  font-display: block;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l4qkHrFpiQ.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
@@ -106,7 +106,7 @@
   font-family: 'Tajawal';
   font-style: normal;
   font-weight: 800;
-  font-display: block;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l5anHrRpiYlJ.woff2) format('woff2');
   unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EEF1;
 }
@@ -116,7 +116,7 @@
   font-family: 'Tajawal';
   font-style: normal;
   font-weight: 800;
-  font-display: block;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l5anHrFpiQ.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
@@ -126,7 +126,7 @@
   font-family: 'Tajawal';
   font-style: normal;
   font-weight: 900;
-  font-display: block;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l7KmHrRpiYlJ.woff2) format('woff2');
   unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EEF1;
 }
@@ -136,7 +136,7 @@
   font-family: 'Tajawal';
   font-style: normal;
   font-weight: 900;
-  font-display: block;
+  font-display: swap;
   src: url(https://fonts.gstatic.com/s/tajawal/v12/Iurf6YBj_oCad4k1l7KmHrFpiQ.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
@@ -718,6 +718,8 @@ html {
   pointer-events: none;
   z-index: 0;
   filter: blur(60px);
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Ambient glow — bottom left (purple) */
@@ -734,6 +736,8 @@ html {
       transparent 70%);
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 @media (max-width: 768px) {
@@ -781,10 +785,11 @@ html {
   background: radial-gradient(circle,
       rgba(0, 212, 255, 0.12) 0%,
       transparent 60%);
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateZ(0);
   pointer-events: none;
   z-index: 0;
   filter: blur(80px);
+  will-change: transform;
 }
 
 @media (max-width: 768px) {
