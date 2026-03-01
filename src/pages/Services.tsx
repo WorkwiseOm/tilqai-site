@@ -1,16 +1,56 @@
 import Layout from "@/components/Layout";
 import { openCalendly } from "@/lib/calendly";
-import { Link } from "react-router-dom";
 import FlipCardGrid from "@/components/services/FlipCardGrid";
 import { useFadeUp, useStaggerReveal } from "@/hooks/use-scroll-animations";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useSEO } from "@/hooks/use-seo";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Business Process Automation",
+  "provider": {
+    "@type": "Organization",
+    "name": "Tilqai",
+    "url": "https://tilqai.om"
+  },
+  "areaServed": ["OM", "AE", "SA", "KW", "QA", "BH"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "HR & Business Automation Services",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HR Hiring Pipeline Automation" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Employee Onboarding Automation" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Leave Request & Approval Automation" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Performance Review Cycle Automation" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Training & Certification Tracking" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HR Document Generation & Control" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Exit & Clearance Automation" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HR Compliance & Audit Automation" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sales Operations Automation" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Procurement Automation" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Finance Process Automation" } }
+    ]
+  }
+};
 
 const Services = () => {
   const { ref: headerRef, visible: headerVisible } = useFadeUp();
   const { ref: tabRef, visible: tabVisible } = useFadeUp();
   const { ref: deptRef, visible: deptVisible } = useFadeUp();
   const { ref: ctaRef, visible: ctaVisible } = useFadeUp();
-  const { t, isRtl } = useLanguage();
+  const { t, isRtl, locale } = useLanguage();
+
+  useSEO({
+    title: locale === "ar"
+      ? "خدمات الأتمتة — تلقائي | أتمتة الموارد البشرية والعمليات في الخليج"
+      : "HR & Business Automation Services | Tilqai — Oman & GCC",
+    description: locale === "ar"
+      ? "خدمات أتمتة شاملة: التوظيف، التأهيل، الإجازات، الأداء، المستندات، المغادرة، والامتثال. نبني الأنظمة ونُسلّمها بالكامل لفريقك."
+      : "End-to-end HR automation services: hiring pipelines, onboarding, leave management, performance reviews, compliance, and more. Built for GCC businesses. You own everything.",
+    url: "https://tilqai.om/services",
+    lang: locale as "en" | "ar",
+  });
 
   const departments = [
     { label: t("services.extend.sales"), key: "sales" },
@@ -111,6 +151,8 @@ const Services = () => {
           </div>
         </div>
       </section>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
     </Layout>
   );
 };

@@ -3,6 +3,8 @@ import HeroSection from "@/components/home/HeroSection";
 import PipelineSection from "@/components/home/PipelineSection";
 import ROISimulator from "@/components/home/ROISimulator";
 import { HeroIntroProvider } from "@/hooks/use-hero-intro";
+import { useSEO } from "@/hooks/use-seo";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const faqSchemaData = {
   "@context": "https://schema.org",
@@ -53,13 +55,66 @@ const faqSchemaData = {
       "name": "How does Tilqai's process work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Tilqai follows a four-phase process: Map (document workflows and identify automation opportunities), Build (develop and test the automation), Control (set access rules and audit trails), and Own (train the team and hand over full ownership)."
+        "text": "Tilqai follows a three-phase process: Map (document workflows and identify automation opportunities), Build (develop and test the automation), and Launch & Improve (train the team, hand over full ownership, and expand)."
       }
     }
   ]
 };
 
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Tilqai",
+  "description": "AI business process automation agency in Muscat, Oman. Specialising in HR automation, sales automation, and operations automation for GCC businesses.",
+  "url": "https://tilqai.om",
+  "email": "hello@tilqai.om",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Muscat",
+    "addressRegion": "Muscat",
+    "addressCountry": "OM"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 23.5880,
+    "longitude": 58.3829
+  },
+  "areaServed": ["OM", "AE", "SA", "KW", "QA", "BH"],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Sunday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  },
+  "sameAs": ["https://www.linkedin.com/company/tilqai-om/"]
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Tilqai",
+  "url": "https://tilqai.om",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://tilqai.om/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+
 const Index = () => {
+  const { locale } = useLanguage();
+
+  useSEO({
+    title: locale === "ar"
+      ? "تلقائي — أتمتة الأعمال بالذكاء الاصطناعي في عُمان"
+      : "Tilqai — AI Business Automation in Oman | HR & Operations Automation GCC",
+    description: locale === "ar"
+      ? "تلقائي تُساعد الشركات على أتمتة المهام التشغيلية المتكررة — من الموارد البشرية إلى العمليات والامتثال. نبني، ثم نُسلّمك النظام بالكامل."
+      : "Tilqai maps, fixes, and automates the manual work slowing your team down. HR automation, operations, and compliance — built for GCC businesses. Based in Muscat, Oman.",
+    url: "https://tilqai.om/",
+    lang: locale as "en" | "ar",
+  });
+
   return (
     <HeroIntroProvider>
       <Layout>
@@ -67,6 +122,8 @@ const Index = () => {
         <PipelineSection />
         <ROISimulator />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaData) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       </Layout>
     </HeroIntroProvider>
   );

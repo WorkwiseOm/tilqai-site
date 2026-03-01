@@ -3,12 +3,45 @@ import { Shield, Zap, Target, Eye, Linkedin } from "lucide-react";
 import { useFadeUp, useStaggerReveal } from "@/hooks/use-scroll-animations";
 import { openCalendly } from "@/lib/calendly";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useSEO } from "@/hooks/use-seo";
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Tariq Al Maskari",
+  "jobTitle": "Founder & Executive Director",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Tilqai",
+    "url": "https://tilqai.om"
+  },
+  "url": "https://tilqai.om/about",
+  "sameAs": ["https://www.linkedin.com/company/tilqai-om/"],
+  "knowsAbout": [
+    "AI automation",
+    "Business process automation",
+    "HR workflow automation",
+    "GCC business operations",
+    "On-premise AI deployment"
+  ]
+};
 
 const About = () => {
   const { ref: missionRef, visible: missionVisible } = useFadeUp();
   const { ref: founderRef, visible: founderVisible } = useFadeUp();
   const { ref: valuesRef, visibleItems } = useStaggerReveal(4, 0.1);
-  const { t, isRtl } = useLanguage();
+  const { t, isRtl, locale } = useLanguage();
+
+  useSEO({
+    title: locale === "ar"
+      ? "من نحن — تلقائي | شركة أتمتة الأعمال في مسقط، عُمان"
+      : "About Tilqai — AI Automation Agency in Muscat, Oman | GCC",
+    description: locale === "ar"
+      ? "تعرّف على تلقائي — وكالة أتمتة الأعمال المتخصصة في عُمان. نحوّل العمليات اليدوية إلى تشغيل تلقائي موثوق، والعميل يمتلك كل شيء."
+      : "Tilqai is an AI automation agency based in Muscat, Oman. Founded by Tariq Al Maskari to help GCC businesses eliminate manual work and run on reliable, owned automation.",
+    url: "https://tilqai.om/about",
+    lang: locale as "en" | "ar",
+  });
 
   const values = [
     { icon: Shield, label: t("about.values.v1.label"), desc: t("about.values.v1.desc") },
@@ -64,6 +97,7 @@ const About = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-3 text-primary hover:brightness-125 transition-all duration-300 w-fit inline-flex"
+                aria-label="Tilqai on LinkedIn"
               >
                 <Linkedin size={24} />
               </a>
@@ -96,6 +130,8 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
     </Layout>
   );
 };

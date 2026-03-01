@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useSEO } from "@/hooks/use-seo";
 
 const dict = {
     en: {
@@ -86,8 +87,16 @@ const dict = {
 export default function Terms() {
     const { locale, isRtl } = useLanguage();
     const d = dict[locale as keyof typeof dict] || dict.en;
-
     const fontClass = isRtl ? "font-['Tajawal',sans-serif]" : "";
+
+    useSEO({
+        title: locale === "ar" ? "شروط الخدمة — تلقائي" : "Terms of Service — Tilqai",
+        description: locale === "ar"
+            ? "شروط الخدمة لموقع تلقائي — الشروط والأحكام المنظمة لاستخدام الموقع."
+            : "Tilqai's terms of service — the terms and conditions governing use of this website.",
+        url: "https://tilqai.om/terms",
+        lang: locale as "en" | "ar",
+    });
 
     return (
         <Layout>

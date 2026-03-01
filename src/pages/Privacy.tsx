@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useSEO } from "@/hooks/use-seo";
 
 const dict = {
     en: {
@@ -86,8 +87,16 @@ const dict = {
 export default function Privacy() {
     const { locale, isRtl } = useLanguage();
     const d = dict[locale as keyof typeof dict] || dict.en;
-
     const fontClass = isRtl ? "font-['Tajawal',sans-serif]" : "";
+
+    useSEO({
+        title: locale === "ar" ? "سياسة الخصوصية — تلقائي" : "Privacy Policy — Tilqai",
+        description: locale === "ar"
+            ? "سياسة الخصوصية لموقع تلقائي — كيف نجمع معلوماتك ونستخدمها ونحميها."
+            : "Tilqai's privacy policy — how we collect, use, and protect your information.",
+        url: "https://tilqai.om/privacy",
+        lang: locale as "en" | "ar",
+    });
 
     return (
         <Layout>
