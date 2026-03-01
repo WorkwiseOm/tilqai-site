@@ -120,7 +120,9 @@ const HeroSection = () => {
               dir={isRtl ? "rtl" : "ltr"}
             >
               <span className="inline-block relative">
-                {displayedText}
+                {displayedText.endsWith('.')
+                  ? <>{displayedText.slice(0, -1)}<span style={{ color: '#00b4d8' }}>.</span></>
+                  : displayedText}
                 <span className={`inline-block w-[3px] h-[0.9em] bg-[#00b4d8] align-middle mx-1 transition-opacity ${showCursor ? "opacity-100 animate-pulse" : "opacity-0"}`} />
               </span>
             </h1>
