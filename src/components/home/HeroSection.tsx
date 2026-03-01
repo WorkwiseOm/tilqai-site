@@ -13,6 +13,7 @@ import Spline from '@splinetool/react-spline';
  *  2 — subheadline fades in  (300ms after typing)
  *  3 — trust line fades in   (400ms after subheadline)
  *  4 — nav + CTAs + image    (500ms after trust line) — all at once
+ *  5 — Spline mounts         (300ms after CTAs visible — hero fully complete)
  */
 const HeroSection = () => {
   const { t, isRtl } = useLanguage();
@@ -33,6 +34,9 @@ const HeroSection = () => {
   const [badgeVisible, setBadgeVisible] = useState(false);
   const [ctaVisible, setCtaVisible] = useState(false);
 
+  // Spline only mounts after the full hero sequence completes
+  const [splineReady, setSplineReady] = useState(false);
+
   useEffect(() => {
     setBgStage(1);
   }, []);
@@ -44,7 +48,9 @@ const HeroSection = () => {
       setBadgeVisible(true);
       setCtaVisible(true);
       completeIntro();
-      return;
+      // Even with reduced motion, give the layout 500ms to settle before WebGL starts
+      const t0 = setTimeout(() => setSplineReady(true), 500);
+      return () => clearTimeout(t0);
     }
 
     if (headlineDone) {
@@ -54,7 +60,9 @@ const HeroSection = () => {
         setCtaVisible(true);
         completeIntro();
       }, 400 + 300 + 300);
-      return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+      // Spline starts loading 300ms after CTAs appear — hero is fully complete
+      const t4 = setTimeout(() => setSplineReady(true), 400 + 300 + 300 + 300);
+      return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
     }
   }, [headlineDone, completeIntro]);
 
@@ -82,9 +90,9 @@ const HeroSection = () => {
 
       {/* 2. Noise Texture (Removed over Spline to preserve 60FPS WebGL Context) */}
 
-      {/* 3. Interactive Spline Background - Positioned 50% Right overlay w/ fade-in & gradient mask */}
+      {/* 3. Interactive Spline Background — deferred until hero is fully loaded */}
       <div
-        className={`hero-robot flex absolute z-0 transition-opacity duration-[1500ms] ease-out items-end justify-center pointer-events-none lg:pointer-events-auto ${bgStage >= 1 ? "opacity-100" : "opacity-0"} ${isMobile
+        className={`hero-robot flex absolute z-0 transition-opacity duration-[1500ms] ease-out items-end justify-center pointer-events-none lg:pointer-events-auto ${splineReady ? "opacity-100" : "opacity-0"} ${isMobile
           ? "inset-0 h-[100dvh] overflow-hidden"
           : `inset-y-0 bottom-0 w-[100vw] lg:w-1/2 ${isRtl ? "left-0" : "right-0"}`
           }`}
@@ -101,12 +109,14 @@ const HeroSection = () => {
               : "linear-gradient(to right, transparent 0%, black 30%)"
         }}
       >
-        <Spline
-          className={`w-full h-full ${isMobile ? 'transform scale-[1.15] translate-y-[-2%]' : 'transform lg:scale-[1.15] lg:translate-y-[5%]'}`}
-          scene="/scene.splinecode?v=3"
-          onLoad={handleSplineLoad}
-          style={{ background: 'transparent' }}
-        />
+        {splineReady && (
+          <Spline
+            className={`w-full h-full ${isMobile ? 'transform scale-[1.15] translate-y-[-2%]' : 'transform lg:scale-[1.15] lg:translate-y-[5%]'}`}
+            scene="/scene.splinecode?v=3"
+            onLoad={handleSplineLoad}
+            style={{ background: 'transparent' }}
+          />
+        )}
       </div>
 
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12 relative z-10 w-full pointer-events-none lg:pl-[80px]">
