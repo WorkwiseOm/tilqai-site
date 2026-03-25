@@ -93,33 +93,26 @@ const Careers = () => {
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    const name = data.get("name") as string;
-    const role = data.get("role") as string;
-    const link = data.get("link") as string;
-    const problem = data.get("problem") as string;
-    const cvFile = data.get("cv") as File | null;
-
-    if (!name.trim() || !role.trim() || !problem.trim()) return;
+    if (
+      !(data.get("name") as string)?.trim() ||
+      !(data.get("role") as string)?.trim() ||
+      !(data.get("problem") as string)?.trim()
+    )
+      return;
 
     setFormStatus("sending");
 
     try {
-      const subject = encodeURIComponent(`Career Interest — ${name}`);
-      const body = encodeURIComponent(
-        `Name: ${name}\nWhat I do: ${role}\nCV / LinkedIn: ${link || "Not provided"}\n\nProblem I'd automate:\n${problem}`
-      );
-
-      // If there's a CV file, we can't attach it via mailto — note that in the body
-      const cvNote =
-        cvFile && cvFile.size > 0
-          ? encodeURIComponent(
-              `\n\n[CV attached: ${cvFile.name} — please reply to this email so I can send it]`
-            )
-          : "";
-
-      window.location.href = `mailto:hello@tilqai.com?subject=${subject}&body=${body}${cvNote}`;
-      setFormStatus("sent");
-      form.reset();
+      const res = await fetch("https://formsubmit.co/ajax/hello@tilqai.com", {
+        method: "POST",
+        body: data,
+      });
+      if (res.ok) {
+        setFormStatus("sent");
+        form.reset();
+      } else {
+        setFormStatus("error");
+      }
     } catch {
       setFormStatus("error");
     }
@@ -267,6 +260,10 @@ const Careers = () => {
               onSubmit={handleSubmit}
               className="space-y-4 max-w-xl"
             >
+              {/* FormSubmit config */}
+              <input type="hidden" name="_subject" value="Career Interest — tilqai.om/careers" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
               <input
                 type="text"
                 name="name"
@@ -302,7 +299,7 @@ const Careers = () => {
                 </label>
                 <input
                   type="file"
-                  name="cv"
+                  name="attachment"
                   accept=".pdf"
                   className="text-[14px] text-muted-foreground file:mr-3 file:rounded-md file:border-0 file:bg-secondary file:px-4 file:py-2 file:text-[13px] file:text-foreground file:cursor-pointer hover:file:bg-secondary/80 transition-colors"
                 />
