@@ -11,6 +11,7 @@ const dict = {
         home: "Home",
         services: "Services",
         about: "About",
+        careers: "Careers",
         bookAssessmentBtn: "Book Free Assessment",
         servicesLabel: "SERVICES",
         hrAuto: "HR Automation",
@@ -31,6 +32,7 @@ const dict = {
         home: "الرئيسية",
         services: "الخدمات",
         about: "عن تلقائي",
+        careers: "وظائف",
         bookAssessmentBtn: "احجز تقييماً مجانياً",
         servicesLabel: "الخدمات",
         hrAuto: "أتمتة الموارد البشرية",
@@ -113,6 +115,7 @@ export default function Footer() {
                         <Link to="/" className={linkClasses} onClick={() => window.scrollTo(0, 0)}>{d.home}</Link>
                         <Link to="/services" className={linkClasses} onClick={() => window.scrollTo(0, 0)}>{d.services}</Link>
                         <Link to="/about" className={linkClasses} onClick={() => window.scrollTo(0, 0)}>{d.about}</Link>
+                        <Link to="/careers" className={linkClasses} onClick={() => window.scrollTo(0, 0)}>{d.careers}</Link>
                         <button onClick={openCalendly} className={linkClasses.replace("w-fit", "w-fit text-left hover:text-primary")}>{d.bookAssessmentBtn}</button>
                     </div>
 

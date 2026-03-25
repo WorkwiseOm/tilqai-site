@@ -24,6 +24,7 @@ const Navbar = () => {
     { label: t("nav.home"), path: "/" },
     { label: t("nav.services"), path: "/services" },
     { label: t("nav.about"), path: "/about" },
+    { label: t("nav.careers"), path: "/careers" },
   ];
 
   const handleNavClick = (e: React.MouseEvent, path: string) => {
