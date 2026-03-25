@@ -127,9 +127,6 @@ const Careers = () => {
             ref={heroRef}
             className={`depth-panel rounded-md p-8 md:p-12 mb-12 fade-up ${heroVisible ? "visible" : ""} ${isRtl ? "text-right" : ""}`}
           >
-            <div className={`section-label mb-8 ${tajawalText}`}>
-              {t("careers.sectionLabel")}
-            </div>
             <h1
               className={`text-[32px] md:text-[44px] font-bold text-foreground leading-[1.15] mb-3 ${tajawalText}`}
             >

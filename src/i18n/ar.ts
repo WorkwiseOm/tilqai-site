@@ -296,7 +296,7 @@ const ar = {
   "about.bottomCta.cta": "احجز التقييم المجاني",
 
   // Careers Page
-  "nav.careers": "وظائف",
+  "nav.careers": "انضم إلينا",
   "careers.sectionLabel": "انضم إلينا",
   "careers.hero.headline": "انضم إلينا",
   "careers.hero.subheadline": "نبني. نُمكّن. ننتقل.",

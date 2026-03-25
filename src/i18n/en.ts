@@ -296,7 +296,7 @@ const en = {
   "about.bottomCta.cta": "Book Free Assessment",
 
   // Careers Page
-  "nav.careers": "Careers",
+  "nav.careers": "Join Us",
   "careers.sectionLabel": "Join Us",
   "careers.hero.headline": "Join Us",
   "careers.hero.subheadline": "We Build. We Hand Over. We Move On.",

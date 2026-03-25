@@ -68,7 +68,7 @@ const Navbar = () => {
                 key={link.path}
                 href={link.path}
                 onClick={(e) => handleNavClick(e, link.path)}
-                className={`px-3 py-1.5 text-[15px] transition-colors relative ${location.pathname === link.path
+                className={`px-3 py-1.5 text-[15px] transition-colors relative ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${location.pathname === link.path
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground"
                   }`}
@@ -137,7 +137,7 @@ const Navbar = () => {
                 key={link.path}
                 href={link.path}
                 onClick={(e) => { handleNavClick(e, link.path); setMobileOpen(false); }}
-                className={`block px-3 py-2 text-sm rounded-md ${location.pathname === link.path
+                className={`block px-3 py-2 text-sm rounded-md ${isRtl ? "font-['Tajawal',sans-serif]" : ""} ${location.pathname === link.path
                   ? "text-foreground bg-secondary"
                   : "text-muted-foreground hover:text-foreground"
                   }`}
