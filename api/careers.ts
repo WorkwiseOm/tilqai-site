@@ -36,10 +36,10 @@ export default async function handler(req: any, res: any) {
           <h2>New Career Interest</h2>
           <table style="border-collapse:collapse;width:100%;max-width:500px">
             <tr><td style="padding:8px 12px;font-weight:bold;vertical-align:top">Name</td><td style="padding:8px 12px">${esc(name)}</td></tr>
-            <tr><td style="padding:8px 12px;font-weight:bold;vertical-align:top">What they do</td><td style="padding:8px 12px">${esc(role)}</td></tr>
-            <tr><td style="padding:8px 12px;font-weight:bold;vertical-align:top">CV / LinkedIn</td><td style="padding:8px 12px">${linkHtml}</td></tr>
+            <tr><td style="padding:8px 12px;font-weight:bold;vertical-align:top">Role / Specialisation</td><td style="padding:8px 12px">${esc(role)}</td></tr>
+            <tr><td style="padding:8px 12px;font-weight:bold;vertical-align:top">LinkedIn</td><td style="padding:8px 12px">${linkHtml}</td></tr>
           </table>
-          <h3>Problem they'd automate</h3>
+          <h3>What they've built or improved</h3>
           <p style="white-space:pre-wrap">${esc(problem)}</p>
         `,
         ...(attachments.length > 0 ? { attachments } : {}),

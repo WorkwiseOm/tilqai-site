@@ -137,11 +137,6 @@ const Careers = () => {
             >
               {t("careers.hero.subheadline")}
             </p>
-            <p
-              className={`text-[16px] md:text-[18px] text-muted-foreground leading-[1.8] max-w-3xl ${tajawalText}`}
-            >
-              {t("careers.hero.body")}
-            </p>
           </div>
 
           {/* ── What the Work Is Actually Like ──────────────────── */}
