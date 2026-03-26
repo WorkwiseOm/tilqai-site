@@ -88,24 +88,43 @@ const Careers = () => {
 
   const tajawalText = isRtl ? "font-['Tajawal',sans-serif]" : "";
 
+  const fileToBase64 = (file: File): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve((reader.result as string).split(",")[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    if (
-      !(data.get("name") as string)?.trim() ||
-      !(data.get("role") as string)?.trim() ||
-      !(data.get("problem") as string)?.trim()
-    )
-      return;
+    const name = (data.get("name") as string)?.trim();
+    const role = (data.get("role") as string)?.trim();
+    const problem = (data.get("problem") as string)?.trim();
+    if (!name || !role || !problem) return;
 
     setFormStatus("sending");
 
     try {
-      const res = await fetch("https://formsubmit.co/ajax/hello@tilqai.com", {
+      const payload: Record<string, unknown> = {
+        name,
+        role,
+        link: (data.get("link") as string)?.trim() || "",
+        problem,
+      };
+
+      const file = data.get("attachment") as File | null;
+      if (file && file.size > 0) {
+        payload.cv = { filename: file.name, content: await fileToBase64(file) };
+      }
+
+      const res = await fetch("/api/careers", {
         method: "POST",
-        body: data,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
       if (res.ok) {
         setFormStatus("sent");
@@ -257,10 +276,6 @@ const Careers = () => {
               onSubmit={handleSubmit}
               className="space-y-4 max-w-xl"
             >
-              {/* FormSubmit config */}
-              <input type="hidden" name="_subject" value="Career Interest — tilqai.om/careers" />
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_template" value="table" />
               <input
                 type="text"
                 name="name"
