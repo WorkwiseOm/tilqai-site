@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import Layout from "@/components/Layout";
-import { Cog, ClipboardList, Search } from "lucide-react";
-import { useFadeUp, useStaggerReveal } from "@/hooks/use-scroll-animations";
+import { useFadeUp } from "@/hooks/use-scroll-animations";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useSEO } from "@/hooks/use-seo";
 
@@ -30,7 +29,7 @@ const Careers = () => {
   const { t, isRtl, locale } = useLanguage();
   const { ref: heroRef, visible: heroVisible } = useFadeUp();
   const { ref: workRef, visible: workVisible } = useFadeUp();
-  const { ref: rolesRef, visibleItems: rolesVisible } = useStaggerReveal(3, 150);
+  const { ref: rolesRef, visible: rolesVisible } = useFadeUp();
   const { ref: ctaRef, visible: ctaVisible } = useFadeUp();
 
   const [formStatus, setFormStatus] = useState<FormStatus>("idle");
@@ -65,24 +64,6 @@ const Careers = () => {
     {
       title: t("careers.work.item4.title"),
       desc: t("careers.work.item4.desc"),
-    },
-  ];
-
-  const roles = [
-    {
-      icon: Cog,
-      title: t("careers.roles.r1.title"),
-      desc: t("careers.roles.r1.desc"),
-    },
-    {
-      icon: ClipboardList,
-      title: t("careers.roles.r2.title"),
-      desc: t("careers.roles.r2.desc"),
-    },
-    {
-      icon: Search,
-      title: t("careers.roles.r3.title"),
-      desc: t("careers.roles.r3.desc"),
     },
   ];
 
@@ -156,23 +137,11 @@ const Careers = () => {
             >
               {t("careers.hero.subheadline")}
             </p>
-            <div className="space-y-4 max-w-3xl">
-              <p
-                className={`text-[16px] md:text-[18px] text-muted-foreground leading-[1.8] ${tajawalText}`}
-              >
-                {t("careers.hero.p1")}
-              </p>
-              <p
-                className={`text-[16px] md:text-[18px] text-muted-foreground leading-[1.8] ${tajawalText}`}
-              >
-                {t("careers.hero.p2")}
-              </p>
-              <p
-                className={`text-[16px] md:text-[18px] text-muted-foreground leading-[1.8] font-medium ${tajawalText}`}
-              >
-                {t("careers.hero.p3")}
-              </p>
-            </div>
+            <p
+              className={`text-[16px] md:text-[18px] text-muted-foreground leading-[1.8] max-w-3xl ${tajawalText}`}
+            >
+              {t("careers.hero.body")}
+            </p>
           </div>
 
           {/* ── What the Work Is Actually Like ──────────────────── */}
@@ -208,46 +177,22 @@ const Careers = () => {
           <div className={`section-label mb-6 ${tajawalText}`}>
             {t("careers.roles.sectionLabel")}
           </div>
-          <div className={`mb-8 max-w-3xl ${isRtl ? "text-right" : ""}`}>
-            <p
-              className={`text-[16px] text-muted-foreground leading-[1.8] mb-2 ${tajawalText}`}
-            >
-              {t("careers.roles.intro")}
-            </p>
-            <p
-              className={`text-[16px] text-muted-foreground leading-[1.8] font-medium ${tajawalText}`}
-            >
-              {t("careers.roles.subIntro")}
-            </p>
-          </div>
-
-          <div
+          <blockquote
             ref={rolesRef}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-16"
+            className={`mb-16 fade-up ${rolesVisible ? "visible" : ""} ${tajawalText}`}
+            style={{
+              fontSize: 22,
+              color: "rgba(255,255,255,0.75)",
+              lineHeight: 1.8,
+              borderLeft: isRtl ? "none" : "3px solid hsl(var(--primary))",
+              borderRight: isRtl ? "3px solid hsl(var(--primary))" : "none",
+              paddingLeft: isRtl ? 0 : 24,
+              paddingRight: isRtl ? 24 : 0,
+              textAlign: isRtl ? "right" : undefined,
+            }}
           >
-            {roles.map((role, i) => (
-              <div
-                key={role.title}
-                className={`card-hover content-card rounded-md p-6 fade-up ${rolesVisible[i] ? "visible" : ""} ${isRtl ? "text-right" : ""}`}
-              >
-                <div
-                  className={`w-10 h-10 rounded-md bg-secondary flex items-center justify-center mb-4 ${isRtl ? "ml-auto" : ""}`}
-                >
-                  <role.icon className="w-5 h-5 text-primary" />
-                </div>
-                <h3
-                  className={`text-[20px] font-bold text-foreground mb-2 ${tajawalText}`}
-                >
-                  {role.title}
-                </h3>
-                <p
-                  className={`text-[15px] text-muted-foreground leading-[1.7] ${tajawalText}`}
-                >
-                  {role.desc}
-                </p>
-              </div>
-            ))}
-          </div>
+            {t("careers.roles.body")}
+          </blockquote>
 
           {/* ── Express Interest CTA + Form ────────────────────── */}
           <div className="section-divider mb-12" />
@@ -260,16 +205,6 @@ const Careers = () => {
             >
               {t("careers.cta.headline")}
             </h2>
-            <p
-              className={`text-[16px] text-muted-foreground mb-1 leading-[1.6] ${tajawalText}`}
-            >
-              {t("careers.cta.body")}
-            </p>
-            <p
-              className={`text-[16px] text-muted-foreground mb-8 leading-[1.6] ${tajawalText}`}
-            >
-              {t("careers.cta.subtext")}
-            </p>
 
             <form
               ref={formRef}

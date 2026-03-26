@@ -300,9 +300,7 @@ const en = {
   "careers.sectionLabel": "Join Us",
   "careers.hero.headline": "Join Us",
   "careers.hero.subheadline": "We Build. We Hand Over. We Move On.",
-  "careers.hero.p1": "That's the job. We build automation systems that actually work, make sure the client's team can run them independently, then move on to the next problem.",
-  "careers.hero.p2": "No endless retainers. No dependency relationships. Just clean work, properly delivered.",
-  "careers.hero.p3": "If that appeals to you, read on.",
+  "careers.hero.body": "We build automation systems that work, hand them over, and move on. No retainers. No dependency. Clean work, properly delivered.",
 
   "careers.work.sectionLabel": "What the Work Is Actually Like",
   "careers.work.headline": "What the Work Is Actually Like",
@@ -317,14 +315,7 @@ const en = {
 
   "careers.roles.sectionLabel": "Who Thrives Here",
   "careers.roles.headline": "Who Thrives Here",
-  "careers.roles.intro": "We don't have open roles right now. We're growing deliberately, and when we hire, we want the right person — not the available person.",
-  "careers.roles.subIntro": "These are the kinds of people we'll be looking for:",
-  "careers.roles.r1.title": "Automation Engineer",
-  "careers.roles.r1.desc": "You build things that run without supervision. You're comfortable with APIs, workflow tools, and knowing when not to use AI. You've shipped something real and can explain every decision you made.",
-  "careers.roles.r2.title": "Delivery Manager",
-  "careers.roles.r2.desc": "You keep complex projects moving without creating noise. You can hold a client conversation, manage scope, and still read a technical spec. You know the difference between a delay and a problem.",
-  "careers.roles.r3.title": "Business Analyst",
-  "careers.roles.r3.desc": "You talk to people, find the actual bottleneck (not the one they describe), and translate it into something buildable. You're comfortable with ambiguity and allergic to vague requirements.",
+  "careers.roles.body": "We build deliberately and hire the same way. If you build things, manage complexity, or turn messy problems into clear requirements — we'd like to know you.",
 
   "careers.cta.sectionLabel": "Express Interest",
   "careers.cta.headline": "Express Interest",
@@ -333,11 +324,11 @@ const en = {
   "careers.cta.button": "Express Interest →",
   "careers.form.name": "Name",
   "careers.form.role": "What you do",
-  "careers.form.link": "CV or LinkedIn URL",
+  "careers.form.link": "LinkedIn URL",
   "careers.form.problem": "What problem would you automate?",
   "careers.form.cv": "Attach CV (PDF, optional)",
   "careers.form.sending": "Sending...",
-  "careers.form.sent": "Sent — we'll be in touch.",
+  "careers.form.sent": "Sent — thank you for your interest.",
   "careers.form.error": "Something went wrong. Please email hello@tilqai.com directly.",
 };
 
