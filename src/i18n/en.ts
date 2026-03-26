@@ -304,8 +304,8 @@ const en = {
 
   "careers.work.sectionLabel": "What the Work Is Actually Like",
   "careers.work.headline": "What the Work Is Actually Like",
-  "careers.work.item1.title": "Real problems, not demos.",
-  "careers.work.item1.desc": "Every engagement is a live business process — HR workflows, compliance checks, operations pipelines. It either works in production or it doesn't.",
+  "careers.work.item1.title": "Real work, real impact.",
+  "careers.work.item1.desc": "Every engagement is a live business process that moves the business forward. It either works in production or it doesn't.",
   "careers.work.item2.title": "You own your delivery.",
   "careers.work.item2.desc": "We're a small team. There's no layer of managers between you and the client problem. You scope it, build it, hand it over.",
   "careers.work.item3.title": "Bilingual by default.",
