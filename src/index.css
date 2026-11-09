@@ -1038,20 +1038,4 @@ img.logo,
     text-align: right !important;
   }
 
-  /* Robot/Spline — second in visual order, below text */
-  spline-viewer,
-  .hero-robot,
-  .hero-image,
-  .hero-visual {
-    order: 2 !important;
-    position: relative !important;
-    width: 100% !important;
-    height: 300px !important;
-    top: auto !important;
-    right: auto !important;
-    left: auto !important;
-    bottom: auto !important;
-    transform: none !important;
-    z-index: 1 !important;
-  }
 }

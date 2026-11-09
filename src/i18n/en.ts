@@ -329,7 +329,7 @@ const en = {
   "careers.form.cv": "Attach CV (PDF, optional)",
   "careers.form.sending": "Sending...",
   "careers.form.sent": "Sent — thank you for your interest.",
-  "careers.form.error": "Something went wrong. Please email hello@tilqai.com directly.",
+  "careers.form.error": "Something went wrong. Please email hello@tilqai.om directly.",
 };
 
 export default en;

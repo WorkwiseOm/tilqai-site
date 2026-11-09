@@ -1,0 +1,103 @@
+/* Hero "HR activities → Tilqai → business results" animation. All classes are hrf-prefixed. */
+.hrf {
+  --hrf-accent: #00b4d8;
+  --hrf-ok: #34d399;
+  --hrf-muted: rgba(255, 255, 255, 0.6);
+  --hrf-faint: rgba(255, 255, 255, 0.4);
+  --hrf-border: rgba(255, 255, 255, 0.1);
+  --hrf-surface: #102038;
+  --hrf-surface-2: #0d1a2f;
+  --hrf-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --hrf-num: Inter, system-ui, sans-serif;
+  position: relative;
+  height: 600px;
+  color: #fff;
+  user-select: none;
+}
+@media (min-width: 1360px) {
+  .hrf { height: auto; }
+}
+.hrf canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.hrf .hrf-abs { position: absolute; left: 0; top: 0; }
+.hrf .hrf-reveal { opacity: 0; transition: opacity 0.8s var(--hrf-ease); }
+.hrf .hrf-reveal.hrf-show { opacity: 1; }
+
+.hrf-col-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hrf-faint); white-space: nowrap; display: flex; align-items: center; gap: 7px; }
+html[lang="ar"] .hrf-col-label { letter-spacing: 0; font-size: 13px; font-weight: 700; }
+.hrf-col-label .hrf-live { width: 6px; height: 6px; border-radius: 50%; background: var(--hrf-ok); }
+.hrf-col-label .hrf-note { text-transform: none; letter-spacing: 0; font-weight: 500; opacity: 0.8; }
+
+/* HR activity chips */
+.hrf-src { height: 38px; padding-inline: 7px 12px; display: flex; align-items: center; gap: 9px; border-radius: 10px; background: var(--hrf-surface-2); border: 1px solid var(--hrf-border); font-size: 13px; font-weight: 500; color: rgba(255, 255, 255, 0.82); white-space: nowrap; transition: opacity 0.8s var(--hrf-ease), border-color 0.3s; }
+html[lang="ar"] .hrf-src { font-size: 14px; font-weight: 700; }
+.hrf-ic { width: 24px; height: 24px; border-radius: 6px; display: grid; place-items: center; background: rgba(255, 255, 255, 0.06); color: rgba(255, 255, 255, 0.78); }
+.hrf-ic svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.hrf-src.hrf-busy { border-color: rgba(255, 255, 255, 0.3); }
+
+/* Travelling documents */
+.hrf-doc { height: 26px; padding-inline: 6px 9px; display: flex; align-items: center; gap: 6px; border-radius: 7px; background: #f4f7fb; color: #0b1a2e; font-size: 11.5px; font-weight: 600; white-space: nowrap; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35); pointer-events: none; will-change: transform, opacity; z-index: 2; }
+html[lang="ar"] .hrf-doc { font-size: 12.5px; font-weight: 700; }
+.hrf-doc svg { width: 13px; height: 13px; fill: none; stroke: #5a6b82; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.hrf-doc.hrf-done { background: var(--hrf-accent); color: #fff; }
+.hrf-doc.hrf-done svg { stroke: #fff; }
+
+/* Tilqai engine panel */
+.hrf-engine { padding: 14px; border-radius: 14px; background: var(--hrf-surface); border: 1px solid rgba(0, 180, 216, 0.35); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35); }
+.hrf-head { display: flex; align-items: center; justify-content: space-between; }
+.hrf-brand { font: 700 16px var(--hrf-num); letter-spacing: -0.01em; direction: ltr; }
+.hrf-brand b { color: var(--hrf-accent); font-weight: 700; }
+.hrf-state { font-size: 11px; font-weight: 600; color: var(--hrf-muted); display: flex; align-items: center; gap: 6px; }
+html[lang="ar"] .hrf-state { font-size: 12.5px; font-weight: 700; }
+.hrf-state i { width: 6px; height: 6px; border-radius: 50%; background: var(--hrf-faint); transition: background 0.3s; }
+.hrf-engine.hrf-working .hrf-state i { background: var(--hrf-ok); }
+.hrf-task { margin-top: 12px; height: 20px; font-size: 12.5px; color: rgba(255, 255, 255, 0.88); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+html[lang="ar"] .hrf-task { font-size: 13.5px; font-weight: 500; }
+.hrf-task span { color: var(--hrf-faint); }
+.hrf-steps { margin-top: 10px; display: flex; gap: 6px; }
+.hrf-step { flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px; height: 24px; border-radius: 6px; font-size: 11px; font-weight: 600; color: var(--hrf-faint); background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.06); transition: all 0.25s; white-space: nowrap; }
+html[lang="ar"] .hrf-step { font-size: 12px; font-weight: 700; }
+.hrf-step svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; display: none; }
+.hrf-step.hrf-active { color: #fff; border-color: rgba(0, 180, 216, 0.5); }
+.hrf-step.hrf-ok { color: var(--hrf-ok); background: rgba(52, 211, 153, 0.08); border-color: rgba(52, 211, 153, 0.3); }
+.hrf-step.hrf-ok svg { display: block; }
+.hrf-meter { margin-top: 12px; display: flex; justify-content: space-between; font-size: 11px; color: var(--hrf-faint); }
+html[lang="ar"] .hrf-meter { font-size: 12.5px; }
+.hrf-meter strong { color: rgba(255, 255, 255, 0.88); font-weight: 600; font-variant-numeric: tabular-nums; font-family: var(--hrf-num); }
+
+/* Business result cards */
+.hrf-card { padding: 11px 14px; border-radius: 12px; background: var(--hrf-surface); border: 1px solid var(--hrf-border); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); transition: opacity 0.8s var(--hrf-ease), border-color 0.4s; }
+.hrf-top { display: flex; align-items: center; gap: 8px; padding-inline-end: 22px; }
+.hrf-money .hrf-top { padding-inline-end: 64px; }
+.hrf-lbl { font-size: 11.5px; font-weight: 500; color: var(--hrf-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+html[lang="ar"] .hrf-lbl { font-size: 13px; font-weight: 700; }
+.hrf-kpi-row { margin-top: 6px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.hrf-kpi { font: 700 22px var(--hrf-num); letter-spacing: -0.02em; line-height: 1; display: flex; align-items: baseline; gap: 4px; direction: ltr; }
+html[dir="rtl"] .hrf-kpi { direction: rtl; }
+.hrf-pre { font: 600 14px var(--hrf-num); color: var(--hrf-muted); margin-inline-end: 1px; }
+.hrf-unit { font-size: 13px; font-weight: 600; color: var(--hrf-muted); letter-spacing: 0; }
+.hrf-delta { flex: none; font-size: 10.5px; font-weight: 700; white-space: nowrap; padding: 2px 6px; border-radius: 5px; color: var(--hrf-ok); background: rgba(52, 211, 153, 0.1); }
+html[lang="ar"] .hrf-delta { font-size: 11.5px; }
+.hrf-sub { margin-top: 6px; height: 15px; font-size: 10.5px; color: var(--hrf-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.3s; }
+html[lang="ar"] .hrf-sub { font-size: 11.5px; height: 17px; }
+.hrf-card.hrf-linked .hrf-sub { color: var(--hrf-accent); font-weight: 600; }
+.hrf-card.hrf-hit { border-color: rgba(0, 180, 216, 0.6); }
+.hrf-card.hrf-money { border-color: rgba(52, 211, 153, 0.28); }
+.hrf-card.hrf-featured { border-color: rgba(0, 180, 216, 0.3); }
+.hrf-bar { margin-top: 8px; height: 4px; border-radius: 4px; background: rgba(255, 255, 255, 0.07); overflow: hidden; }
+.hrf-bar i { display: block; height: 100%; width: 0; border-radius: 4px; background: var(--hrf-accent); transition: width 1.2s var(--hrf-ease); }
+.hrf-plus { position: absolute; inset-inline-end: 12px; top: 10px; font: 700 11px var(--hrf-num); color: var(--hrf-accent); pointer-events: none; animation: hrf-plus 1.1s var(--hrf-ease) forwards; }
+@keyframes hrf-plus { from { opacity: 0; transform: translateY(6px); } 25% { opacity: 1; } to { opacity: 0; transform: translateY(-12px); } }
+
+/* Rolling digits */
+.hrf-odo { display: inline-flex; height: 1em; line-height: 1em; overflow: hidden; direction: ltr; font-variant-numeric: tabular-nums; }
+.hrf-d { display: inline-block; height: 1em; overflow: hidden; }
+.hrf-strip { display: flex; flex-direction: column; transition: transform 0.9s var(--hrf-ease); }
+.hrf-strip span { height: 1em; text-align: center; }
+/* The site's Arabic styles set a tall line-height on every element; the rolling digits need exactly 1em */
+.hrf-odo, .hrf-odo * { line-height: 1em !important; }
+
+/* Narrow hosts: hide badges, wrap labels, drop the cost "+" note */
+.hrf.hrf-compact .hrf-delta { display: none; }
+.hrf.hrf-compact .hrf-lbl { white-space: normal; line-height: 1.25; }
+.hrf.hrf-compact .hrf-money .hrf-top { padding-inline-end: 0; }
+.hrf.hrf-compact .hrf-money .hrf-plus { display: none; }

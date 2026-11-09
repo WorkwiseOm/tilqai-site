@@ -22,7 +22,7 @@ const dict = {
         getInTouch: "GET IN TOUCH",
         location: "Muscat, Oman",
         bookAsses: "Book Free Assessment →",
-        rights: "© 2025 Tilqai. All rights reserved.",
+        rights: `© ${new Date().getFullYear()} Tilqai. All rights reserved.`,
         privacy: "Privacy Policy",
         terms: "Terms of Service"
     },
@@ -43,7 +43,7 @@ const dict = {
         getInTouch: "تواصل معنا",
         location: "مسقط، عُمان",
         bookAsses: "احجز تقييماً مجانياً ←",
-        rights: "© 2025 تلقائي. جميع الحقوق محفوظة.",
+        rights: `© ${new Date().getFullYear()} تلقائي. جميع الحقوق محفوظة.`,
         privacy: "سياسة الخصوصية",
         terms: "شروط الخدمة"
     }
@@ -54,8 +54,8 @@ const schemaData = {
     "@type": "ProfessionalService",
     "name": "Tilqai",
     "description": "AI business process automation agency based in Muscat, Oman. Specialising in HR automation, sales automation, compliance automation, and operations automation for GCC businesses.",
-    "url": "https://www.tilqai.com",
-    "email": "hello@tilqai.com",
+    "url": "https://tilqai.om",
+    "email": "hello@tilqai.om",
     "address": {
         "@type": "PostalAddress",
         "addressLocality": "Muscat",
@@ -132,7 +132,7 @@ export default function Footer() {
                     {/* Column 4 - Get in Touch */}
                     <div className={colClasses}>
                         <div className={labelClasses}>{d.getInTouch}</div>
-                        <a href="mailto:hello@tilqai.com" className={linkClasses}>hello@tilqai.com</a>
+                        <a href="mailto:hello@tilqai.om" className={linkClasses}>hello@tilqai.om</a>
                         <span className={`text-[14px] text-muted-foreground ${tajawalText}`}>{d.location}</span>
                         <button onClick={openCalendly} className={`text-[14px] text-primary hover:brightness-125 transition-colors mt-2 font-medium w-fit ${tajawalText}`}>
                             {d.bookAsses}
