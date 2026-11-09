@@ -167,18 +167,25 @@ export function mountHrFlow(host: HTMLElement, copy: HrFlowCopy, rtl: boolean): 
     engine.style.width = engW + "px";
     const pad = tight ? 8 : 20;
     const left = pad, right = w - cardW - pad;
-    const cy = h * 0.52;
+    // Beside the headline (absolutely positioned) the hero can be taller than the screen;
+    // fit the scene into the part visible on load so nothing starts below the fold.
+    let region = h;
+    if (getComputedStyle(host).position === "absolute") {
+      const pageTop = host.getBoundingClientRect().top + window.scrollY;
+      region = clamp(window.innerHeight - pageTop, 480, h);
+    }
+    const cy = region * 0.52;
     const srcMaxW = Math.max(...sources.map(s => s.el.offsetWidth));
     const engX = lerp(left + srcMaxW, right, 0.5) - engW / 2;
     const engH = engine.offsetHeight;
     place(engine, engX, cy - engH / 2);
-    const spanY = Math.min(h * 0.38, 240);
+    const spanY = Math.min(region * 0.38, 240);
     sources.forEach((s, i) => {
       const y = cy + ((i / (sources.length - 1)) * 2 - 1) * spanY - 19;
       place(s.el, left, y);
       s.anchor = pt(left + s.el.offsetWidth, y + 19);
     });
-    const gap = 10;
+    const gap = region < 620 ? 6 : 10;
     const hs = cards.map(c => c.el.offsetHeight);
     const total = hs.reduce((a, b) => a + b, 0) + gap * (cards.length - 1);
     let y = cy - total / 2;
