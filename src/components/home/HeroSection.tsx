@@ -65,7 +65,7 @@ const HeroSection = () => {
   }, [headlineDone, completeIntro]);
 
   return (
-    <section className={`py-20 lg:py-24 pb-6 relative hero-section flex flex-col justify-center min-[1360px]:flex-row min-[1360px]:items-center min-h-[100dvh] transition-colors duration-1000 ease-in-out ${bgStage >= 1 ? "bg-[#0a1628]" : "bg-[#050a12]"} overflow-hidden`}>
+    <section className={`py-20 lg:py-24 pb-6 relative hero-section flex flex-col justify-center min-[1240px]:flex-row min-[1240px]:items-center min-[1240px]:min-h-[100dvh] transition-colors duration-1000 ease-in-out ${bgStage >= 1 ? "bg-[#0a1628]" : "bg-[#050a12]"} overflow-hidden`}>
 
       {/* 1. Breathing Gradient */}
       <div
@@ -75,10 +75,10 @@ const HeroSection = () => {
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12 relative z-10 w-full pointer-events-none lg:pl-[80px]">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full relative">
           {/* Text column - Strictly 520px width & no overlap */}
-          <div className={`hero-content hero-text w-full lg:max-w-[520px] ${isRtl ? "lg:text-right lg:ml-auto lg:pl-0 lg:pr-[80px]" : "lg:text-left lg:mr-auto"} pointer-events-auto flex flex-col items-start`}>
+          <div className={`hero-content hero-text w-full lg:max-w-[520px] min-[1240px]:max-[1359px]:max-w-[480px] ${isRtl ? "lg:text-right lg:ml-auto lg:pl-0 lg:pr-[80px]" : "lg:text-left lg:mr-auto"} pointer-events-auto flex flex-col items-start`}>
             {/* Headline */}
             <h1
-              className={`text-[32px] md:text-[42px] lg:text-[56px] tracking-tight font-bold text-white leading-[1.1] flex flex-wrap ${isRtl ? "justify-end lg:flex-row-reverse" : "justify-start text-left items-baseline"}`}
+              className={`text-[32px] md:text-[42px] lg:text-[56px] min-[1240px]:max-[1359px]:text-[48px] tracking-tight font-bold text-white leading-[1.1] flex flex-wrap ${isRtl ? "justify-end lg:flex-row-reverse" : "justify-start text-left items-baseline"}`}
               style={{ minHeight: "2.4em", textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}
               dir={isRtl ? "rtl" : "ltr"}
             >
@@ -126,14 +126,14 @@ const HeroSection = () => {
       </div>
 
       {/* 2. HR activities → Tilqai → business results.
-             Below 1360px it sits under the text; from 1360px it fills the space beside the text column. */}
-      <div className="relative z-[5] w-full mt-10 min-[1360px]:mt-0 min-[1360px]:absolute min-[1360px]:inset-0 min-[1360px]:pointer-events-none">
-        <div className="relative mx-auto max-w-[1400px] h-full px-5 sm:px-10 min-[1360px]:px-12">
+             Below 1240px it sits under the text; from 1240px it fills the space beside the text column. */}
+      <div className="relative z-[5] w-full mt-10 min-[1240px]:mt-0 min-[1240px]:absolute min-[1240px]:inset-0 min-[1240px]:pointer-events-none">
+        <div className="relative mx-auto max-w-[1400px] h-full px-5 sm:px-10 min-[1240px]:px-12">
           <HrFlowScene
             ref={sceneRef}
             active={sceneReady}
             locale={locale}
-            className={`min-[1360px]:!absolute min-[1360px]:inset-y-0 ${isRtl ? "min-[1360px]:left-12 min-[1360px]:right-[620px]" : "min-[1360px]:left-[640px] min-[1360px]:right-12"}`}
+            className={`min-[1240px]:!absolute min-[1240px]:inset-y-0 ${isRtl ? "min-[1240px]:left-12 min-[1240px]:right-[560px] min-[1360px]:right-[620px]" : "min-[1240px]:left-[580px] min-[1360px]:left-[640px] min-[1240px]:right-12"}`}
           />
         </div>
       </div>
