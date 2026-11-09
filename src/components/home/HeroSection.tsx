@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { openCalendly } from "@/lib/calendly";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useHeroIntro } from "@/hooks/use-hero-intro";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { useTypewriter } from "@/hooks/use-typewriter";
-import Spline from '@splinetool/react-spline';
+import HrFlowScene, { type HrFlowHandle } from "@/components/home/hr-flow/HrFlowScene";
 
 /**
  * Cinematic hero load sequence:
@@ -13,12 +12,11 @@ import Spline from '@splinetool/react-spline';
  *  2 — subheadline fades in  (300ms after typing)
  *  3 — trust line fades in   (400ms after subheadline)
  *  4 — nav + CTAs + image    (500ms after trust line) — all at once
- *  5 — Spline mounts         (300ms after CTAs visible — hero fully complete)
+ *  5 — HR → results animation starts (300ms after CTAs visible)
  */
 const HeroSection = () => {
-  const { t, isRtl } = useLanguage();
+  const { t, isRtl, locale } = useLanguage();
   const { completeIntro } = useHeroIntro();
-  const isMobile = useIsMobile();
 
   const [bgStage, setBgStage] = useState(0);
 
@@ -34,8 +32,9 @@ const HeroSection = () => {
   const [badgeVisible, setBadgeVisible] = useState(false);
   const [ctaVisible, setCtaVisible] = useState(false);
 
-  // Spline only mounts after the full hero sequence completes
-  const [splineReady, setSplineReady] = useState(false);
+  // The animation starts after the full hero text sequence completes
+  const [sceneReady, setSceneReady] = useState(false);
+  const sceneRef = useRef<HrFlowHandle>(null);
 
   useEffect(() => {
     setBgStage(1);
@@ -48,8 +47,7 @@ const HeroSection = () => {
       setBadgeVisible(true);
       setCtaVisible(true);
       completeIntro();
-      // Even with reduced motion, give the layout 500ms to settle before WebGL starts
-      const t0 = setTimeout(() => setSplineReady(true), 500);
+      const t0 = setTimeout(() => setSceneReady(true), 100);
       return () => clearTimeout(t0);
     }
 
@@ -60,64 +58,19 @@ const HeroSection = () => {
         setCtaVisible(true);
         completeIntro();
       }, 400 + 300 + 300);
-      // Spline starts loading 300ms after CTAs appear — hero is fully complete
-      const t4 = setTimeout(() => setSplineReady(true), 400 + 300 + 300 + 300);
+      // Animation starts 300ms after CTAs appear — hero text is complete
+      const t4 = setTimeout(() => setSceneReady(true), 400 + 300 + 300 + 300);
       return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
     }
   }, [headlineDone, completeIntro]);
 
-  const handleSplineLoad = (splineApp: any) => {
-    // Inject mobile performance clamp
-    if (window.innerWidth < 480) {
-      try {
-        if (splineApp._app?.renderer) {
-          splineApp._app.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-          splineApp._app.renderer.powerPreference = "high-performance";
-        }
-      } catch (e) {
-        // Silently catch if internals shift
-      }
-    }
-  };
-
   return (
-    <section className={`py-20 lg:py-24 pb-6 relative hero-section flex items-center min-h-[100dvh] transition-colors duration-1000 ease-in-out ${bgStage >= 1 ? "bg-[#0a1628]" : "bg-[#050a12]"} overflow-hidden`}>
+    <section className={`py-20 lg:py-24 pb-6 relative hero-section flex flex-col justify-center min-[1360px]:flex-row min-[1360px]:items-center min-h-[100dvh] transition-colors duration-1000 ease-in-out ${bgStage >= 1 ? "bg-[#0a1628]" : "bg-[#050a12]"} overflow-hidden`}>
 
       {/* 1. Breathing Gradient */}
       <div
         className="absolute inset-0 z-0 pointer-events-none opacity-50 hero-breathing-gradient"
       />
-
-      {/* 2. Noise Texture (Removed over Spline to preserve 60FPS WebGL Context) */}
-
-      {/* 3. Interactive Spline Background — deferred until hero is fully loaded */}
-      <div
-        className={`hero-robot flex absolute z-0 transition-opacity duration-[1500ms] ease-out items-end justify-center pointer-events-none lg:pointer-events-auto ${splineReady ? "opacity-100" : "opacity-0"} ${isMobile
-          ? "inset-0 h-[100dvh] overflow-hidden"
-          : `inset-y-0 bottom-0 w-[100vw] lg:w-1/2 ${isRtl ? "left-0" : "right-0"}`
-          }`}
-        style={{
-          WebkitMaskImage: isMobile
-            ? "none"
-            : isRtl
-              ? "linear-gradient(to left, transparent 0%, black 30%)"
-              : "linear-gradient(to right, transparent 0%, black 30%)",
-          maskImage: isMobile
-            ? "none"
-            : isRtl
-              ? "linear-gradient(to left, transparent 0%, black 30%)"
-              : "linear-gradient(to right, transparent 0%, black 30%)"
-        }}
-      >
-        {splineReady && (
-          <Spline
-            className={`w-full h-full ${isMobile ? 'transform scale-[1.15] translate-y-[-2%]' : 'transform lg:scale-[1.15] lg:translate-y-[5%]'}`}
-            scene="/scene.splinecode?v=3"
-            onLoad={handleSplineLoad}
-            style={{ background: 'transparent' }}
-          />
-        )}
-      </div>
 
       <div className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12 relative z-10 w-full pointer-events-none lg:pl-[80px]">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full relative">
@@ -159,12 +112,29 @@ const HeroSection = () => {
             <div className={`mt-8 md:mt-10 flex w-full lg:w-auto gap-4`}>
               <button
                 onClick={openCalendly}
+                onMouseEnter={() => sceneRef.current?.setTurbo(true)}
+                onMouseLeave={() => sceneRef.current?.setTurbo(false)}
+                onFocus={() => sceneRef.current?.setTurbo(true)}
+                onBlur={() => sceneRef.current?.setTurbo(false)}
                 className={`btn-primary-hover min-w-[44px] min-h-[44px] w-full sm:w-auto bg-[#00b4d8] text-white hover:bg-[#009ac2] text-[16px] font-semibold px-8 py-4 md:py-3.5 rounded-lg shadow-[0_0_20px_rgba(0,180,216,0.3)] transition-all duration-[500ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] flex items-center justify-center ${ctaVisible ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"}`}
               >
                 {t("hero.primaryCta")}
               </button>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* 2. HR activities → Tilqai → business results.
+             Below 1360px it sits under the text; from 1360px it fills the space beside the text column. */}
+      <div className="relative z-[5] w-full mt-10 min-[1360px]:mt-0 min-[1360px]:absolute min-[1360px]:inset-0 min-[1360px]:pointer-events-none">
+        <div className="relative mx-auto max-w-[1400px] h-full px-5 sm:px-10 min-[1360px]:px-12">
+          <HrFlowScene
+            ref={sceneRef}
+            active={sceneReady}
+            locale={locale}
+            className={`min-[1360px]:!absolute min-[1360px]:inset-y-0 ${isRtl ? "min-[1360px]:left-12 min-[1360px]:right-[620px]" : "min-[1360px]:left-[640px] min-[1360px]:right-12"}`}
+          />
         </div>
       </div>
     </section>

@@ -23,14 +23,14 @@ const ar = {
   "pipeline.step1.bullet3": "الاتفاق على مقاييس النجاح",
   "pipeline.step2.title": "البناء",
   "pipeline.step2.duration": "من الأسبوع 2 إلى 3",
-  "pipeline.step2.bullet1": "تصميم وبناء وضبط الاتمتة",
+  "pipeline.step2.bullet1": "تصميم وبناء وضبط الأتمتة",
   "pipeline.step2.bullet2": "التكامل مع الأنظمة الحالية",
   "pipeline.step2.bullet3": "الاختبار بحالات واقعية قبل التدشين",
   "pipeline.step3.title": "التدشين والتحسين",
   "pipeline.step3.duration": "من الأسبوع 4 فصاعداً",
   "pipeline.step3.bullet1": "تدشين النظام مع التسليم الكامل والتوثيق",
   "pipeline.step3.bullet2": "مراقبة الأداء وإصلاح المشاكل المبكرة",
-  "pipeline.step3.bullet3": "مد نطاق الأتمتة لتطبيقات اخرى",
+  "pipeline.step3.bullet3": "مد نطاق الأتمتة لتطبيقات أخرى",
 
   // ROI / Quick Estimate
   // Capacity Calculator
@@ -329,7 +329,7 @@ const ar = {
   "careers.form.cv": "إرفاق السيرة الذاتية (PDF، اختياري)",
   "careers.form.sending": "جارِ الإرسال...",
   "careers.form.sent": "تم الإرسال — شكراً لاهتمامك.",
-  "careers.form.error": "حدث خطأ. يرجى مراسلتنا مباشرة على hello@tilqai.com",
+  "careers.form.error": "حدث خطأ. يرجى مراسلتنا مباشرة على hello@tilqai.om",
 };
 
 export default ar;
