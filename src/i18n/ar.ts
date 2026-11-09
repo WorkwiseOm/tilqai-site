@@ -326,7 +326,7 @@ const ar = {
   "careers.form.role": "المسمى الوظيفي / التخصص",
   "careers.form.link": "رابط LinkedIn",
   "careers.form.problem": "ما الذي بنيته أو طوّرته؟",
-  "careers.form.cv": "إرفاق السيرة الذاتية (PDF، اختياري)",
+  "careers.form.cv": "إرفاق السيرة الذاتية (PDF حتى 3 ميغابايت، اختياري)",
   "careers.form.sending": "جارِ الإرسال...",
   "careers.form.sent": "تم الإرسال — شكراً لاهتمامك.",
   "careers.form.error": "حدث خطأ. يرجى مراسلتنا مباشرة على hello@tilqai.om",

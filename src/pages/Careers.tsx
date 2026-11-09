@@ -95,10 +95,16 @@ const Careers = () => {
         role,
         link: (data.get("link") as string)?.trim() || "",
         problem,
+        website: (data.get("website") as string) || "", // honeypot, stays empty for real visitors
       };
 
       const file = data.get("attachment") as File | null;
       if (file && file.size > 0) {
+        // Server accepts PDFs up to 3 MB
+        if (file.size > 3 * 1024 * 1024 || !/\.pdf$/i.test(file.name)) {
+          setFormStatus("error");
+          return;
+        }
         payload.cv = { filename: file.name, content: await fileToBase64(file) };
       }
 
@@ -233,6 +239,15 @@ const Careers = () => {
                 placeholder={t("careers.form.problem")}
                 className={`w-full rounded-md border border-white/10 bg-black/30 px-4 py-3 text-[15px] text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 transition-colors resize-none ${tajawalText}`}
               />
+              {/* Honeypot for bots: hidden from people and screen readers */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute -left-[9999px] h-0 w-0 opacity-0"
+              />
               <div>
                 <label
                   className={`block text-[13px] text-muted-foreground/60 mb-1.5 ${tajawalText}`}
@@ -242,7 +257,7 @@ const Careers = () => {
                 <input
                   type="file"
                   name="attachment"
-                  accept=".pdf"
+                  accept=".pdf,application/pdf"
                   className="text-[14px] text-muted-foreground file:mr-3 file:rounded-md file:border-0 file:bg-secondary file:px-4 file:py-2 file:text-[13px] file:text-foreground file:cursor-pointer hover:file:bg-secondary/80 transition-colors"
                 />
               </div>
