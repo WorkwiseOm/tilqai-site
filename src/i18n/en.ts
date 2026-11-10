@@ -326,7 +326,7 @@ const en = {
   "careers.form.role": "Role / Specialisation",
   "careers.form.link": "LinkedIn URL",
   "careers.form.problem": "What have you built or improved?",
-  "careers.form.cv": "Attach CV (PDF, optional)",
+  "careers.form.cv": "Attach CV (PDF up to 3 MB, optional)",
   "careers.form.sending": "Sending...",
   "careers.form.sent": "Sent — thank you for your interest.",
   "careers.form.error": "Something went wrong. Please email hello@tilqai.om directly.",
